@@ -8,9 +8,12 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MapSelectedDelegate {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
+    
+    private var teams : [Team]?
+    private var backgroundMap : UIColor = UIColor.green
     
     let mapPickerMenu = "Map Picker"
     let addATeamMenu = "Add a Team"
@@ -30,6 +33,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.mainMenuTableView.delegate = self
         self.mainMenuTableView.dataSource = self
+    
+        self.setUpBackgroundMap(map: backgroundMap)
+        
+    }
+    
+    func setUpBackgroundMap(map: UIColor) {
+        self.view.backgroundColor = map
     }
     
     
@@ -52,6 +62,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch mainMenuArray[indexPath.row] {
         case mapPickerMenu:
+            performSegue(withIdentifier: "mapPickerSegue", sender: self)
             print(mapPickerMenu)
             break
         case addATeamMenu:
@@ -74,15 +85,33 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             break
         case logOutMenu:
             self.dismiss(animated: true, completion: nil)
-//            navigationController?.popViewController(animated: true)
-//            if let currentNavigationController = self.navigationController {
-//                currentNavigationController.popToRootViewController(animated: true)
-//            }
             break
         default:
             print("default case")
         }
     }
+        
+    func mapWasSelected(map: String) {
+        switch map {
+        case "Map 1 Green":
+            setUpBackgroundMap(map: UIColor.green)
+            break
+        case "Map 2 Blue":
+            setUpBackgroundMap(map: UIColor.blue)
+            break
+        case "Map 3 Yellow":
+            setUpBackgroundMap(map: UIColor.yellow)
+            break
+        default:
+            setUpBackgroundMap(map: UIColor.green)
+        }
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mapPickerSegue" {
+            let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
+            MapPickerVC.delegate = self
+        }
+    }
     
 }
