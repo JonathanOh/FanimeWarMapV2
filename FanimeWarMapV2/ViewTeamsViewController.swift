@@ -37,7 +37,7 @@ class ViewTeamsViewController: UIViewController, UITableViewDelegate, UITableVie
         var image : UIImage!
         image = UIImage(named: "PlaceHolderIcon")
         
-        cell.configureCell(icon: image, name: team.teamName, members: ["team 1", "team 2"])
+        cell.configureCell(icon: image, name: team.teamName, members: team.teamMembers)
         
         return cell
     }

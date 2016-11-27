@@ -13,11 +13,15 @@ class Rover {
     private var name : String
     private var phone : Int?
     private var team : String?
+    private var isAssigned : Bool = false
     
     init(name: String, phone: Int?, team: String?) {
         self.name = name
         self.phone = phone
-        self.team = team
+        if let team = team {
+            self.team = team
+            self.isAssigned = true
+        }
     }
     
 }

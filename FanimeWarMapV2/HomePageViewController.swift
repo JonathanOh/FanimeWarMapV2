@@ -12,7 +12,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     
-    private var teams : [Team] = []
+    private var activeTeams : [Team] = []
+    private var currentRovers : [Rover] = []
     private var backgroundMap : UIColor = UIColor.green
     
     var mainMenuArray : Array<String>!
@@ -26,6 +27,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.setUpBackgroundMap(map: backgroundMap)
         
+        loadCurrentRovers()
         loadCurrentTeamsIntoArray()
         
     }
@@ -34,18 +36,31 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.backgroundColor = map
     }
   
+    func loadCurrentRovers() {
+        //dummy data
+        let dummyRoverData = ["Hanson", "Starry", "Jay", "Michael", "Jenny", "Stacey", "Greg", "Aston", "Sara", "LeeSin"]
+        let dummyAssignment = ["Pikachu", nil, "Pikachu", nil, "Squirtle", "Squirtle", "Squirtle", "Squirtle", nil, nil]
+        
+        for item in dummyRoverData {
+            let currentIndex = dummyRoverData.index(of: item)
+            let rover = Rover(name: item, phone: nil, team: dummyAssignment[currentIndex!])
+            self.currentRovers.append(rover)
+        }
+        
+    }
+    
     func loadCurrentTeamsIntoArray() {
         //currently dummy data, this is where we will pull current teams from network
         let dummyDataTeamName = ["Pikachu", "Squirtle", "Bulbasaur", "Raichu", "Charizard"]
         let dummyDataTeamIcon = ["PikachuIcon", "SquirtleIcon", "BulbasaurIcon", "RaichuIcon", "CharizardIcon"]
+        let dummyDataTeamMembers = [["Jon", "Phil"], ["Chris", "Waffles"], ["Alicia", "Mike"], ["Steven", "Chris"], ["JJ", "Harambe"]]
         
         for name in dummyDataTeamName {
             let currentIndex = dummyDataTeamName.index(of: name)
             let team = Team(name: name, icon: dummyDataTeamIcon[currentIndex!])
-            teams.append(team)
+            team.replaceCurrentTeamWith(team: dummyDataTeamMembers[currentIndex!])
+            activeTeams.append(team)
         }
-        print(self.teams)
-        
     }
     
     
@@ -125,7 +140,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             break
         case SegueId.viewTeamId:
             let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController
-            ViewTeamVC.currentTeams = teams
+            ViewTeamVC.currentTeams = activeTeams
             break
         default:
             return
