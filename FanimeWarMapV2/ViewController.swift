@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        usernameTextField.text = "cool"
+        passwordTextField.text = "guy"
+        
     }
 
     @IBAction func loginButton(_ sender: Any) {
@@ -29,8 +32,8 @@ class ViewController: UIViewController {
             return
         }
         
-        usernameTextField.text = ""
-        passwordTextField.text = ""
+        //usernameTextField.text = ""
+        //passwordTextField.text = ""
         
         performSegue(withIdentifier: "loginToHomeSegue", sender: self)
         

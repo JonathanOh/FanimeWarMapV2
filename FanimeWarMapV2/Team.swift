@@ -10,10 +10,10 @@ import Foundation
 
 class Team {
     
-    private var teamName : String
-    private var teamMembers : [String]?
-    private var teamLocation : Int?
-    private var teamIcon : String
+    private(set) var teamName : String
+    private(set) var teamMembers : [String]?
+    private(set) var teamLocation : Int?
+    private(set) var teamIcon : String
     
     init(name: String, icon: String) {
         self.teamName = name

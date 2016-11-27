@@ -12,34 +12,40 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     
-    private var teams : [Team]?
+    private var teams : [Team] = []
     private var backgroundMap : UIColor = UIColor.green
-    
-    let mapPickerMenu = "Map Picker"
-    let addATeamMenu = "Add a Team"
-    let addARoverMenu = "Add a Rover"
-    let deployTeamMenu = "Deploy Team"
-    let viewTeamsMenu = "View Teams"
-    let saveMapMenu = "Save/Upload Map"
-    let zoomModeMenu = "Zoom Mode"
-    let logOutMenu = "Log Out"
     
     var mainMenuArray : Array<String>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainMenuArray = [mapPickerMenu, addATeamMenu, addARoverMenu, deployTeamMenu, viewTeamsMenu, saveMapMenu, zoomModeMenu, logOutMenu]
-        
+        mainMenuArray = [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.zoomMode, MainMenu.logOut]
         self.mainMenuTableView.delegate = self
         self.mainMenuTableView.dataSource = self
-    
+        
         self.setUpBackgroundMap(map: backgroundMap)
+        
+        loadCurrentTeamsIntoArray()
         
     }
     
     func setUpBackgroundMap(map: UIColor) {
         self.view.backgroundColor = map
+    }
+  
+    func loadCurrentTeamsIntoArray() {
+        //currently dummy data, this is where we will pull current teams from network
+        let dummyDataTeamName = ["Pikachu", "Squirtle", "Bulbasaur", "Raichu", "Charizard"]
+        let dummyDataTeamIcon = ["PikachuIcon", "SquirtleIcon", "BulbasaurIcon", "RaichuIcon", "CharizardIcon"]
+        
+        for name in dummyDataTeamName {
+            let currentIndex = dummyDataTeamName.index(of: name)
+            let team = Team(name: name, icon: dummyDataTeamIcon[currentIndex!])
+            teams.append(team)
+        }
+        print(self.teams)
+        
     }
     
     
@@ -61,57 +67,71 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch mainMenuArray[indexPath.row] {
-        case mapPickerMenu:
-            performSegue(withIdentifier: "mapPickerSegue", sender: self)
-            print(mapPickerMenu)
+        case MainMenu.mapPicker:
+            performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
             break
-        case addATeamMenu:
-            print(addATeamMenu)
+        case MainMenu.addATeam:
             break
-        case addARoverMenu:
-            print(addARoverMenu)
+        case MainMenu.addARover:
             break
-        case deployTeamMenu:
-            print(deployTeamMenu)
+        case MainMenu.deployTeam:
             break
-        case viewTeamsMenu:
-            print(viewTeamsMenu)
+        case MainMenu.viewTeams:
+            performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
             break
-        case saveMapMenu:
-            print(saveMapMenu)
+        case MainMenu.saveMap:
             break
-        case zoomModeMenu:
-            print(zoomModeMenu)
+        case MainMenu.zoomMode:
             break
-        case logOutMenu:
+        case MainMenu.logOut:
             self.dismiss(animated: true, completion: nil)
             break
         default:
             print("default case")
         }
     }
-        
+    
+  
+// MARK: Custom Delegates
     func mapWasSelected(map: String) {
         switch map {
-        case "Map 1 Green":
+        case MapName.mapOne:
             setUpBackgroundMap(map: UIColor.green)
             break
-        case "Map 2 Blue":
+        case MapName.mapTwo:
             setUpBackgroundMap(map: UIColor.blue)
             break
-        case "Map 3 Yellow":
+        case MapName.mapThree:
             setUpBackgroundMap(map: UIColor.yellow)
             break
         default:
             setUpBackgroundMap(map: UIColor.green)
         }
     }
-    
+// MARK: prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "mapPickerSegue" {
+        guard let segueId = segue.identifier else {
+            return
+        }
+        
+        switch segueId {
+        case SegueId.mapPickerId:
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
+            break
+        case SegueId.viewTeamId:
+            let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController
+            ViewTeamVC.currentTeams = teams
+            break
+        default:
+            return
         }
+        
+        
+//        if segue.identifier == SegueId.mapPickerId {
+//            let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
+//            MapPickerVC.delegate = self
+//        }
     }
     
 }

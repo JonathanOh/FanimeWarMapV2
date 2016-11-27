@@ -16,7 +16,7 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var delegate : MapSelectedDelegate? = nil
     
-    let currentMaps : [String] = ["Map 1 Green", "Map 2 Blue", "Map 3 Yellow"]
+    let currentMaps : [String] = [MapName.mapOne, MapName.mapTwo, MapName.mapThree]
     @IBOutlet weak var mapPickerTableView: UITableView!
     
     override func viewDidLoad() {
@@ -51,7 +51,6 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
             let SelectedMap = currentMaps[indexPath.row]
             delegate?.mapWasSelected(map: SelectedMap)
             navigationController!.popViewController(animated: true)
-            //navigationController?.popToRootViewController(animated: true)
         }
     }
     

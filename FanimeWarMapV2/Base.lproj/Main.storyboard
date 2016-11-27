@@ -104,6 +104,7 @@
                     <connections>
                         <outlet property="mainMenuTableView" destination="mV2-dy-aNl" id="sgr-ef-Bxu"/>
                         <segue destination="hjl-6e-vxa" kind="show" identifier="mapPickerSegue" id="Nff-dR-2Wd"/>
+                        <segue destination="c2y-Rt-wOh" kind="show" identifier="viewTeamSegue" id="CVm-VD-FmU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoB-Nt-9of" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -142,6 +143,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cku-UN-gpr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2899" y="-1045"/>
+        </scene>
+        <!--View Teams View Controller-->
+        <scene sceneID="oxk-cD-AuW">
+            <objects>
+                <viewController id="c2y-Rt-wOh" customClass="ViewTeamsViewController" customModule="FanimeWarMapV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8YJ-Vd-iUF"/>
+                        <viewControllerLayoutGuide type="bottom" id="RNu-TD-wod"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qA9-rJ-VF7">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aua-Zw-8ov">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RNu-TD-wod" firstAttribute="top" secondItem="aua-Zw-8ov" secondAttribute="bottom" id="XDy-Fl-3Qa"/>
+                            <constraint firstItem="aua-Zw-8ov" firstAttribute="top" secondItem="qA9-rJ-VF7" secondAttribute="top" id="jGX-8u-cbV"/>
+                            <constraint firstItem="aua-Zw-8ov" firstAttribute="leading" secondItem="qA9-rJ-VF7" secondAttribute="leading" id="nvE-CM-c6b"/>
+                            <constraint firstAttribute="trailing" secondItem="aua-Zw-8ov" secondAttribute="trailing" id="vsz-u9-tZE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentTeamsTableView" destination="aua-Zw-8ov" id="1ac-ib-cQg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="df4-bL-W1I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2898.6328125" y="1382.8125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6IA-QY-BHC">
