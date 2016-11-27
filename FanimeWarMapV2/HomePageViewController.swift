@@ -66,20 +66,25 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch mainMenuArray[indexPath.row] {
         case MainMenu.mapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
             break
         case MainMenu.addATeam:
+            // This needs to be passed active rovers
             break
         case MainMenu.addARover:
+            // This needs to be passed active teams
             break
         case MainMenu.deployTeam:
+            // This needs to be passed active teams without a location
             break
         case MainMenu.viewTeams:
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
             break
         case MainMenu.saveMap:
+            //Learn Firebase
             break
         case MainMenu.zoomMode:
             break
@@ -90,7 +95,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             print("default case")
         }
     }
-    
   
 // MARK: Custom Delegates
     func mapWasSelected(map: String) {
@@ -126,12 +130,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         default:
             return
         }
-        
-        
-//        if segue.identifier == SegueId.mapPickerId {
-//            let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
-//            MapPickerVC.delegate = self
-//        }
     }
     
 }
