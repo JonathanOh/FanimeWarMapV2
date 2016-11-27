@@ -10,15 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+
+    let adminUsername : String = "cool"
+    let adminPassword : String = "guy"
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func loginButton(_ sender: Any) {
+        
+        guard adminUsername == usernameTextField.text! && adminPassword == passwordTextField.text! else {
+            return
+        }
+        
+        usernameTextField.text = ""
+        passwordTextField.text = ""
+        
+        performSegue(withIdentifier: "loginToHomeSegue", sender: self)
+        
+        
     }
+    
 
 
 }
