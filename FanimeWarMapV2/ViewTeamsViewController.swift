@@ -25,18 +25,21 @@ class ViewTeamsViewController: UIViewController, UITableViewDelegate, UITableVie
 
 // MARK: Table view delegates
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "teamCellId")
-        cell = UITableViewCell(style: .subtitle, reuseIdentifier: "teamCellId")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "teamCellId") as? ViewTeamsPrototypeCell else {
+            return ViewTeamsPrototypeCell()
+        }
         
         guard let currentTeam = currentTeams else {
-            return UITableViewCell()
+            return ViewTeamsPrototypeCell()
         }
         
         let team : Team = currentTeam[indexPath.row]
-        cell?.textLabel?.text = team.teamName
-        cell?.detailTextLabel?.text = team.teamIcon
+        var image : UIImage!
+        image = UIImage(named: "PlaceHolderIcon")
         
-        return cell!
+        cell.configureCell(icon: image, name: team.teamName, members: ["team 1", "team 2"])
+        
+        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

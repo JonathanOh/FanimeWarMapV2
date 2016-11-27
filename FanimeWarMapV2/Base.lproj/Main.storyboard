@@ -156,9 +156,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aua-Zw-8ov">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="182" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aua-Zw-8ov">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCellId" rowHeight="182" id="93J-DM-wuI" customClass="ViewTeamsPrototypeCell" customModule="FanimeWarMapV2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="182"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="93J-DM-wuI" id="v4T-IY-z8n">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="181"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uwE-DZ-QmW">
+                                                    <rect key="frame" x="8" y="8" width="173" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="173" id="XC1-DH-lXP"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSq-Jr-tz8">
+                                                    <rect key="frame" x="189" y="8" width="330" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="330" id="WjO-Z2-DMa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Member Names" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6c-lK-3cH">
+                                                    <rect key="frame" x="745" y="8" width="271" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="271" id="yob-qk-qD5"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="s6c-lK-3cH" firstAttribute="top" secondItem="v4T-IY-z8n" secondAttribute="top" constant="8" id="3K0-8q-Eiq"/>
+                                                <constraint firstItem="qSq-Jr-tz8" firstAttribute="leading" secondItem="uwE-DZ-QmW" secondAttribute="trailing" constant="8" id="LTp-9a-wce"/>
+                                                <constraint firstAttribute="bottom" secondItem="uwE-DZ-QmW" secondAttribute="bottom" constant="8" id="W1Z-lV-k5t"/>
+                                                <constraint firstItem="qSq-Jr-tz8" firstAttribute="top" secondItem="v4T-IY-z8n" secondAttribute="top" constant="8" id="WPp-5C-6Tv"/>
+                                                <constraint firstAttribute="trailing" secondItem="s6c-lK-3cH" secondAttribute="trailing" constant="8" id="aOJ-ps-bb5"/>
+                                                <constraint firstAttribute="bottom" secondItem="qSq-Jr-tz8" secondAttribute="bottom" constant="8" id="aio-Tl-0KV"/>
+                                                <constraint firstAttribute="bottom" secondItem="s6c-lK-3cH" secondAttribute="bottom" constant="8" id="dUk-Yr-yjd"/>
+                                                <constraint firstItem="uwE-DZ-QmW" firstAttribute="leading" secondItem="v4T-IY-z8n" secondAttribute="leading" constant="8" id="hIq-3J-45R"/>
+                                                <constraint firstItem="uwE-DZ-QmW" firstAttribute="top" secondItem="v4T-IY-z8n" secondAttribute="top" constant="8" id="wYz-u8-cYa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="teamIcon" destination="uwE-DZ-QmW" id="TWt-2m-8yp"/>
+                                            <outlet property="teamMembers" destination="s6c-lK-3cH" id="ZbA-nI-yEr"/>
+                                            <outlet property="teamName" destination="qSq-Jr-tz8" id="xY7-AK-LG4"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
