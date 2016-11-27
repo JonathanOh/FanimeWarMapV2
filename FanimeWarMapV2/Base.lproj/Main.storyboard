@@ -66,14 +66,14 @@
                     <connections>
                         <outlet property="passwordTextField" destination="uoH-kb-VEA" id="dE5-od-B8v"/>
                         <outlet property="usernameTextField" destination="R29-uY-m22" id="OXr-Hq-5cf"/>
-                        <segue destination="XmP-GK-nJg" kind="show" identifier="loginToHomeSegue" id="GeI-3e-Lbs"/>
+                        <segue destination="K05-Ep-Ymb" kind="show" identifier="loginToHomeSegue" id="GeI-3e-Lbs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33.984375" y="39.84375"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--The Map-->
         <scene sceneID="MRS-8p-N5H">
             <objects>
                 <viewController id="XmP-GK-nJg" customClass="HomePageViewController" customModule="FanimeWarMapV2" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mV2-dy-aNl">
-                                <rect key="frame" x="0.0" y="20" width="240" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="gTA-RP-NQg"/>
@@ -96,15 +96,34 @@
                         <color key="backgroundColor" red="1" green="0.97535902320000001" blue="0.128762393" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mV2-dy-aNl" firstAttribute="leading" secondItem="dAu-nm-iig" secondAttribute="leading" id="CJ0-9l-g1n"/>
+                            <constraint firstItem="mV2-dy-aNl" firstAttribute="top" secondItem="E8e-7H-MN8" secondAttribute="bottom" constant="-64" id="OsY-E8-Ask"/>
                             <constraint firstItem="MnY-Cs-3ai" firstAttribute="top" secondItem="mV2-dy-aNl" secondAttribute="bottom" id="OuD-wY-eYx"/>
-                            <constraint firstItem="mV2-dy-aNl" firstAttribute="top" secondItem="E8e-7H-MN8" secondAttribute="bottom" id="YgU-i7-09M"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="The Map" id="MBY-o2-OdN"/>
                     <connections>
                         <outlet property="mainMenuTableView" destination="mV2-dy-aNl" id="sgr-ef-Bxu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoB-Nt-9of" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1474.21875" y="43.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6IA-QY-BHC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K05-Ep-Ymb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YU2-Sv-tkN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XmP-GK-nJg" kind="relationship" relationship="rootViewController" id="aLR-I1-4Lg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cgo-RQ-acz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="43.75"/>
         </scene>
