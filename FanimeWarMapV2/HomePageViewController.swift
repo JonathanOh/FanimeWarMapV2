@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MapSelectedDelegate {
+class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MapSelectedDelegate, RoverAddedDelegate {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     
@@ -29,7 +29,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         loadCurrentRovers()
         loadCurrentTeamsIntoArray()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        for rover in currentRovers {
+            print(rover.name)
+        }
     }
     
     func setUpBackgroundMap(map: UIColor) {
@@ -91,6 +96,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             break
         case MainMenu.addARover:
             // This needs to be passed active teams
+            performSegue(withIdentifier: SegueId.addRoverId, sender: self)
             break
         case MainMenu.deployTeam:
             // This needs to be passed active teams without a location
@@ -127,6 +133,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             setUpBackgroundMap(map: UIColor.green)
         }
     }
+    
+    func roverWasAdded(rover: Rover) {
+        currentRovers.append(rover)
+    }
+    
+    
 // MARK: prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segueId = segue.identifier else {
@@ -137,6 +149,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         case SegueId.mapPickerId:
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
+            break
+        case SegueId.addRoverId:
+            let AddRoverVC : AddRoverViewController = segue.destination as! AddRoverViewController
+            AddRoverVC.delegate = self
             break
         case SegueId.viewTeamId:
             let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController

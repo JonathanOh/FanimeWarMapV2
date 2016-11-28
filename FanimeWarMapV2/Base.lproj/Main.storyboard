@@ -105,6 +105,7 @@
                         <outlet property="mainMenuTableView" destination="mV2-dy-aNl" id="sgr-ef-Bxu"/>
                         <segue destination="hjl-6e-vxa" kind="show" identifier="mapPickerSegue" id="Nff-dR-2Wd"/>
                         <segue destination="c2y-Rt-wOh" kind="show" identifier="viewTeamSegue" id="CVm-VD-FmU"/>
+                        <segue destination="7PN-iF-VyI" kind="show" identifier="addRoverSegue" id="YFG-7m-2uq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoB-Nt-9of" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,6 +144,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cku-UN-gpr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2899" y="-1045"/>
+        </scene>
+        <!--Add Rover-->
+        <scene sceneID="sEH-eY-EE6">
+            <objects>
+                <viewController title="Add Rover" id="7PN-iF-VyI" customClass="AddRoverViewController" customModule="FanimeWarMapV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fqr-dy-kl6"/>
+                        <viewControllerLayoutGuide type="bottom" id="LHR-f4-fav"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YX8-LW-As5">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rover Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p95-oI-cf4">
+                                <rect key="frame" x="347" y="178" width="331" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9UD-c7-Kqd"/>
+                                    <constraint firstAttribute="width" constant="331" id="o6L-wf-5qx"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rover Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2TX-As-VxO">
+                                <rect key="frame" x="347" y="253" width="331" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9VH-br-D8d"/>
+                                    <constraint firstAttribute="width" constant="331" id="h3p-c7-TMX"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hk8-xV-WZj">
+                                <rect key="frame" x="433" y="464" width="159" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="IQ0-hN-apr"/>
+                                    <constraint firstAttribute="width" constant="159" id="YBm-qq-z2Q"/>
+                                </constraints>
+                                <state key="normal" title="Add Rover"/>
+                                <connections>
+                                    <action selector="addRoverButton:" destination="7PN-iF-VyI" eventType="touchUpInside" id="x2K-P5-kH0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LHR-f4-fav" firstAttribute="top" secondItem="Hk8-xV-WZj" secondAttribute="bottom" constant="274" id="2pf-zt-mkH"/>
+                            <constraint firstItem="2TX-As-VxO" firstAttribute="centerX" secondItem="YX8-LW-As5" secondAttribute="centerX" id="4Mk-Oo-hfd"/>
+                            <constraint firstItem="Hk8-xV-WZj" firstAttribute="centerX" secondItem="YX8-LW-As5" secondAttribute="centerX" id="9ob-EA-4dB"/>
+                            <constraint firstItem="p95-oI-cf4" firstAttribute="centerX" secondItem="YX8-LW-As5" secondAttribute="centerX" id="XVb-SY-9KR"/>
+                            <constraint firstItem="p95-oI-cf4" firstAttribute="top" secondItem="Fqr-dy-kl6" secondAttribute="bottom" constant="114" id="Xfu-vb-6tq"/>
+                            <constraint firstItem="2TX-As-VxO" firstAttribute="top" secondItem="p95-oI-cf4" secondAttribute="bottom" constant="45" id="cIx-aZ-xtL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="roverNameTextField" destination="p95-oI-cf4" id="6Oc-PG-1Ra"/>
+                        <outlet property="roverPhoneTextField" destination="2TX-As-VxO" id="GJy-Eb-dsb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbe-4d-smE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2898.6328125" y="-223.4375"/>
         </scene>
         <!--View Teams View Controller-->
         <scene sceneID="oxk-cD-AuW">

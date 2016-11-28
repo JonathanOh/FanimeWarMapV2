@@ -28,6 +28,7 @@ struct MapName {
 struct SegueId {
     static let mapPickerId = "mapPickerSegue"
     static let viewTeamId = "viewTeamSegue"
+    static let addRoverId = "addRoverSegue"
 }
 
 let Pokemon : [String] = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise",

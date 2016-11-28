@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */; };
 		8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */; };
+		8B5992671DEC0A44003CD21F /* AddRoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */; };
 		8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */; };
 		8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */; };
 		8BFCDA601DE96FB1002129C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5E1DE96FB1002129C8 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsViewController.swift; sourceTree = "<group>"; };
 		8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsPrototypeCell.swift; sourceTree = "<group>"; };
+		8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoverViewController.swift; sourceTree = "<group>"; };
 		8BFCDA571DE96FB1002129C8 /* FanimeWarMapV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanimeWarMapV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */,
 				8BFCDA6C1DE97664002129C8 /* HomePageViewController.swift */,
 				8BFCDA721DEA76B5002129C8 /* MapPickerViewController.swift */,
+				8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */,
 				8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */,
 			);
 			name = Controller;
@@ -183,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFCDA6F1DEA642B002129C8 /* Rover.swift in Sources */,
+				8B5992671DEC0A44003CD21F /* AddRoverViewController.swift in Sources */,
 				8BFCDA731DEA76B5002129C8 /* MapPickerViewController.swift in Sources */,
 				8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */,
 				8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */,

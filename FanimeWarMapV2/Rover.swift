@@ -10,12 +10,12 @@ import Foundation
 
 class Rover {
     
-    private var name : String
-    private var phone : Int?
-    private var team : String?
-    private var isAssigned : Bool = false
+    private(set) var name : String
+    private(set) var phone : String?
+    private(set) var team : String?
+    private(set) var isAssigned : Bool = false
     
-    init(name: String, phone: Int?, team: String?) {
+    init(name: String, phone: String?, team: String?) {
         self.name = name
         self.phone = phone
         if let team = team {
