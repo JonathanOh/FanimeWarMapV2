@@ -18,7 +18,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var activeTeams : [Team] = []
     private var currentRovers : [Rover] = []
-    private var backgroundMap : UIColor = UIColor.green
     
     var mainMenuArray : Array<String>!
     
@@ -30,12 +29,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         self.mainMenuTableView.dataSource = self
         self.mapScrollerSuperView.delegate = self
         
-        self.mainMenuTableView.backgroundColor = UIColor.lightGray
+        self.mainMenuTableView.backgroundColor = UIColor.white
         
         let button = UIBarButtonItem(title: "Menu Toggle", style: .plain, target: self, action: #selector(toggleMenu))
         self.navigationItem.leftBarButtonItem = button
         
-        self.setUpBackgroundMap(map: backgroundMap)
+        self.view.backgroundColor = FANIME_DARK_BLUE
+        self.setUpBackgroundMap(map: MapName.wholeMap)
         
         loadCurrentRovers()
         loadCurrentTeamsIntoArray()
@@ -60,12 +60,14 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    func setUpBackgroundMap(map: UIColor) {
+    func setUpBackgroundMap(map: String) {
         
         self.mapScrollerSuperView.minimumZoomScale = 1.0
         self.mapScrollerSuperView.maximumZoomScale = 6.0
         
-        self.view.backgroundColor = map
+        self.mapImageView.image = UIImage(named: map)
+        self.title = map
+        //self.view.backgroundColor = map
     }
   
     func loadCurrentRovers() {
@@ -104,6 +106,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         var cell = tableView.dequeueReusableCell(withIdentifier: "mainMenuCellIdentifier")
         cell = UITableViewCell(style: .default, reuseIdentifier: "mainMenuCellIdentifier")
         cell?.textLabel?.text = mainMenuArray[indexPath.row]
+        cell?.textLabel?.textColor = FANIME_ORANGE
+        cell?.textLabel?.font = UIFont(name: "SFUIText-Bold", size: 14)
+        
         return cell!
     }
     
@@ -153,19 +158,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
   
 // MARK: Custom Delegates
     func mapWasSelected(map: String) {
-        switch map {
-        case MapName.mapOne:
-            setUpBackgroundMap(map: UIColor.green)
-            break
-        case MapName.mapTwo:
-            setUpBackgroundMap(map: UIColor.blue)
-            break
-        case MapName.mapThree:
-            setUpBackgroundMap(map: UIColor.yellow)
-            break
-        default:
-            setUpBackgroundMap(map: UIColor.green)
-        }
+        setUpBackgroundMap(map: map)
     }
     
     func roverWasAdded(rover: Rover) {

@@ -16,7 +16,7 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var delegate : MapSelectedDelegate? = nil
     
-    let currentMaps : [String] = [MapName.mapOne, MapName.mapTwo, MapName.mapThree]
+    let currentMaps : [String] = [MapName.wholeMap, MapName.upperLevelMap, MapName.lowerLevelMap]
     @IBOutlet weak var mapPickerTableView: UITableView!
     
     override func viewDidLoad() {
