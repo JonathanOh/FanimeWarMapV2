@@ -85,24 +85,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-Bj-oaA">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wholeMap" translatesAutoresizingMaskIntoConstraints="NO" id="gc4-EP-ptf">
+                                        <rect key="frame" x="0.0" y="-64" width="1024" height="768"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="gc4-EP-ptf" firstAttribute="centerY" secondItem="GDz-Bj-oaA" secondAttribute="centerY" id="2tD-db-IV5"/>
+                                    <constraint firstAttribute="trailing" secondItem="gc4-EP-ptf" secondAttribute="trailing" id="9Fe-Cm-g2V"/>
+                                    <constraint firstAttribute="bottom" secondItem="gc4-EP-ptf" secondAttribute="bottom" id="Rd2-04-jMk"/>
+                                    <constraint firstItem="gc4-EP-ptf" firstAttribute="top" secondItem="GDz-Bj-oaA" secondAttribute="top" id="fhq-Nx-8U1"/>
+                                    <constraint firstItem="gc4-EP-ptf" firstAttribute="centerX" secondItem="GDz-Bj-oaA" secondAttribute="centerX" id="h6d-rj-puH"/>
+                                    <constraint firstItem="gc4-EP-ptf" firstAttribute="leading" secondItem="GDz-Bj-oaA" secondAttribute="leading" id="tvh-Vh-BSg"/>
+                                </constraints>
+                            </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mV2-dy-aNl">
-                                <rect key="frame" x="0.0" y="64" width="240" height="704"/>
+                                <rect key="frame" x="0.0" y="64" width="200" height="704"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="gTA-RP-NQg"/>
+                                    <constraint firstAttribute="width" constant="200" id="gTA-RP-NQg"/>
                                 </constraints>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97535902320000001" blue="0.128762393" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="mV2-dy-aNl" firstAttribute="leading" secondItem="dAu-nm-iig" secondAttribute="leading" id="CJ0-9l-g1n"/>
+                            <constraint firstAttribute="leading" secondItem="mV2-dy-aNl" secondAttribute="leading" id="CJ0-9l-g1n"/>
+                            <constraint firstItem="GDz-Bj-oaA" firstAttribute="top" secondItem="dAu-nm-iig" secondAttribute="top" id="DHr-f8-h8v"/>
                             <constraint firstItem="mV2-dy-aNl" firstAttribute="top" secondItem="E8e-7H-MN8" secondAttribute="bottom" id="OsY-E8-Ask"/>
                             <constraint firstItem="MnY-Cs-3ai" firstAttribute="top" secondItem="mV2-dy-aNl" secondAttribute="bottom" id="OuD-wY-eYx"/>
+                            <constraint firstItem="GDz-Bj-oaA" firstAttribute="bottom" secondItem="MnY-Cs-3ai" secondAttribute="top" id="aIw-72-8q6"/>
+                            <constraint firstAttribute="trailing" secondItem="GDz-Bj-oaA" secondAttribute="trailing" id="i5v-Vm-28p"/>
+                            <constraint firstItem="GDz-Bj-oaA" firstAttribute="leading" secondItem="mV2-dy-aNl" secondAttribute="leading" id="zs1-Dz-YXS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Map" id="MBY-o2-OdN"/>
                     <connections>
                         <outlet property="mainMenuTableView" destination="mV2-dy-aNl" id="sgr-ef-Bxu"/>
+                        <outlet property="mapImageView" destination="gc4-EP-ptf" id="AoU-f6-hCN"/>
+                        <outlet property="mapScrollerSuperView" destination="GDz-Bj-oaA" id="cja-gA-5AI"/>
+                        <outlet property="widthOfMenuConstraint" destination="gTA-RP-NQg" id="RWK-ph-kYT"/>
                         <segue destination="hjl-6e-vxa" kind="show" identifier="mapPickerSegue" id="Nff-dR-2Wd"/>
                         <segue destination="c2y-Rt-wOh" kind="show" identifier="viewTeamSegue" id="CVm-VD-FmU"/>
                         <segue destination="7PN-iF-VyI" kind="show" identifier="addRoverSegue" id="YFG-7m-2uq"/>
@@ -312,4 +335,7 @@
             <point key="canvasLocation" x="342" y="5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="wholeMap" width="1700" height="1100"/>
+    </resources>
 </document>

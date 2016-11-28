@@ -11,8 +11,10 @@ import UIKit
 class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
-    //@IBOutlet weak var mapImageview: UIImageView!
-    //@IBOutlet weak var mapScrollerSuperView: UIScrollView!
+    @IBOutlet weak var mapScrollerSuperView: UIScrollView!
+    @IBOutlet weak var mapImageView: UIImageView!
+
+    @IBOutlet weak var widthOfMenuConstraint: NSLayoutConstraint!
     
     private var activeTeams : [Team] = []
     private var currentRovers : [Rover] = []
@@ -26,6 +28,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         mainMenuArray = [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.zoomMode, MainMenu.logOut]
         self.mainMenuTableView.delegate = self
         self.mainMenuTableView.dataSource = self
+        self.mapScrollerSuperView.delegate = self
+        
+        self.mainMenuTableView.backgroundColor = UIColor.lightGray
+        
+        let button = UIBarButtonItem(title: "Menu Toggle", style: .plain, target: self, action: #selector(toggleMenu))
+        self.navigationItem.leftBarButtonItem = button
         
         self.setUpBackgroundMap(map: backgroundMap)
         
@@ -39,29 +47,23 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func toggleMenu() {
+        let constant = self.widthOfMenuConstraint.constant
+        if constant == 0 {
+            self.widthOfMenuConstraint.constant = 200.0
+        } else {
+            self.widthOfMenuConstraint.constant = 0.0
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
     func setUpBackgroundMap(map: UIColor) {
         
-//        var vWidth = self.view.frame.width
-//        var vHeight = self.view.frame.height
-//        
-//        var scrollImg: UIScrollView = UIScrollView()
-//        scrollImg.delegate = self
-//        scrollImg.frame = CGRect(x: 0, y: 0, width: vWidth, height: vHeight)//CGRectMake(0, 0, vWidth, vHeight)
-//        scrollImg.backgroundColor = UIColor(red: 90, green: 90, blue: 90, alpha: 0.90)
-//        scrollImg.alwaysBounceVertical = false
-//        scrollImg.alwaysBounceHorizontal = false
-//        scrollImg.showsVerticalScrollIndicator = true
-//        scrollImg.flashScrollIndicators()
-//        
-//        scrollImg.minimumZoomScale = 1.0
-//        scrollImg.maximumZoomScale = 10.0
-//        
-//        self.view.addSubview(scrollImg)
-//        
-//        let mapImage = UIImage(named: MapName.wholeMap)
-//        mapImage!.layer.cornerRadius = 11.0
-//        mapImage!.clipsToBounds = false
-//        scrollImg.addSubview(mapImage!)
+        self.mapScrollerSuperView.minimumZoomScale = 1.0
+        self.mapScrollerSuperView.maximumZoomScale = 6.0
         
         self.view.backgroundColor = map
     }
@@ -94,7 +96,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.mapImageview
+        return self.mapImageView
     }
     
 // MARK: Table View Delegates
@@ -143,6 +145,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         default:
             print("default case")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
   
 // MARK: Custom Delegates
