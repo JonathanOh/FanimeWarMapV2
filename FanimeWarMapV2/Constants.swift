@@ -23,6 +23,9 @@ struct MapName {
     static let mapOne = "Map 1 Green"
     static let mapTwo = "Map 2 Blue"
     static let mapThree = "Map 3 Yellow"
+    static let wholeMap = "wholeMap"
+    static let upperLevelMap = "upperLevelMap"
+    static let lowerLevelMap = "lowerLevelMap"
 }
 
 struct SegueId {
