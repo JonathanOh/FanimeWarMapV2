@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-Bj-oaA">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <rect key="frame" x="200" y="0.0" width="824" height="768"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wholeMap" translatesAutoresizingMaskIntoConstraints="NO" id="gc4-EP-ptf">
                                         <rect key="frame" x="0.0" y="-64" width="1024" height="768"/>
@@ -117,7 +117,7 @@
                             <constraint firstItem="MnY-Cs-3ai" firstAttribute="top" secondItem="mV2-dy-aNl" secondAttribute="bottom" id="OuD-wY-eYx"/>
                             <constraint firstItem="GDz-Bj-oaA" firstAttribute="bottom" secondItem="MnY-Cs-3ai" secondAttribute="top" id="aIw-72-8q6"/>
                             <constraint firstAttribute="trailing" secondItem="GDz-Bj-oaA" secondAttribute="trailing" id="i5v-Vm-28p"/>
-                            <constraint firstItem="GDz-Bj-oaA" firstAttribute="leading" secondItem="mV2-dy-aNl" secondAttribute="leading" id="zs1-Dz-YXS"/>
+                            <constraint firstItem="GDz-Bj-oaA" firstAttribute="leading" secondItem="mV2-dy-aNl" secondAttribute="trailing" id="zs1-Dz-YXS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Map" id="MBY-o2-OdN"/>
@@ -321,7 +321,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K05-Ep-Ymb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YU2-Sv-tkN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YU2-Sv-tkN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -21,6 +21,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     var mainMenuArray : Array<String>!
     
+    var iconToMove = UIImageView()
+    var minimumDistanceToMoveClosestIcon : CGFloat = 0
+    
+    let charmander = UIImageView()
+    let squirtle = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +45,24 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         loadCurrentRovers()
         loadCurrentTeamsIntoArray()
+        
+        
+
+        charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        charmander.image = UIImage(named: "charmander")
+        charmander.tag = 0
+        
+        squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        squirtle.image = UIImage(named: "squirtle")
+        squirtle.tag = 1
+        //self.mapScrollerSuperView.
+        self.mapScrollerSuperView.isUserInteractionEnabled = false
+        self.mapImageView.addSubview(charmander)
+        self.mapImageView.addSubview(squirtle)
+        
+        print(squirtle.center)
+        print(charmander.center)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +70,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             print(rover.name)
         }
     }
-    
+
     func toggleMenu() {
         let constant = self.widthOfMenuConstraint.constant
         if constant == 0 {
@@ -154,6 +178,46 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
+    }
+
+// MARK: Touch Events
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let touchLocation = touch.location(in: self.mapImageView)
+            if minimumDistanceToMoveClosestIcon < 60 {
+                iconToMove.center = touchLocation
+            }
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let touchLocation = touch.location(in: self.mapImageView)
+            closestImageToTouchEvent(touch: touchLocation)
+            if minimumDistanceToMoveClosestIcon < 60 {
+                iconToMove.center = touchLocation
+            }
+        }
+    }
+
+    func closestImageToTouchEvent(touch: CGPoint) {
+        let arrayOfIcons = [squirtle, charmander]
+        var closestImagetoTouch = UIImageView()
+        var closestDistanceValue : CGFloat = -1.0
+        
+        for icon in arrayOfIcons {
+            let xDistance = abs(icon.center.x - touch.x)
+            let yDistance = abs(icon.center.y - touch.y)
+            let currentDistanceValue : CGFloat = xDistance + yDistance
+            if closestDistanceValue == -1 {
+                closestDistanceValue = currentDistanceValue
+                closestImagetoTouch = icon
+            } else if (currentDistanceValue < closestDistanceValue) {
+                closestDistanceValue = currentDistanceValue
+                closestImagetoTouch = icon
+            }
+        }
+        minimumDistanceToMoveClosestIcon = closestDistanceValue
+        iconToMove = closestImagetoTouch
     }
   
 // MARK: Custom Delegates
