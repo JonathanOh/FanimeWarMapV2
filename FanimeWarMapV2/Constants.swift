@@ -16,7 +16,7 @@ struct MainMenu {
     static let deployTeam = "Deploy Team"
     static let viewTeams = "View Teams"
     static let saveMap = "Save/Upload Map"
-    static let zoomMode = "Zoom Mode"
+    static let moveTeamsMode = "Move Teams Mode"
     static let logOut = "Log Out"
 }
 

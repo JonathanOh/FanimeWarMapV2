@@ -19,6 +19,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     private var activeTeams : [Team] = []
     private var currentRovers : [Rover] = []
     
+    private var isInZoomMode : Bool = false
+    
     var mainMenuArray : Array<String>!
     
     var iconToMove = UIImageView()
@@ -30,24 +32,22 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainMenuArray = [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.zoomMode, MainMenu.logOut]
-        self.mainMenuTableView.delegate = self
-        self.mainMenuTableView.dataSource = self
-        self.mapScrollerSuperView.delegate = self
+        mainMenuArray = [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.logOut]
+        mainMenuTableView.delegate = self
+        mainMenuTableView.dataSource = self
+        mapScrollerSuperView.delegate = self
         
-        self.mainMenuTableView.backgroundColor = UIColor.white
+        mainMenuTableView.backgroundColor = UIColor.white
         
         let button = UIBarButtonItem(title: "Menu Toggle", style: .plain, target: self, action: #selector(toggleMenu))
-        self.navigationItem.leftBarButtonItem = button
+        navigationItem.leftBarButtonItem = button
         
-        self.view.backgroundColor = FANIME_DARK_BLUE
-        self.setUpBackgroundMap(map: MapName.wholeMap)
+        view.backgroundColor = FANIME_DARK_BLUE
+        setUpBackgroundMap(map: MapName.wholeMap)
         
         loadCurrentRovers()
         loadCurrentTeamsIntoArray()
         
-        
-
         charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         charmander.image = UIImage(named: "charmander")
         charmander.tag = 0
@@ -55,10 +55,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
         squirtle.image = UIImage(named: "squirtle")
         squirtle.tag = 1
-        //self.mapScrollerSuperView.
-        self.mapScrollerSuperView.isUserInteractionEnabled = false
-        self.mapImageView.addSubview(charmander)
-        self.mapImageView.addSubview(squirtle)
+        
+        // This property allows icons to be interacted with by the user
+        mapScrollerSuperView.isUserInteractionEnabled = true
+        
+        mapImageView.addSubview(charmander)
+        mapImageView.addSubview(squirtle)
         
         print(squirtle.center)
         print(charmander.center)
@@ -71,6 +73,14 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
+    
+// MARK : Helper Functions
+    func toggleZoomMode() {
+        isInZoomMode = !isInZoomMode
+        mapScrollerSuperView.isUserInteractionEnabled = !mapScrollerSuperView.isUserInteractionEnabled
+        mapScrollerSuperView.zoomScale = 1.0
+    }
+    
     func toggleMenu() {
         let constant = self.widthOfMenuConstraint.constant
         if constant == 0 {
@@ -145,7 +155,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if (mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    
         switch mainMenuArray[indexPath.row] {
         case MainMenu.mapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
@@ -166,7 +179,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         case MainMenu.saveMap:
             //Learn Firebase
             break
-        case MainMenu.zoomMode:
+        case MainMenu.moveTeamsMode:
+            if isInZoomMode {
+                tableView.deselectRow(at: indexPath, animated: true)
+            } else {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            }
+            toggleZoomMode()
             break
         case MainMenu.logOut:
             self.dismiss(animated: true, completion: nil)
