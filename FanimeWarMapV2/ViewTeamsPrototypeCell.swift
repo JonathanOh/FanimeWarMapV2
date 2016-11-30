@@ -30,7 +30,7 @@ class ViewTeamsPrototypeCell: UITableViewCell {
         self.teamName.text = name
         var teamMembersString : String = ""
         for member in members {
-            teamMembersString.append("\(member), ")
+            teamMembersString.append("\(member) ")
         }
         self.teamMembers.text = teamMembersString
     }

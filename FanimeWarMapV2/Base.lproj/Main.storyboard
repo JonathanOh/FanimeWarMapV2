@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -129,6 +131,7 @@
                         <segue destination="hjl-6e-vxa" kind="show" identifier="mapPickerSegue" id="Nff-dR-2Wd"/>
                         <segue destination="c2y-Rt-wOh" kind="show" identifier="viewTeamSegue" id="CVm-VD-FmU"/>
                         <segue destination="7PN-iF-VyI" kind="show" identifier="addRoverSegue" id="YFG-7m-2uq"/>
+                        <segue destination="dMB-h7-Ne7" kind="show" identifier="deployTeamSegue" id="8fj-2y-CVp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoB-Nt-9of" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,7 +232,91 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbe-4d-smE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2898.6328125" y="-223.4375"/>
+            <point key="canvasLocation" x="2899" y="-359"/>
+        </scene>
+        <!--Deploy Team View Controller-->
+        <scene sceneID="g5h-60-QmC">
+            <objects>
+                <viewController id="dMB-h7-Ne7" customClass="DeployTeamViewController" customModule="FanimeWarMapV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R95-RK-5h7"/>
+                        <viewControllerLayoutGuide type="bottom" id="ent-s0-old"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dC6-ro-D77">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tUG-Gy-jxe">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCellId" rowHeight="182" id="6IR-fr-c9T" customClass="ViewTeamsPrototypeCell" customModule="FanimeWarMapV2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="182"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6IR-fr-c9T" id="8f5-dO-eDz">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="181"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kn-PN-DKs">
+                                                    <rect key="frame" x="607" y="8" width="330" height="165"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QeR-vo-MkI">
+                                                    <rect key="frame" x="426" y="8" width="173" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="QeR-vo-MkI" secondAttribute="height" multiplier="173:165" id="wat-3c-roi"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Member Names" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-lY-RPe">
+                                                    <rect key="frame" x="8" y="8" width="271" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="271" id="Xh2-c4-OLz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9kn-PN-DKs" firstAttribute="leading" secondItem="QeR-vo-MkI" secondAttribute="trailing" constant="30" id="0o7-hg-MEF"/>
+                                                <constraint firstItem="Ehe-lY-RPe" firstAttribute="top" secondItem="8f5-dO-eDz" secondAttribute="topMargin" id="EAU-Ny-w6L"/>
+                                                <constraint firstItem="Ehe-lY-RPe" firstAttribute="bottom" secondItem="8f5-dO-eDz" secondAttribute="bottomMargin" id="EYA-js-F8Y"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9kn-PN-DKs" secondAttribute="trailing" id="HtM-Xz-FbF"/>
+                                                <constraint firstItem="QeR-vo-MkI" firstAttribute="centerY" secondItem="8f5-dO-eDz" secondAttribute="centerY" id="QDU-9A-pxQ"/>
+                                                <constraint firstItem="QeR-vo-MkI" firstAttribute="bottom" secondItem="8f5-dO-eDz" secondAttribute="bottomMargin" id="TOy-oj-iSN"/>
+                                                <constraint firstItem="Ehe-lY-RPe" firstAttribute="leading" secondItem="8f5-dO-eDz" secondAttribute="leadingMargin" id="Vrs-YZ-UK2"/>
+                                                <constraint firstItem="QeR-vo-MkI" firstAttribute="top" secondItem="8f5-dO-eDz" secondAttribute="topMargin" id="dnC-WI-ybL"/>
+                                                <constraint firstItem="9kn-PN-DKs" firstAttribute="top" secondItem="8f5-dO-eDz" secondAttribute="topMargin" id="pV4-8w-Tva"/>
+                                                <constraint firstItem="9kn-PN-DKs" firstAttribute="bottom" secondItem="8f5-dO-eDz" secondAttribute="bottomMargin" id="sIi-Ei-QBf"/>
+                                                <constraint firstItem="QeR-vo-MkI" firstAttribute="centerX" secondItem="8f5-dO-eDz" secondAttribute="centerX" id="sNi-qB-30h"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="teamIcon" destination="QeR-vo-MkI" id="CKh-4u-LRo"/>
+                                            <outlet property="teamMembers" destination="Ehe-lY-RPe" id="lsd-84-PdY"/>
+                                            <outlet property="teamName" destination="9kn-PN-DKs" id="cai-Ou-1Af"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tUG-Gy-jxe" firstAttribute="top" secondItem="dC6-ro-D77" secondAttribute="top" id="0Eu-gt-7KO"/>
+                            <constraint firstItem="ent-s0-old" firstAttribute="top" secondItem="tUG-Gy-jxe" secondAttribute="bottom" id="15c-sh-IGq"/>
+                            <constraint firstItem="tUG-Gy-jxe" firstAttribute="leading" secondItem="dC6-ro-D77" secondAttribute="leading" id="YF8-cw-BJ1"/>
+                            <constraint firstAttribute="trailing" secondItem="tUG-Gy-jxe" secondAttribute="trailing" id="iW0-sy-DJ3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deployableTeamsTableView" destination="tUG-Gy-jxe" id="3t0-dA-ZxD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xOk-Gt-8Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2898.6328125" y="351.5625"/>
         </scene>
         <!--View Teams View Controller-->
         <scene sceneID="oxk-cD-AuW">

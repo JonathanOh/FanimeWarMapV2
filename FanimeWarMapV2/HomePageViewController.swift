@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate {
+class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate, SelectedTeamToDeployDelegate {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     @IBOutlet weak var mapScrollerSuperView: UIScrollView!
@@ -18,14 +18,16 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var activeTeams : [Team] = []
     private var currentRovers : [Rover] = []
+    private var dictionaryOfTeams = [String : [Team]]()
     
-    private var isInZoomMode : Bool = false
+    private var isInZoomMode : Bool = true
     
     var mainMenuArray : Array<String>!
     
     var iconToMove = UIImageView()
     var minimumDistanceToMoveClosestIcon : CGFloat = 0
     
+    private var arrayOfIcons = [UIImageView]()
     let charmander = UIImageView()
     let squirtle = UIImageView()
     
@@ -47,15 +49,16 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         loadCurrentRovers()
         loadCurrentTeamsIntoArray()
+        loadDictionaryOfTeams()
+        
         
         charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         charmander.image = UIImage(named: "charmander")
         charmander.tag = 0
-        
         squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
         squirtle.image = UIImage(named: "squirtle")
         squirtle.tag = 1
-        
+        arrayOfIcons = [charmander, squirtle]
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
         
@@ -101,38 +104,59 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.mapImageView.image = UIImage(named: map)
         self.title = map
-        //self.view.backgroundColor = map
+
     }
   
+    func loadDictionaryOfTeams() {
+        
+        var teamHolder : [Team] = []
+        
+        for pokemon in Pokemon {
+            let team = Team(name: pokemon, icon: pokemon)
+            teamHolder.append(team)
+        }
+        dictionaryOfTeams["deployed"] = []
+        dictionaryOfTeams["undeployed"] = teamHolder
+    
+    }
+    
     func loadCurrentRovers() {
         //dummy data
-        let dummyRoverData = ["Hanson", "Starry", "Jay", "Michael", "Jenny", "Stacey", "Greg", "Aston", "Sara", "LeeSin"]
-        let dummyAssignment = ["Pikachu", nil, "Pikachu", nil, "Squirtle", "Squirtle", "Squirtle", "Squirtle", nil, nil]
-        
-        for item in dummyRoverData {
-            let currentIndex = dummyRoverData.index(of: item)
-            let rover = Rover(name: item, phone: nil, team: dummyAssignment[currentIndex!])
-            self.currentRovers.append(rover)
-        }
+//        let dummyRoverData = ["Hanson", "Starry", "Jay", "Michael", "Jenny", "Stacey", "Greg", "Aston", "Sara", "LeeSin"]
+//        let dummyAssignment = ["Pikachu", nil, "Pikachu", nil, "Squirtle", "Squirtle", "Squirtle", "Squirtle", nil, nil]
+//        
+//        for item in dummyRoverData {
+//            let currentIndex = dummyRoverData.index(of: item)
+//            let rover = Rover(name: item, phone: nil, team: dummyAssignment[currentIndex!])
+//            self.currentRovers.append(rover)
+//        }
         
     }
     
     func loadCurrentTeamsIntoArray() {
         //currently dummy data, this is where we will pull current teams from network
-        let dummyDataTeamName = ["Pikachu", "Squirtle", "Bulbasaur", "Raichu", "Charizard"]
-        let dummyDataTeamIcon = ["PikachuIcon", "SquirtleIcon", "BulbasaurIcon", "RaichuIcon", "CharizardIcon"]
-        let dummyDataTeamMembers = [["Jon", "Phil"], ["Chris", "Waffles"], ["Alicia", "Mike"], ["Steven", "Chris"], ["JJ", "Harambe"]]
-        
-        for name in dummyDataTeamName {
-            let currentIndex = dummyDataTeamName.index(of: name)
-            let team = Team(name: name, icon: dummyDataTeamIcon[currentIndex!])
-            team.replaceCurrentTeamWith(team: dummyDataTeamMembers[currentIndex!])
-            activeTeams.append(team)
-        }
+//        let dummyDataTeamName = ["Pikachu", "Squirtle", "Bulbasaur", "Raichu", "Charizard"]
+//        let dummyDataTeamIcon = ["PikachuIcon", "SquirtleIcon", "BulbasaurIcon", "RaichuIcon", "CharizardIcon"]
+//        let dummyDataTeamMembers = [["Jon", "Phil"], ["Chris", "Waffles"], ["Alicia", "Mike"], ["Steven", "Chris"], ["JJ", "Harambe"]]
+//        
+//        for name in dummyDataTeamName {
+//            let currentIndex = dummyDataTeamName.index(of: name)
+//            let team = Team(name: name, icon: dummyDataTeamIcon[currentIndex!])
+//            team.replaceCurrentTeamWith(team: dummyDataTeamMembers[currentIndex!])
+//            activeTeams.append(team)
+//        }
     }
     
+    // This allowed pinch zooming for the view returned
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.mapImageView
+    }
+    
+    func placeHolderAlert() {
+        let tempAlert = UIAlertController(title: "Whoops!", message: "This is currently in development", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        tempAlert.addAction(okAction)
+        present(tempAlert, animated: true, completion: nil)
     }
     
 // MARK: Table View Delegates
@@ -155,6 +179,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // If Move Teams Mode is enabled, do allow interaction with any other table cell.  Will reselect the Move Teams Cell
+        if (!isInZoomMode && mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let moveTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.moveTeamsMode)!, section: 0)
+            tableView.selectRow(at: moveTeamsCellIndex, animated: true, scrollPosition: .none)
+            return
+        }
         if (mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -162,34 +193,28 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         switch mainMenuArray[indexPath.row] {
         case MainMenu.mapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
-            break
         case MainMenu.addATeam:
             // This needs to be passed active rovers
-            break
+            placeHolderAlert()
         case MainMenu.addARover:
             // This needs to be passed active teams
             performSegue(withIdentifier: SegueId.addRoverId, sender: self)
-            break
         case MainMenu.deployTeam:
-            // This needs to be passed active teams without a location
-            break
+            performSegue(withIdentifier: SegueId.deployTeamId, sender: self)
         case MainMenu.viewTeams:
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
-            break
         case MainMenu.saveMap:
             //Learn Firebase
-            break
+            placeHolderAlert()
         case MainMenu.moveTeamsMode:
             if isInZoomMode {
-                tableView.deselectRow(at: indexPath, animated: true)
-            } else {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: true)
             }
             toggleZoomMode()
-            break
         case MainMenu.logOut:
             self.dismiss(animated: true, completion: nil)
-            break
         default:
             print("default case")
         }
@@ -203,7 +228,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self.mapImageView)
-            let imageToMove = closestImageToTouchEvent(touch: touchLocation)
+            let imageToMove = closestImageToTouchEvent(touchPoint: touchLocation)
             
             if let imageToMove = imageToMove {
                 imageToMove.center = touchLocation
@@ -211,38 +236,39 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.location(in: self.mapImageView)
-            let imageToMove = closestImageToTouchEvent(touch: touchLocation)
-            
-            if let imageToMove = imageToMove {
-                imageToMove.center = touchLocation
-            }
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        for touch in touches {
+//            let touchLocation = touch.location(in: self.mapImageView)
+//            let imageToMove = closestImageToTouchEvent(touchPoint: touchLocation)
+//            
+//            if let imageToMove = imageToMove {
+//                imageToMove.center = touchLocation
+//            }
+//        }
+//    }
 
-    func closestImageToTouchEvent(touch: CGPoint) -> UIImageView? {
-        let arrayOfIcons = [squirtle, charmander]
-        var closestImagetoTouch : UIImageView?
-        var closestDistanceValue : CGFloat = -1.0
+    func closestImageToTouchEvent(touchPoint: CGPoint) -> UIImageView? {
+        //let arrayOfIcons = [squirtle, charmander]
+        var closestImageToTouch : UIImageView?
+        var closestDistanceValue : CGFloat = -1.0 // Use a default place holder value of -1
         
         for icon in arrayOfIcons {
-            let xDistance = abs(icon.center.x - touch.x)
-            let yDistance = abs(icon.center.y - touch.y)
+            let xDistance = abs(icon.center.x - touchPoint.x)
+            let yDistance = abs(icon.center.y - touchPoint.y)
             let currentDistanceValue : CGFloat = xDistance + yDistance
             if closestDistanceValue == -1 {
                 closestDistanceValue = currentDistanceValue
-                closestImagetoTouch = icon
+                closestImageToTouch = icon
             } else if (currentDistanceValue < closestDistanceValue) {
                 closestDistanceValue = currentDistanceValue
-                closestImagetoTouch = icon
+                closestImageToTouch = icon
             }
         }
-        if closestDistanceValue > 60 {
-            closestImagetoTouch = nil
+        let fingerIsCloseEnoughToImageToMoveImage = closestDistanceValue > 60
+        if fingerIsCloseEnoughToImageToMoveImage {
+            closestImageToTouch = nil
         }
-        return closestImagetoTouch
+        return closestImageToTouch
     }
   
 // MARK: Custom Delegates
@@ -252,6 +278,23 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func roverWasAdded(rover: Rover) {
         currentRovers.append(rover)
+    }
+    
+    func teamWasSelectedToDeploy(team: Team) {
+        //mutate current standing dictionary of teams
+        //create image icon of team and add the subview to image
+        let teamIconToAddToView = UIImageView(image: team.teamIcon)
+        
+        teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        
+        //squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        //squirtle.image = UIImage(named: "squirtle")
+        mapImageView.addSubview(teamIconToAddToView)
+        
+
+        arrayOfIcons.append(teamIconToAddToView)
+
+        print(arrayOfIcons.count)
     }
     
     
@@ -265,15 +308,17 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         case SegueId.mapPickerId:
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
-            break
         case SegueId.addRoverId:
             let AddRoverVC : AddRoverViewController = segue.destination as! AddRoverViewController
             AddRoverVC.delegate = self
-            break
+        case SegueId.deployTeamId:
+            let DeployTeamVC : DeployTeamViewController = segue.destination as! DeployTeamViewController
+            DeployTeamVC.deployableTeams = dictionaryOfTeams["undeployed"]!
+            DeployTeamVC.delegate = self
         case SegueId.viewTeamId:
             let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController
             ViewTeamVC.currentTeams = activeTeams
-            break
+            
         default:
             return
         }

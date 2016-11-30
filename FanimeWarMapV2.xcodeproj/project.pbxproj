@@ -24,6 +24,7 @@
 		8B5992821DEC447D003CD21F /* SF-UI-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B5992741DEC447D003CD21F /* SF-UI-Text-Medium.otf */; };
 		8B5992831DEC447D003CD21F /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B5992751DEC447D003CD21F /* SF-UI-Text-Bold.otf */; };
 		8B5992841DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B5992761DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf */; };
+		8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */; };
 		8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */; };
 		8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */; };
 		8BFCDA601DE96FB1002129C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5E1DE96FB1002129C8 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		8B5992741DEC447D003CD21F /* SF-UI-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Medium.otf"; sourceTree = "<group>"; };
 		8B5992751DEC447D003CD21F /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		8B5992761DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-BoldItalic.otf"; sourceTree = "<group>"; };
+		8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeployTeamViewController.swift; sourceTree = "<group>"; };
 		8BFCDA571DE96FB1002129C8 /* FanimeWarMapV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanimeWarMapV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */,
 				8BFCDA6C1DE97664002129C8 /* HomePageViewController.swift */,
+				8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */,
 				8BFCDA721DEA76B5002129C8 /* MapPickerViewController.swift */,
 				8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */,
 				8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */,
@@ -256,6 +259,7 @@
 				8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */,
 				8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */,
 				8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */,
+				8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */,
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
 				8BFCDA711DEA650B002129C8 /* Team.swift in Sources */,
 				8BFCDA6D1DE97664002129C8 /* HomePageViewController.swift in Sources */,

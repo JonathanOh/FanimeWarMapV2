@@ -7,17 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 class Team {
     
     private(set) var teamName : String
     private(set) var teamMembers : [String] = ["No Team Members"]
     private(set) var teamLocation : Int?
-    private(set) var teamIcon : String
+    private(set) var teamIcon : UIImage?
     
     init(name: String, icon: String) {
         self.teamName = name
-        self.teamIcon = icon
+        
+        guard let teamIcon = UIImage(named: icon) else {
+            return
+        }
+        self.teamIcon = teamIcon
     }
     
     func replaceCurrentTeamWith(team: [String]) {
