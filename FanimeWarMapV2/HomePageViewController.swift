@@ -184,24 +184,28 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self.mapImageView)
-            if minimumDistanceToMoveClosestIcon < 60 {
-                iconToMove.center = touchLocation
+            let imageToMove = closestImageToTouchEvent(touch: touchLocation)
+            
+            if let imageToMove = imageToMove {
+                imageToMove.center = touchLocation
             }
         }
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self.mapImageView)
-            closestImageToTouchEvent(touch: touchLocation)
-            if minimumDistanceToMoveClosestIcon < 60 {
-                iconToMove.center = touchLocation
+            let imageToMove = closestImageToTouchEvent(touch: touchLocation)
+            
+            if let imageToMove = imageToMove {
+                imageToMove.center = touchLocation
             }
         }
     }
 
-    func closestImageToTouchEvent(touch: CGPoint) {
+    func closestImageToTouchEvent(touch: CGPoint) -> UIImageView? {
         let arrayOfIcons = [squirtle, charmander]
-        var closestImagetoTouch = UIImageView()
+        var closestImagetoTouch : UIImageView?
         var closestDistanceValue : CGFloat = -1.0
         
         for icon in arrayOfIcons {
@@ -216,8 +220,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 closestImagetoTouch = icon
             }
         }
-        minimumDistanceToMoveClosestIcon = closestDistanceValue
-        iconToMove = closestImagetoTouch
+        if closestDistanceValue > 60 {
+            closestImagetoTouch = nil
+        }
+        return closestImagetoTouch
     }
   
 // MARK: Custom Delegates
