@@ -25,6 +25,7 @@
 		8B5992831DEC447D003CD21F /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B5992751DEC447D003CD21F /* SF-UI-Text-Bold.otf */; };
 		8B5992841DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B5992761DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf */; };
 		8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */; };
+		8B59928C1DF054BF003CD21F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59928B1DF054BF003CD21F /* Utils.swift */; };
 		8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */; };
 		8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */; };
 		8BFCDA601DE96FB1002129C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFCDA5E1DE96FB1002129C8 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		8B5992751DEC447D003CD21F /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		8B5992761DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-BoldItalic.otf"; sourceTree = "<group>"; };
 		8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeployTeamViewController.swift; sourceTree = "<group>"; };
+		8B59928B1DF054BF003CD21F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8BFCDA571DE96FB1002129C8 /* FanimeWarMapV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanimeWarMapV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				8B5992651DEACC91003CD21F /* View */,
 				8B5992641DEACC65003CD21F /* Controller */,
 				8B5992631DEACC4B003CD21F /* Models */,
+				8B59928B1DF054BF003CD21F /* Utils.swift */,
 				8BFCDA741DEA950B002129C8 /* Constants.swift */,
 				8BFCDA5E1DE96FB1002129C8 /* Main.storyboard */,
 				8BFCDA611DE96FB1002129C8 /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
 				8BFCDA711DEA650B002129C8 /* Team.swift in Sources */,
 				8BFCDA6D1DE97664002129C8 /* HomePageViewController.swift in Sources */,
+				8B59928C1DF054BF003CD21F /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanoh.FanimeWarMapV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -404,6 +409,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanoh.FanimeWarMapV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

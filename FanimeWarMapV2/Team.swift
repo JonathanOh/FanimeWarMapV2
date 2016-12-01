@@ -13,8 +13,9 @@ class Team {
     
     private(set) var teamName : String
     private(set) var teamMembers : [String] = ["No Team Members"]
-    private(set) var teamLocation : Int?
+    private(set) var teamLocation : CGPoint?
     private(set) var teamIcon : UIImage?
+    private(set) var isTeamDeployed : Bool = false
     
     init(name: String, icon: String) {
         self.teamName = name

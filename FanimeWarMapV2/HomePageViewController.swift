@@ -16,16 +16,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var widthOfMenuConstraint: NSLayoutConstraint!
     
-    private var activeTeams : [Team] = []
+    private var possibleTeams : [Team] = []
     private var currentRovers : [Rover] = []
-    private var dictionaryOfTeams = [String : [Team]]()
     
     private var isInZoomMode : Bool = true
     
     var mainMenuArray : Array<String>!
-    
-    var iconToMove = UIImageView()
-    var minimumDistanceToMoveClosestIcon : CGFloat = 0
     
     private var arrayOfIcons = [UIImageView]()
     let charmander = UIImageView()
@@ -34,7 +30,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainMenuArray = [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.logOut]
+        mainMenuArray = Utils.getArrayOfMainMenuOptions()
         mainMenuTableView.delegate = self
         mainMenuTableView.dataSource = self
         mapScrollerSuperView.delegate = self
@@ -47,10 +43,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         view.backgroundColor = FANIME_DARK_BLUE
         setUpBackgroundMap(map: MapName.wholeMap)
         
-        loadCurrentRovers()
-        loadCurrentTeamsIntoArray()
-        loadDictionaryOfTeams()
-        
+        possibleTeams = Utils.getCurrentArrayOfTeams()
         
         charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         charmander.image = UIImage(named: "charmander")
@@ -106,45 +99,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         self.title = map
 
     }
-  
-    func loadDictionaryOfTeams() {
-        
-        var teamHolder : [Team] = []
-        
-        for pokemon in Pokemon {
-            let team = Team(name: pokemon, icon: pokemon)
-            teamHolder.append(team)
-        }
-        dictionaryOfTeams["deployed"] = []
-        dictionaryOfTeams["undeployed"] = teamHolder
-    
-    }
     
     func loadCurrentRovers() {
-        //dummy data
-//        let dummyRoverData = ["Hanson", "Starry", "Jay", "Michael", "Jenny", "Stacey", "Greg", "Aston", "Sara", "LeeSin"]
-//        let dummyAssignment = ["Pikachu", nil, "Pikachu", nil, "Squirtle", "Squirtle", "Squirtle", "Squirtle", nil, nil]
-//        
-//        for item in dummyRoverData {
-//            let currentIndex = dummyRoverData.index(of: item)
-//            let rover = Rover(name: item, phone: nil, team: dummyAssignment[currentIndex!])
-//            self.currentRovers.append(rover)
-//        }
-        
-    }
-    
-    func loadCurrentTeamsIntoArray() {
-        //currently dummy data, this is where we will pull current teams from network
-//        let dummyDataTeamName = ["Pikachu", "Squirtle", "Bulbasaur", "Raichu", "Charizard"]
-//        let dummyDataTeamIcon = ["PikachuIcon", "SquirtleIcon", "BulbasaurIcon", "RaichuIcon", "CharizardIcon"]
-//        let dummyDataTeamMembers = [["Jon", "Phil"], ["Chris", "Waffles"], ["Alicia", "Mike"], ["Steven", "Chris"], ["JJ", "Harambe"]]
-//        
-//        for name in dummyDataTeamName {
-//            let currentIndex = dummyDataTeamName.index(of: name)
-//            let team = Team(name: name, icon: dummyDataTeamIcon[currentIndex!])
-//            team.replaceCurrentTeamWith(team: dummyDataTeamMembers[currentIndex!])
-//            activeTeams.append(team)
-//        }
+        //dummy data        
     }
     
     // This allowed pinch zooming for the view returned
@@ -228,47 +185,11 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self.mapImageView)
-            let imageToMove = closestImageToTouchEvent(touchPoint: touchLocation)
-            
+            let imageToMove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
             if let imageToMove = imageToMove {
                 imageToMove.center = touchLocation
             }
         }
-    }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for touch in touches {
-//            let touchLocation = touch.location(in: self.mapImageView)
-//            let imageToMove = closestImageToTouchEvent(touchPoint: touchLocation)
-//            
-//            if let imageToMove = imageToMove {
-//                imageToMove.center = touchLocation
-//            }
-//        }
-//    }
-
-    func closestImageToTouchEvent(touchPoint: CGPoint) -> UIImageView? {
-        //let arrayOfIcons = [squirtle, charmander]
-        var closestImageToTouch : UIImageView?
-        var closestDistanceValue : CGFloat = -1.0 // Use a default place holder value of -1
-        
-        for icon in arrayOfIcons {
-            let xDistance = abs(icon.center.x - touchPoint.x)
-            let yDistance = abs(icon.center.y - touchPoint.y)
-            let currentDistanceValue : CGFloat = xDistance + yDistance
-            if closestDistanceValue == -1 {
-                closestDistanceValue = currentDistanceValue
-                closestImageToTouch = icon
-            } else if (currentDistanceValue < closestDistanceValue) {
-                closestDistanceValue = currentDistanceValue
-                closestImageToTouch = icon
-            }
-        }
-        let fingerIsCloseEnoughToImageToMoveImage = closestDistanceValue > 60
-        if fingerIsCloseEnoughToImageToMoveImage {
-            closestImageToTouch = nil
-        }
-        return closestImageToTouch
     }
   
 // MARK: Custom Delegates
@@ -282,19 +203,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func teamWasSelectedToDeploy(team: Team) {
         //mutate current standing dictionary of teams
-        //create image icon of team and add the subview to image
+
         let teamIconToAddToView = UIImageView(image: team.teamIcon)
-        
         teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-        
-        //squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-        //squirtle.image = UIImage(named: "squirtle")
         mapImageView.addSubview(teamIconToAddToView)
         
-
         arrayOfIcons.append(teamIconToAddToView)
-
-        print(arrayOfIcons.count)
     }
     
     
@@ -313,11 +227,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             AddRoverVC.delegate = self
         case SegueId.deployTeamId:
             let DeployTeamVC : DeployTeamViewController = segue.destination as! DeployTeamViewController
-            DeployTeamVC.deployableTeams = dictionaryOfTeams["undeployed"]!
+            let deployableTeams = Utils.getDeployableTeams(teams: possibleTeams)
+            DeployTeamVC.deployableTeams = deployableTeams
             DeployTeamVC.delegate = self
         case SegueId.viewTeamId:
             let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController
-            ViewTeamVC.currentTeams = activeTeams
+            ViewTeamVC.currentTeams = possibleTeams
             
         default:
             return
