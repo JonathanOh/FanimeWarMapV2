@@ -118,11 +118,18 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If Move Teams Mode is enabled, do allow interaction with any other table cell.  Will reselect the Move Teams Cell
-        if (!isInZoomMode && mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
+        if (removeTeamsMode && mainMenuArray[indexPath.row] != MainMenu.removeTeamsMode) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let removeTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.removeTeamsMode)!, section: 0)
+            tableView.selectRow(at: removeTeamsCellIndex, animated: true, scrollPosition: .none)
+            present(Utils.customWhoopsAlert(message: "You are currently in Remove Teams Mode"), animated: true, completion: nil)
+            return
+        }
+        if (moveTeamsMode && mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
             tableView.deselectRow(at: indexPath, animated: true)
             let moveTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.moveTeamsMode)!, section: 0)
             tableView.selectRow(at: moveTeamsCellIndex, animated: true, scrollPosition: .none)
-            present(Utils.currentlyInMoveTeamsMode(), animated: true, completion: nil)
+            present(Utils.customWhoopsAlert(message: "You are currently in Move Teams Mode"), animated: true, completion: nil)
             return
         }
         if (mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {

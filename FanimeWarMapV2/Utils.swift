@@ -77,8 +77,8 @@ class Utils {
         tempAlert.addAction(okAction)
         return tempAlert
     }
-    static func currentlyInMoveTeamsMode() -> UIAlertController {
-        let tempAlert = UIAlertController(title: "Whoops!", message: "You are currently in Move Teams Mode", preferredStyle: UIAlertControllerStyle.alert)
+    static func customWhoopsAlert(message: String) -> UIAlertController {
+        let tempAlert = UIAlertController(title: "Whoops!", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         tempAlert.addAction(okAction)
         return tempAlert
