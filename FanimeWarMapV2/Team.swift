@@ -47,6 +47,7 @@ class Team {
     
     func teamWasUndeployed() {
         isTeamDeployed = false
+        teamLocation = nil
     }
     
 }

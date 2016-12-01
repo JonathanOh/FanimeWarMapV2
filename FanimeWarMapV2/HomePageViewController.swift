@@ -47,22 +47,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         possibleTeams = Utils.getCurrentArrayOfTeams()
         
-//        charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        charmander.image = UIImage(named: "charmander")
-//        charmander.tag = 0
-//        squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-//        squirtle.image = UIImage(named: "squirtle")
-//        squirtle.tag = 1
-//        arrayOfIcons = [charmander, squirtle]
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
-        
-//        mapImageView.addSubview(charmander)
-//        mapImageView.addSubview(squirtle)
-//        
-//        print(squirtle.center)
-//        print(charmander.center)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,26 +176,27 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 // MARK: Touch Events
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if moveTeamsMode {
+            let deployedTeams = Utils.getDeployedTeams(teams: possibleTeams)
             for touch in touches {
                 let touchLocation = touch.location(in: self.mapImageView)
-                guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: Utils.getDeployedTeams(teams: possibleTeams)) else { return }
+                guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: deployedTeams) else { return }
                 guard let teamIconView = teamToMove.teamIconView else { return }
                 teamIconView.center = touchLocation
             }
         }
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if removeTeamsMode {
-//            for touch in touches {
-//                let touchLocation = touch.location(in: self.mapImageView)
-//                let imageToRemoveove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
-//                if let imageToRemove = imageToRemove {
-//                    
-//                }
-//            }
-//        }
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if removeTeamsMode {
+            let deployedTeams = Utils.getDeployedTeams(teams: possibleTeams)
+            for touch in touches {
+                let touchLocation = touch.location(in: self.mapImageView)
+                guard let teamToRemove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: deployedTeams) else { return }
+                present(Utils.removeTeamAlert(team: teamToRemove), animated: true, completion: nil)
+                //teamToRemove.teamIconView?.removeFromSuperview()
+            }
+        }
+    }
   
 // MARK: Custom Delegates
     func mapWasSelected(map: String) {
