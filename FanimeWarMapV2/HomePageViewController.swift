@@ -6,6 +6,8 @@
 //  Copyright © 2016 Jonathan Oh. All rights reserved.
 //
 
+// TODOS: Save state on maps and their team icons
+
 import UIKit
 
 class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate, SelectedTeamToDeployDelegate {
