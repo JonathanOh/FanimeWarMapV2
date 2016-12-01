@@ -20,6 +20,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     private var currentRovers : [Rover] = []
     
     private var isInZoomMode : Bool = true
+    private var moveTeamsMode : Bool = false
+    private var removeTeamsMode : Bool = false
     
     var mainMenuArray : Array<String>!
     
@@ -45,21 +47,21 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         possibleTeams = Utils.getCurrentArrayOfTeams()
         
-        charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        charmander.image = UIImage(named: "charmander")
-        charmander.tag = 0
-        squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-        squirtle.image = UIImage(named: "squirtle")
-        squirtle.tag = 1
-        arrayOfIcons = [charmander, squirtle]
+//        charmander.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        charmander.image = UIImage(named: "charmander")
+//        charmander.tag = 0
+//        squirtle.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+//        squirtle.image = UIImage(named: "squirtle")
+//        squirtle.tag = 1
+//        arrayOfIcons = [charmander, squirtle]
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
         
-        mapImageView.addSubview(charmander)
-        mapImageView.addSubview(squirtle)
-        
-        print(squirtle.center)
-        print(charmander.center)
+//        mapImageView.addSubview(charmander)
+//        mapImageView.addSubview(squirtle)
+//        
+//        print(squirtle.center)
+//        print(charmander.center)
 
     }
     
@@ -109,13 +111,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         return self.mapImageView
     }
     
-    func placeHolderAlert() {
-        let tempAlert = UIAlertController(title: "Whoops!", message: "This is currently in development", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        tempAlert.addAction(okAction)
-        present(tempAlert, animated: true, completion: nil)
-    }
-    
 // MARK: Table View Delegates
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "mainMenuCellIdentifier")
@@ -141,6 +136,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             tableView.deselectRow(at: indexPath, animated: true)
             let moveTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.moveTeamsMode)!, section: 0)
             tableView.selectRow(at: moveTeamsCellIndex, animated: true, scrollPosition: .none)
+            present(Utils.currentlyInMoveTeamsMode(), animated: true, completion: nil)
             return
         }
         if (mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
@@ -150,9 +146,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         switch mainMenuArray[indexPath.row] {
         case MainMenu.mapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
-        case MainMenu.addATeam:
-            // This needs to be passed active rovers
-            placeHolderAlert()
         case MainMenu.addARover:
             // This needs to be passed active teams
             performSegue(withIdentifier: SegueId.addRoverId, sender: self)
@@ -162,14 +155,27 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
         case MainMenu.saveMap:
             //Learn Firebase
-            placeHolderAlert()
+            present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case MainMenu.moveTeamsMode:
             if isInZoomMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
+            moveTeamsMode = !moveTeamsMode
             toggleZoomMode()
+        case MainMenu.removeTeamsMode:
+            if isInZoomMode {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            } else {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            removeTeamsMode = !removeTeamsMode
+            toggleZoomMode()
+            //get deployable teams via utils function then pass touch point
+            
+            // This needs to be passed active rovers
+            //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case MainMenu.logOut:
             self.dismiss(animated: true, completion: nil)
         default:
@@ -183,14 +189,28 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 
 // MARK: Touch Events
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let touchLocation = touch.location(in: self.mapImageView)
-            let imageToMove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
-            if let imageToMove = imageToMove {
-                imageToMove.center = touchLocation
+        if moveTeamsMode {
+            for touch in touches {
+                let touchLocation = touch.location(in: self.mapImageView)
+                let imageToMove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
+                if let imageToMove = imageToMove {
+                    imageToMove.center = touchLocation
+                }
             }
         }
     }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if removeTeamsMode {
+//            for touch in touches {
+//                let touchLocation = touch.location(in: self.mapImageView)
+//                let imageToRemoveove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
+//                if let imageToRemove = imageToRemove {
+//                    
+//                }
+//            }
+//        }
+//    }
   
 // MARK: Custom Delegates
     func mapWasSelected(map: String) {
@@ -202,13 +222,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func teamWasSelectedToDeploy(team: Team) {
-        //mutate current standing dictionary of teams
-
+        team.teamWasDeployed()
+        
         let teamIconToAddToView = UIImageView(image: team.teamIcon)
         teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
         mapImageView.addSubview(teamIconToAddToView)
         
-        arrayOfIcons.append(teamIconToAddToView)
+        //arrayOfIcons.append(teamIconToAddToView)
     }
     
     

@@ -12,7 +12,7 @@ import UIKit
 class Utils {
 
     static func getArrayOfMainMenuOptions() -> [String] {
-        return [MainMenu.mapPicker, MainMenu.addATeam, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.logOut]
+        return [MainMenu.mapPicker, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.removeTeamsMode, MainMenu.logOut]
     }
     
     static func getDeployableTeams(teams: [Team]) -> [Team] {
@@ -56,6 +56,19 @@ class Utils {
             closestImageToTouch = nil
         }
         return closestImageToTouch
+    }
+    
+    static func placeHolderAlert() -> UIAlertController {
+        let tempAlert = UIAlertController(title: "Whoops!", message: "This is currently in development", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        tempAlert.addAction(okAction)
+        return tempAlert
+    }
+    static func currentlyInMoveTeamsMode() -> UIAlertController {
+        let tempAlert = UIAlertController(title: "Whoops!", message: "You are currently in Move Teams Mode", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        tempAlert.addAction(okAction)
+        return tempAlert
     }
 
 }

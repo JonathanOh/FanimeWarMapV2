@@ -37,4 +37,13 @@ class Team {
         teamMembers.append(name)
     }
     
+    func teamWasDeployed() {
+        isTeamDeployed = true
+        teamLocation = STARTING_POINT
+    }
+    
+    func teamWasUndeployed() {
+        isTeamDeployed = false
+    }
+    
 }

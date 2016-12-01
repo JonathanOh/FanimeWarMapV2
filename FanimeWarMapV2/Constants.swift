@@ -11,12 +11,12 @@ import UIKit
 
 struct MainMenu {
     static let mapPicker = "Map Picker"
-    static let addATeam = "Add a Team"
     static let addARover = "Add a Rover"
     static let deployTeam = "Deploy Team"
     static let viewTeams = "View Teams"
     static let saveMap = "Save/Upload Map"
     static let moveTeamsMode = "Move Teams Mode"
+    static let removeTeamsMode = "Remove Teams Mode"
     static let logOut = "Log Out"
 }
 
@@ -35,6 +35,8 @@ struct SegueId {
     static let addRoverId = "addRoverSegue"
     static let deployTeamId = "deployTeamSegue"
 }
+
+let STARTING_POINT = CGPoint(x: 40, y: 0)
 
 let FANIME_DARK_BLUE : UIColor = UIColor(red: 17.0/255.0, green: 45.0/255.0, blue: 85.0/255.0, alpha: 1)
 let FANIME_ORANGE : UIColor = UIColor(red: 244.0/255.0, green: 121.0/255.0, blue: 32.0/255.0, alpha: 1)
