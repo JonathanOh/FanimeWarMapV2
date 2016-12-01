@@ -132,9 +132,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             present(Utils.customWhoopsAlert(message: "You are currently in Move Teams Mode"), animated: true, completion: nil)
             return
         }
-        if (mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
     
         switch mainMenuArray[indexPath.row] {
         case MainMenu.mapPicker:
@@ -150,7 +149,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             //Learn Firebase
             present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case MainMenu.moveTeamsMode:
-            if isInZoomMode {
+            if !moveTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -158,7 +157,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             moveTeamsMode = !moveTeamsMode
             toggleZoomMode()
         case MainMenu.removeTeamsMode:
-            if isInZoomMode {
+            if !removeTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -200,7 +199,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 let touchLocation = touch.location(in: self.mapImageView)
                 guard let teamToRemove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: deployedTeams) else { return }
                 present(Utils.removeTeamAlert(team: teamToRemove), animated: true, completion: nil)
-                //teamToRemove.teamIconView?.removeFromSuperview()
             }
         }
     }

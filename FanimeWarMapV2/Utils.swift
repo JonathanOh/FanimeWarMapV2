@@ -87,6 +87,7 @@ class Utils {
         let tempAlert = UIAlertController(title: "Alert", message: "Remove \(team.teamName) from map?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
             team.teamIconView?.removeFromSuperview()
+            team.teamWasUndeployed()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         tempAlert.addAction(okAction)
