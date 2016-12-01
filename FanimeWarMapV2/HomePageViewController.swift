@@ -192,10 +192,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         if moveTeamsMode {
             for touch in touches {
                 let touchLocation = touch.location(in: self.mapImageView)
-                let imageToMove = Utils.closestImageToTouchEvent(touchPoint: touchLocation, arrayOfIcons: arrayOfIcons)
-                if let imageToMove = imageToMove {
-                    imageToMove.center = touchLocation
-                }
+                guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: Utils.getDeployedTeams(teams: possibleTeams)) else { return }
+                guard let teamIconView = teamToMove.teamIconView else { return }
+                teamIconView.center = touchLocation
             }
         }
     }
@@ -223,9 +222,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func teamWasSelectedToDeploy(team: Team) {
         team.teamWasDeployed()
-        
-//        let teamIconToAddToView = UIImageView(image: team.teamIcon)
-//        teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
         if let teamIconView = team.teamIconView {
             mapImageView.addSubview(teamIconView)
             arrayOfIcons.append(teamIconView)

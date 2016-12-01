@@ -25,6 +25,16 @@ class Utils {
         return deployableTeams
     }
     
+    static func getDeployedTeams(teams: [Team]) -> [Team] {
+        var deployedTeams : [Team] = []
+        for team in teams {
+            if team.isTeamDeployed {
+                deployedTeams.append(team)
+            }
+        }
+        return deployedTeams
+    }
+    
     static func getCurrentArrayOfTeams() -> [Team] {
         var teamHolder : [Team] = []
         
@@ -35,27 +45,30 @@ class Utils {
         return teamHolder
     }
     
-    static func closestImageToTouchEvent(touchPoint: CGPoint, arrayOfIcons: [UIImageView]) -> UIImageView? {
-        var closestImageToTouch : UIImageView?
+    static func closestTeamToTouchEvent(touchPoint: CGPoint, arrayOfTeams: [Team]) -> Team? {
+        var closestTeamToTouch : Team?
         var closestDistanceValue : CGFloat = -1.0 // Use a default place holder value of -1
         
-        for icon in arrayOfIcons {
-            let xDistance = abs(icon.center.x - touchPoint.x)
-            let yDistance = abs(icon.center.y - touchPoint.y)
+        for team in arrayOfTeams {
+            guard let teamIconView = team.teamIconView else {
+                break
+            }
+            let xDistance = abs(teamIconView.center.x - touchPoint.x)
+            let yDistance = abs(teamIconView.center.y - touchPoint.y)
             let currentDistanceValue : CGFloat = xDistance + yDistance
             if closestDistanceValue == -1 {
                 closestDistanceValue = currentDistanceValue
-                closestImageToTouch = icon
+                closestTeamToTouch = team
             } else if (currentDistanceValue < closestDistanceValue) {
                 closestDistanceValue = currentDistanceValue
-                closestImageToTouch = icon
+                closestTeamToTouch = team
             }
         }
         let fingerIsCloseEnoughToImageToMoveImage = closestDistanceValue > 60
         if fingerIsCloseEnoughToImageToMoveImage {
-            closestImageToTouch = nil
+            closestTeamToTouch = nil
         }
-        return closestImageToTouch
+        return closestTeamToTouch
     }
     
     static func placeHolderAlert() -> UIAlertController {
