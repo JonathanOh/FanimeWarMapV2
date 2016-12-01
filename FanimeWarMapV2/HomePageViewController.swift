@@ -224,11 +224,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     func teamWasSelectedToDeploy(team: Team) {
         team.teamWasDeployed()
         
-        let teamIconToAddToView = UIImageView(image: team.teamIcon)
-        teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
-        mapImageView.addSubview(teamIconToAddToView)
-        
-        //arrayOfIcons.append(teamIconToAddToView)
+//        let teamIconToAddToView = UIImageView(image: team.teamIcon)
+//        teamIconToAddToView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        if let teamIconView = team.teamIconView {
+            mapImageView.addSubview(teamIconView)
+            arrayOfIcons.append(teamIconView)
+        }
     }
     
     

@@ -15,6 +15,7 @@ class Team {
     private(set) var teamMembers : [String] = ["No Team Members"]
     private(set) var teamLocation : CGPoint?
     private(set) var teamIcon : UIImage?
+    private(set) var teamIconView : UIImageView?
     private(set) var isTeamDeployed : Bool = false
     
     init(name: String, icon: String) {
@@ -24,6 +25,8 @@ class Team {
             return
         }
         self.teamIcon = teamIcon
+        teamIconView = UIImageView(image: teamIcon)
+        teamIconView?.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
     }
     
     func replaceCurrentTeamWith(team: [String]) {
