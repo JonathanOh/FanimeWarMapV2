@@ -20,12 +20,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var possibleTeams : [Team] = []
     private var currentRovers : [Rover] = []
+    private var currentActiveMap : Map = .WholeMap
     
     private var isInZoomMode : Bool = true
     private var moveTeamsMode : Bool = false
     private var removeTeamsMode : Bool = false
     
-    var mainMenuArray : Array<String>!
+    var mainMenuArray : Array<Menu>!
     
     private var arrayOfIcons = [UIImageView]()
     let charmander = UIImageView()
@@ -34,7 +35,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainMenuArray = Utils.getArrayOfMainMenuOptions()
+        mainMenuArray = Utils.getArrayOfMenuOptions()
         mainMenuTableView.delegate = self
         mainMenuTableView.dataSource = self
         mapScrollerSuperView.delegate = self
@@ -45,7 +46,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.leftBarButtonItem = button
         
         view.backgroundColor = FANIME_DARK_BLUE
-        setUpBackgroundMap(map: MapName.wholeMap)
+        setUpBackgroundMap(map: .WholeMap)
         
         possibleTeams = Utils.getCurrentArrayOfTeams()
         
@@ -80,13 +81,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    func setUpBackgroundMap(map: String) {
+    func setUpBackgroundMap(map: Map) {
         
         self.mapScrollerSuperView.minimumZoomScale = 1.0
         self.mapScrollerSuperView.maximumZoomScale = 6.0
         
-        self.mapImageView.image = UIImage(named: map)
-        self.title = map
+        self.mapImageView.image = UIImage(named: map.rawValue)
+        self.title = map.rawValue
 
     }
     
@@ -103,7 +104,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "mainMenuCellIdentifier")
         cell = UITableViewCell(style: .default, reuseIdentifier: "mainMenuCellIdentifier")
-        cell?.textLabel?.text = mainMenuArray[indexPath.row]
+        cell?.textLabel?.text = mainMenuArray[indexPath.row].rawValue
         cell?.textLabel?.textColor = FANIME_ORANGE
         cell?.textLabel?.font = UIFont(name: "SFUIText-Bold", size: 14)
         
@@ -120,16 +121,16 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If Move Teams Mode is enabled, do allow interaction with any other table cell.  Will reselect the Move Teams Cell
-        if (removeTeamsMode && mainMenuArray[indexPath.row] != MainMenu.removeTeamsMode) {
+        if (removeTeamsMode && mainMenuArray[indexPath.row] != Menu.RemoveTeamsMode) {
             tableView.deselectRow(at: indexPath, animated: true)
-            let removeTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.removeTeamsMode)!, section: 0)
+            let removeTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: .RemoveTeamsMode)!, section: 0)
             tableView.selectRow(at: removeTeamsCellIndex, animated: true, scrollPosition: .none)
             present(Utils.customWhoopsAlert(message: "You are currently in Remove Teams Mode"), animated: true, completion: nil)
             return
         }
-        if (moveTeamsMode && mainMenuArray[indexPath.row] != MainMenu.moveTeamsMode) {
+        if (moveTeamsMode && mainMenuArray[indexPath.row] != Menu.MoveTeamsMode) {
             tableView.deselectRow(at: indexPath, animated: true)
-            let moveTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: MainMenu.moveTeamsMode)!, section: 0)
+            let moveTeamsCellIndex : IndexPath = IndexPath(row: mainMenuArray.index(of: .MoveTeamsMode)!, section: 0)
             tableView.selectRow(at: moveTeamsCellIndex, animated: true, scrollPosition: .none)
             present(Utils.customWhoopsAlert(message: "You are currently in Move Teams Mode"), animated: true, completion: nil)
             return
@@ -138,19 +139,19 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
     
         switch mainMenuArray[indexPath.row] {
-        case MainMenu.mapPicker:
+        case .MapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
-        case MainMenu.addARover:
+        case .AddARover:
             // This needs to be passed active teams
             performSegue(withIdentifier: SegueId.addRoverId, sender: self)
-        case MainMenu.deployTeam:
+        case .DeployTeam:
             performSegue(withIdentifier: SegueId.deployTeamId, sender: self)
-        case MainMenu.viewTeams:
+        case .ViewTeams:
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
-        case MainMenu.saveMap:
+        case .SaveMap:
             //Learn Firebase
             present(Utils.placeHolderAlert(), animated: true, completion: nil)
-        case MainMenu.moveTeamsMode:
+        case .MoveTeamsMode:
             if !moveTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
@@ -158,7 +159,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             }
             moveTeamsMode = !moveTeamsMode
             toggleZoomMode()
-        case MainMenu.removeTeamsMode:
+        case .RemoveTeamsMode:
             if !removeTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
@@ -170,7 +171,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             
             // This needs to be passed active rovers
             //present(Utils.placeHolderAlert(), animated: true, completion: nil)
-        case MainMenu.logOut:
+        case .LogOut:
             self.dismiss(animated: true, completion: nil)
         default:
             print("default case")
@@ -206,7 +207,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     }
   
 // MARK: Custom Delegates
-    func mapWasSelected(map: String) {
+    func mapWasSelected(map: Map) {
         setUpBackgroundMap(map: map)
     }
     
@@ -214,8 +215,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         currentRovers.append(rover)
     }
     
-    func teamWasSelectedToDeploy(team: Team) {
-        team.teamWasDeployed()
+    func teamWasSelectedToDeploy(team: Team, map: Map) {
+        team.teamWasDeployed(map: map)
         if let teamIconView = team.teamIconView {
             mapImageView.addSubview(teamIconView)
             arrayOfIcons.append(teamIconView)
@@ -240,6 +241,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             let DeployTeamVC : DeployTeamViewController = segue.destination as! DeployTeamViewController
             let deployableTeams = Utils.getDeployableTeams(teams: possibleTeams)
             DeployTeamVC.deployableTeams = deployableTeams
+            DeployTeamVC.currentMapBeingDeployedTo = currentActiveMap
             DeployTeamVC.delegate = self
         case SegueId.viewTeamId:
             let ViewTeamVC : ViewTeamsViewController = segue.destination as! ViewTeamsViewController

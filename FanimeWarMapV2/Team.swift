@@ -16,6 +16,7 @@ class Team {
     private(set) var teamLocation : CGPoint?
     private(set) var teamIcon : UIImage?
     private(set) var teamIconView : UIImageView?
+    private(set) var assignedOnMap : Map?
     private(set) var isTeamDeployed : Bool = false
     
     init(name: String, icon: String) {
@@ -40,14 +41,15 @@ class Team {
         teamMembers.append(name)
     }
     
-    func teamWasDeployed() {
+    func teamWasDeployed(map: Map) {
         isTeamDeployed = true
-        teamLocation = STARTING_POINT
+        assignedOnMap = map
+        teamIconView?.center = STARTING_POINT
     }
     
     func teamWasUndeployed() {
         isTeamDeployed = false
-        teamLocation = nil
+        teamIconView?.center = STARTING_POINT
     }
     
 }

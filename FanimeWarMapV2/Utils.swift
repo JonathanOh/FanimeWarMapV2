@@ -14,6 +14,9 @@ class Utils {
     static func getArrayOfMainMenuOptions() -> [String] {
         return [MainMenu.mapPicker, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.removeTeamsMode, MainMenu.logOut]
     }
+    static func getArrayOfMenuOptions() -> [Menu] {
+        return [.MapPicker, .AddARover, .DeployTeam, .ViewTeams, .SaveMap, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
+    }
     
     static func getDeployableTeams(teams: [Team]) -> [Team] {
         var deployableTeams : [Team] = []
@@ -86,8 +89,8 @@ class Utils {
     static func removeTeamAlert(team: Team) -> UIAlertController {
         let tempAlert = UIAlertController(title: "Alert", message: "Remove \(team.teamName) from map?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
-            team.teamIconView?.removeFromSuperview()
             team.teamWasUndeployed()
+            team.teamIconView?.removeFromSuperview()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         tempAlert.addAction(okAction)

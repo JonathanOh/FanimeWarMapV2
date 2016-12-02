@@ -9,14 +9,14 @@
 import UIKit
 
 protocol MapSelectedDelegate {
-    func mapWasSelected(map: String)
+    func mapWasSelected(map: Map)
 }
 
 class MapPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var delegate : MapSelectedDelegate? = nil
     
-    let currentMaps : [String] = [MapName.wholeMap, MapName.upperLevelMap, MapName.lowerLevelMap]
+    let currentMaps : [Map] = [.WholeMap, .UpperLevelMap, .LowerLevelMap]
     @IBOutlet weak var mapPickerTableView: UITableView!
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "mapPickerCellID")
         cell = UITableViewCell(style: .default, reuseIdentifier: "mapPickerCellID")
-        cell?.textLabel?.text = currentMaps[indexPath.row]
+        cell?.textLabel?.text = currentMaps[indexPath.row].rawValue
         return cell!
     }
 

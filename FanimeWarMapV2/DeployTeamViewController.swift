@@ -9,12 +9,13 @@
 import UIKit
 
 protocol SelectedTeamToDeployDelegate {
-    func teamWasSelectedToDeploy(team: Team)
+    func teamWasSelectedToDeploy(team: Team, map: Map)
 }
 
 class DeployTeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var deployableTeamsTableView: UITableView!
+    var currentMapBeingDeployedTo : Map?
     var deployableTeams : [Team]? = nil
     var delegate : SelectedTeamToDeployDelegate? = nil
     
@@ -61,7 +62,8 @@ class DeployTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let teamToPass = deployableTeams?[indexPath.row] else { return }
-        delegate?.teamWasSelectedToDeploy(team: teamToPass)
+        guard let currentMap = currentMapBeingDeployedTo else { return }
+        delegate?.teamWasSelectedToDeploy(team: teamToPass, map: currentMap)
         navigationController!.popViewController(animated: true)
     }
     
