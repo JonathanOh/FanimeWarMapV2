@@ -47,3 +47,17 @@ let Pokemon : [String] = ["abra", "bulbasaur", "caterpie", "charmander", "dratin
 //                          "Nidoqueen", "Clefairy", "Clefable", "Vulpix", "Nintales", "Jgglypuff", "Jigglytuff", "Zubat", "Golbat", "Oddish", "Gloom",
 //                          "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck",
 //                          "Mankey", "Primeape", "Growlith", "Arcanine"]
+
+// Dummy Data Response
+
+let DummyTeam : [String : Any] = [
+    "teamName" : "eevee",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+    "assignedOnMap" : "Upper Level Map"
+]
+
+let DummyResponse : [Dictionary] = [DummyTeam]
+
+
+

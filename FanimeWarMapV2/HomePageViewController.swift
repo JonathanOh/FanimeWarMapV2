@@ -52,6 +52,18 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
+        
+        constructTeamAndMapStateFromResponse(currentTeams: possibleTeams)
+    }
+    
+//    "teamName" : "eevee",
+//    "teamLocationX" : 200,
+//    "teamLocationY" : 200,
+//    "assignedOnMap" : "Upper Level Map"
+    
+    func constructTeamAndMapStateFromResponse(currentTeams: [Team]) {
+        let tempResponse = DummyResponse
+        guard let teamName = response["teamName"] else { return }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,6 +215,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
   
 // MARK: Custom Delegates
     func mapWasSelected(map: Map) {
+        Utils.removeTeamIconsFromMap(teams: possibleTeams, map: currentActiveMap)
         setUpBackgroundMap(map: map)
         let teamsInMap = Utils.getTeamsForGivenMap(teams: possibleTeams, map: map)
         Utils.layoutTeamsInImageView(teams: teamsInMap, imageView: mapImageView)
@@ -229,7 +242,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch segueId {
         case SegueId.mapPickerId:
-            Utils.removeTeamIconsFromMap(teams: possibleTeams, map: currentActiveMap)
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
         case SegueId.addRoverId:
