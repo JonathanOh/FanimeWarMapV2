@@ -62,8 +62,14 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 //    "assignedOnMap" : "Upper Level Map"
     
     func constructTeamAndMapStateFromResponse(currentTeams: [Team]) {
-        let tempResponse = DummyResponse
-        guard let teamName = response["teamName"] else { return }
+        let tempResponses = DummyResponse
+        for response in teampResponses {
+            guard let teamName = response["teamName"] else { return }
+            guard let teamLocationX = response["teamLocationX"] else { return }
+            guard let teamLocationY = response["teamLocationY"] else { return }
+            guard let assignedOnMap = response["assignedOnMap"] else { return }
+            let teamLocation : CGPoint = CGPoint(teamLocationX, teamLocationY)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
