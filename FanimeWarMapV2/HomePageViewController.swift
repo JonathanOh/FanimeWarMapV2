@@ -59,7 +59,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             print(rover.name)
         }
     }
-
     
 // MARK : Helper Functions
     func toggleZoomMode() {
@@ -78,17 +77,15 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
-        
     }
     
     func setUpBackgroundMap(map: Map) {
-        
+        currentActiveMap = map
         self.mapScrollerSuperView.minimumZoomScale = 1.0
         self.mapScrollerSuperView.maximumZoomScale = 6.0
         
         self.mapImageView.image = UIImage(named: map.rawValue)
         self.title = map.rawValue
-
     }
     
     func loadCurrentRovers() {
@@ -173,8 +170,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case .LogOut:
             self.dismiss(animated: true, completion: nil)
-        default:
-            print("default case")
         }
     }
     
@@ -185,10 +180,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 // MARK: Touch Events
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if moveTeamsMode {
-            let deployedTeams = Utils.getDeployedTeams(teams: possibleTeams)
+            let teamsOnMap = Utils.getTeamsForGivenMap(teams: possibleTeams, map: currentActiveMap)
             for touch in touches {
                 let touchLocation = touch.location(in: self.mapImageView)
-                guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: deployedTeams) else { return }
+                guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: teamsOnMap) else { return }
                 guard let teamIconView = teamToMove.teamIconView else { return }
                 teamIconView.center = touchLocation
             }
@@ -197,10 +192,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if removeTeamsMode {
-            let deployedTeams = Utils.getDeployedTeams(teams: possibleTeams)
+            let teamsOnMap = Utils.getTeamsForGivenMap(teams: possibleTeams, map: currentActiveMap)
             for touch in touches {
                 let touchLocation = touch.location(in: self.mapImageView)
-                guard let teamToRemove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: deployedTeams) else { return }
+                guard let teamToRemove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: teamsOnMap) else { return }
                 present(Utils.removeTeamAlert(team: teamToRemove), animated: true, completion: nil)
             }
         }
@@ -209,6 +204,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 // MARK: Custom Delegates
     func mapWasSelected(map: Map) {
         setUpBackgroundMap(map: map)
+        let teamsInMap = Utils.getTeamsForGivenMap(teams: possibleTeams, map: map)
+        Utils.layoutTeamsInImageView(teams: teamsInMap, imageView: mapImageView)
     }
     
     func roverWasAdded(rover: Rover) {
@@ -232,6 +229,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch segueId {
         case SegueId.mapPickerId:
+            Utils.removeTeamIconsFromMap(teams: possibleTeams, map: currentActiveMap)
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
         case SegueId.addRoverId:

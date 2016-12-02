@@ -35,6 +35,23 @@ class Utils {
         return deployedTeams
     }
     
+    static func getTeamsForGivenMap(teams: [Team], map: Map) -> [Team] {
+        var teamsOnMap : [Team] = []
+        for team in teams {
+            if team.isTeamDeployed && team.assignedOnMap == map {
+                teamsOnMap.append(team)
+            }
+        }
+        return teamsOnMap
+    }
+    
+    static func layoutTeamsInImageView(teams: [Team], imageView: UIImageView) {
+        for team in teams {
+            guard let iconView = team.teamIconView else { return }
+            imageView.addSubview(iconView)
+        }
+    }
+    
     static func getCurrentArrayOfTeams() -> [Team] {
         var teamHolder : [Team] = []
         
@@ -43,6 +60,14 @@ class Utils {
             teamHolder.append(team)
         }
         return teamHolder
+    }
+    
+    static func removeTeamIconsFromMap(teams: [Team], map: Map) {
+        for team in teams {
+            if team.assignedOnMap == map {
+                team.teamIconView?.removeFromSuperview()
+            }
+        }
     }
     
     static func closestTeamToTouchEvent(touchPoint: CGPoint, arrayOfTeams: [Team]) -> Team? {
@@ -78,7 +103,7 @@ class Utils {
         return tempAlert
     }
     static func customWhoopsAlert(message: String) -> UIAlertController {
-        let tempAlert = UIAlertController(title: "Whoops!", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
+        let tempAlert = UIAlertController(title: "Oops!", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         tempAlert.addAction(okAction)
         return tempAlert
@@ -87,7 +112,6 @@ class Utils {
         let tempAlert = UIAlertController(title: "Alert", message: "Remove \(team.teamName) from map?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
             team.teamWasUndeployed()
-            team.teamIconView?.removeFromSuperview()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         tempAlert.addAction(okAction)

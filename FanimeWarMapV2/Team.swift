@@ -49,7 +49,11 @@ class Team {
     
     func teamWasUndeployed() {
         isTeamDeployed = false
-        teamIconView?.center = STARTING_POINT
+        teamIconView?.removeFromSuperview()
+    }
+    
+    func saveTeamLocation() {
+        teamLocation = teamIconView?.center
     }
     
 }
