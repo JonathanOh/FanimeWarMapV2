@@ -9,16 +9,7 @@
 import Foundation
 import UIKit
 
-struct MainMenu {
-    static let mapPicker = "Map Picker"
-    static let addARover = "Add a Rover"
-    static let deployTeam = "Deploy Team"
-    static let viewTeams = "View Teams"
-    static let saveMap = "Save/Upload Map"
-    static let moveTeamsMode = "Move Teams Mode"
-    static let removeTeamsMode = "Remove Teams Mode"
-    static let logOut = "Log Out"
-}
+
 enum Menu : String {
     case MapPicker = "Map Picker"
     case AddARover = "Add a Rover"
@@ -29,15 +20,6 @@ enum Menu : String {
     case RemoveTeamsMode = "Remove Teams Mode"
     case LogOut = "Log Out"
 }
-
-//struct MapName {
-//    static let mapOne = "Map 1 Green"
-//    static let mapTwo = "Map 2 Blue"
-//    static let mapThree = "Map 3 Yellow"
-//    static let wholeMap = "Whole Map"
-//    static let upperLevelMap = "Upper Level Map"
-//    static let lowerLevelMap = "Lower Level Map"
-//}
 
 enum Map : String {
     case WholeMap = "Whole Map"

@@ -11,9 +11,6 @@ import UIKit
 
 class Utils {
 
-    static func getArrayOfMainMenuOptions() -> [String] {
-        return [MainMenu.mapPicker, MainMenu.addARover, MainMenu.deployTeam, MainMenu.viewTeams, MainMenu.saveMap, MainMenu.moveTeamsMode, MainMenu.removeTeamsMode, MainMenu.logOut]
-    }
     static func getArrayOfMenuOptions() -> [Menu] {
         return [.MapPicker, .AddARover, .DeployTeam, .ViewTeams, .SaveMap, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
     }
