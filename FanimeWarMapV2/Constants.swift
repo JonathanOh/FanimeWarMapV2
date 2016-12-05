@@ -51,26 +51,75 @@ let Pokemon : [String] = ["abra", "bulbasaur", "caterpie", "charmander", "dratin
 // Dummy Data Response
 
 let DummyTeam1 : Dictionary<String, Any> = [
+    "teamName" : "abra",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+//    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam2 : Dictionary<String, Any> = [
+    "teamName" : "bulbasaur",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+//    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam3 : Dictionary<String, Any> = [
+    "teamName" : "caterpie",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+//    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam4 : Dictionary<String, Any> = [
+    "teamName" : "charmander",
+    "teamLocationX" : 125,
+    "teamLocationY" : 200,
+    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam5 : Dictionary<String, Any> = [
+    "teamName" : "dratini",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+//    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam6 : Dictionary<String, Any> = [
     "teamName" : "eevee",
     "teamLocationX" : 200,
     "teamLocationY" : 200,
     "assignedOnMap" : "Whole Map"
 ]
 
-let DummyTeam2 : Dictionary<String, Any> = [
+let DummyTeam7 : Dictionary<String, Any> = [
+    "teamName" : "jigglypuff",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+    "assignedOnMap" : "Lower Level Map"
+]
+
+let DummyTeam8 : Dictionary<String, Any> = [
+    "teamName" : "meowth",
+    "teamLocationX" : 200,
+    "teamLocationY" : 200,
+//    "assignedOnMap" : "Whole Map"
+]
+
+let DummyTeam9 : Dictionary<String, Any> = [
     "teamName" : "pikachu",
     "teamLocationX" : 500,
     "teamLocationY" : 100,
-    "assignedOnMap" : "Whole Map"
+    "assignedOnMap" : "Upper Level Map"
 ]
-let DummyTeam3 : Dictionary<String, Any> = [
-    "teamName" : "dratini",
-    "teamLocationX" : 600,
-    "teamLocationY" : 250,
-    "assignedOnMap" : "Whole Map"
+let DummyTeam10 : Dictionary<String, Any> = [
+    "teamName" : "squirtle",
+    "teamLocationX" : 0,
+    "teamLocationY" : 0,
+//    "assignedOnMap" : "Whole Map"
 ]
 //
-let DummyResponse : [Dictionary<String, Any?>] = [DummyTeam1, DummyTeam2, DummyTeam3]
+let DummyResponse : [Dictionary<String, Any?>] = [DummyTeam1, DummyTeam2, DummyTeam3, DummyTeam4, DummyTeam5, DummyTeam6, DummyTeam7, DummyTeam8, DummyTeam9, DummyTeam10]
 
 
 

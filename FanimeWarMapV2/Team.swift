@@ -57,6 +57,7 @@ class Team {
     }
     
     func setupLocationAndMap(map: Map, xLocation: Int, yLocation: Int) {
+        isTeamDeployed = true
         let location = CGPoint(x: xLocation, y: yLocation)
         teamIconView?.center = location
         assignedOnMap = map

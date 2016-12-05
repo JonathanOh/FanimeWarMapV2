@@ -112,22 +112,23 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         //dummy data
         var teamHolder = [Team]()
         for team in response {
-            guard let teamName = team["teamName"] as? String else { return }
-            guard let teamXLocation = team["teamLocationX"] as? Int else { return }
-            guard let teamYLocation = team["teamLocationY"] as? Int else { return }
-            guard let teamMap = team["assignedOnMap"] as? String else { return }
+            guard let teamName = team["teamName"] as? String else { continue }
+            
+            let savedTeam = Team(name: teamName, icon: teamName)
+            teamHolder.append(savedTeam)
+            
+            guard let teamXLocation = team["teamLocationX"] as? Int else { continue }
+            guard let teamYLocation = team["teamLocationY"] as? Int else { continue }
+            guard let teamMap = team["assignedOnMap"] as? String else { continue }
             let mapEnum = Utils.getMapEnumFromString(name: teamMap)
             guard let map = mapEnum else { return }
-            let savedTeam = Team(name: teamName, icon: teamName)
-            
             if map == currentActiveMap {
-                view.addSubview(savedTeam.teamIconView!)
+                mapImageView.addSubview(savedTeam.teamIconView!)
             }
             
             savedTeam.setupLocationAndMap(map: map, xLocation: teamXLocation, yLocation: teamYLocation)
-            
-            teamHolder.append(savedTeam)
         }
+        possibleTeams = teamHolder
         print("hi")
     }
     
