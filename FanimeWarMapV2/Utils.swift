@@ -70,6 +70,13 @@ class Utils {
         }
     }
     
+    static func getMapEnumFromString(name: String) -> Map? {
+        if name == "Whole Map" { return Map.WholeMap }
+        else if name == "Upper Level Map" { return Map.UpperLevelMap }
+        else if name == "Lower Level Map" { return Map.LowerLevelMap }
+        else { return nil }
+    }
+    
     static func closestTeamToTouchEvent(touchPoint: CGPoint, arrayOfTeams: [Team]) -> Team? {
         var closestTeamToTouch : Team?
         var closestDistanceValue : CGFloat = -1.0 // Use a default place holder value of -1

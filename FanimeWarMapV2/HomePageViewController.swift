@@ -53,7 +53,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
         
-        constructTeamAndMapStateFromResponse(currentTeams: possibleTeams)
+        loadCurrentRoversWithResponse(response: DummyResponse, currentTeams: possibleTeams)
     }
     
 //    "teamName" : "eevee",
@@ -61,16 +61,18 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 //    "teamLocationY" : 200,
 //    "assignedOnMap" : "Upper Level Map"
     
-    func constructTeamAndMapStateFromResponse(currentTeams: [Team]) {
-        let tempResponses = DummyResponse
-        for response in teampResponses {
-            guard let teamName = response["teamName"] else { return }
-            guard let teamLocationX = response["teamLocationX"] else { return }
-            guard let teamLocationY = response["teamLocationY"] else { return }
-            guard let assignedOnMap = response["assignedOnMap"] else { return }
-            let teamLocation : CGPoint = CGPoint(teamLocationX, teamLocationY)
-        }
-    }
+//    func constructTeamAndMapStateFromResponse(currentTeams: [Team]) {
+//        let tempResponses = DummyResponse
+//        for response in teampResponses {
+//            guard let teamName = response["teamName"] as String else { return }
+//            guard let teamLocationX = response["teamLocationX"] as Int else { return }
+//            guard let teamLocationY = response["teamLocationY"] as Int else { return }
+//            guard let assignedOnMap = response["assignedOnMap"] as String else { return }
+//            let teamLocation : CGPoint = CGPoint(x: teamLocationX, y: teamLocationY)
+//            
+//            
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         for rover in currentRovers {
@@ -106,8 +108,27 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         self.title = map.rawValue
     }
     
-    func loadCurrentRovers() {
-        //dummy data        
+    func loadCurrentRoversWithResponse(response: [Dictionary<String, Any?>], currentTeams: [Team]) {
+        //dummy data
+        var teamHolder = [Team]()
+        for team in response {
+            guard let teamName = team["teamName"] as? String else { return }
+            guard let teamXLocation = team["teamLocationX"] as? Int else { return }
+            guard let teamYLocation = team["teamLocationY"] as? Int else { return }
+            guard let teamMap = team["assignedOnMap"] as? String else { return }
+            let mapEnum = Utils.getMapEnumFromString(name: teamMap)
+            guard let map = mapEnum else { return }
+            let savedTeam = Team(name: teamName, icon: teamName)
+            
+            if map == currentActiveMap {
+                view.addSubview(savedTeam.teamIconView!)
+            }
+            
+            savedTeam.setupLocationAndMap(map: map, xLocation: teamXLocation, yLocation: teamYLocation)
+            
+            teamHolder.append(savedTeam)
+        }
+        print("hi")
     }
     
     // This allowed pinch zooming for the view returned

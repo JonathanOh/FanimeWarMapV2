@@ -50,14 +50,27 @@ let Pokemon : [String] = ["abra", "bulbasaur", "caterpie", "charmander", "dratin
 
 // Dummy Data Response
 
-let DummyTeam : [String : Any] = [
+let DummyTeam1 : Dictionary<String, Any> = [
     "teamName" : "eevee",
     "teamLocationX" : 200,
     "teamLocationY" : 200,
-    "assignedOnMap" : "Upper Level Map"
+    "assignedOnMap" : "Whole Map"
 ]
 
-let DummyResponse : [Dictionary] = [DummyTeam]
+let DummyTeam2 : Dictionary<String, Any> = [
+    "teamName" : "pikachu",
+    "teamLocationX" : 500,
+    "teamLocationY" : 100,
+    "assignedOnMap" : "Whole Map"
+]
+let DummyTeam3 : Dictionary<String, Any> = [
+    "teamName" : "dratini",
+    "teamLocationX" : 600,
+    "teamLocationY" : 250,
+    "assignedOnMap" : "Whole Map"
+]
+//
+let DummyResponse : [Dictionary<String, Any?>] = [DummyTeam1, DummyTeam2, DummyTeam3]
 
 
 
