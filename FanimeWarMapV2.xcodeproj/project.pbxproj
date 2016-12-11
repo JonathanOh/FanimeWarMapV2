@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45BCEB5B1DFD1D190062DF22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */; };
+		45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5D1DFD1F730062DF22 /* AuthService.swift */; };
+		45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */; };
+		595E27936630BD2EFE205787 /* Pods_FanimeWarMapV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946A86E06C22D5B21579C9CA /* Pods_FanimeWarMapV2.framework */; };
 		8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */; };
 		8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */; };
 		8B5992671DEC0A44003CD21F /* AddRoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */; };
@@ -39,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		45BCEB5D1DFD1F730062DF22 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsViewController.swift; sourceTree = "<group>"; };
 		8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsPrototypeCell.swift; sourceTree = "<group>"; };
 		8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoverViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +77,9 @@
 		8BFCDA701DEA650A002129C8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		8BFCDA721DEA76B5002129C8 /* MapPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPickerViewController.swift; sourceTree = "<group>"; };
 		8BFCDA741DEA950B002129C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		946A86E06C22D5B21579C9CA /* Pods_FanimeWarMapV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanimeWarMapV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F24851F829CA89E4B6134435 /* Pods-FanimeWarMapV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanimeWarMapV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanimeWarMapV2/Pods-FanimeWarMapV2.release.xcconfig"; sourceTree = "<group>"; };
+		F768732A153A83862FC0AF26 /* Pods-FanimeWarMapV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanimeWarMapV2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanimeWarMapV2/Pods-FanimeWarMapV2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +87,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595E27936630BD2EFE205787 /* Pods_FanimeWarMapV2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45BCEB5C1DFD1F560062DF22 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				45BCEB5D1DFD1F730062DF22 /* AuthService.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		8B5992631DEACC4B003CD21F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +120,7 @@
 				8BFCDA721DEA76B5002129C8 /* MapPickerViewController.swift */,
 				8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */,
 				8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */,
+				45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -139,6 +159,8 @@
 			children = (
 				8BFCDA591DE96FB1002129C8 /* FanimeWarMapV2 */,
 				8BFCDA581DE96FB1002129C8 /* Products */,
+				91DA932E9F6CB76C75E7A8FC /* Pods */,
+				D01B52031029EAC3D44D63BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,7 +175,9 @@
 		8BFCDA591DE96FB1002129C8 /* FanimeWarMapV2 */ = {
 			isa = PBXGroup;
 			children = (
+				45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */,
 				8BFCDA5A1DE96FB1002129C8 /* AppDelegate.swift */,
+				45BCEB5C1DFD1F560062DF22 /* Network */,
 				8B5992651DEACC91003CD21F /* View */,
 				8B5992641DEACC65003CD21F /* Controller */,
 				8B5992631DEACC4B003CD21F /* Models */,
@@ -168,6 +192,23 @@
 			path = FanimeWarMapV2;
 			sourceTree = "<group>";
 		};
+		91DA932E9F6CB76C75E7A8FC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F768732A153A83862FC0AF26 /* Pods-FanimeWarMapV2.debug.xcconfig */,
+				F24851F829CA89E4B6134435 /* Pods-FanimeWarMapV2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D01B52031029EAC3D44D63BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				946A86E06C22D5B21579C9CA /* Pods_FanimeWarMapV2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BFCDA691DE96FB1002129C8 /* Build configuration list for PBXNativeTarget "FanimeWarMapV2" */;
 			buildPhases = (
+				E7668FAD9288ED0C27BEE86E /* [CP] Check Pods Manifest.lock */,
 				8BFCDA531DE96FB1002129C8 /* Sources */,
 				8BFCDA541DE96FB1002129C8 /* Frameworks */,
 				8BFCDA551DE96FB1002129C8 /* Resources */,
+				C37A867A4BDD822DD96283C9 /* [CP] Embed Pods Frameworks */,
+				D1F450EDBF22CD78A890F748 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,6 +283,7 @@
 				8B5992781DEC447D003CD21F /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				8B5992841DEC447D003CD21F /* SF-UI-Text-BoldItalic.otf in Resources */,
 				8B5992801DEC447D003CD21F /* SF-UI-Text-Light.otf in Resources */,
+				45BCEB5B1DFD1D190062DF22 /* GoogleService-Info.plist in Resources */,
 				8B59927B1DEC447D003CD21F /* SF-UI-Text-MediumItalic.otf in Resources */,
 				8BFCDA621DE96FB1002129C8 /* Assets.xcassets in Resources */,
 				8B59927A1DEC447D003CD21F /* SF-UI-Text-SemiboldItalic.otf in Resources */,
@@ -250,17 +295,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C37A867A4BDD822DD96283C9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanimeWarMapV2/Pods-FanimeWarMapV2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1F450EDBF22CD78A890F748 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanimeWarMapV2/Pods-FanimeWarMapV2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7668FAD9288ED0C27BEE86E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8BFCDA531DE96FB1002129C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */,
 				8BFCDA6F1DEA642B002129C8 /* Rover.swift in Sources */,
 				8B5992671DEC0A44003CD21F /* AddRoverViewController.swift in Sources */,
 				8BFCDA731DEA76B5002129C8 /* MapPickerViewController.swift in Sources */,
 				8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */,
 				8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */,
 				8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */,
+				45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */,
 				8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */,
 				8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */,
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
@@ -387,6 +482,7 @@
 		};
 		8BFCDA6A1DE96FB1002129C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F768732A153A83862FC0AF26 /* Pods-FanimeWarMapV2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KQ85KX5DW2;
@@ -401,6 +497,7 @@
 		};
 		8BFCDA6B1DE96FB1002129C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F24851F829CA89E4B6134435 /* Pods-FanimeWarMapV2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KQ85KX5DW2;

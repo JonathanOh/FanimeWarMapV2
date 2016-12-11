@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -54,26 +54,103 @@
                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xv5-vg-rFf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71G-xo-Q5a">
+                                <rect key="frame" x="417" y="334" width="191" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Z8p-AP-G2h"/>
+                                    <constraint firstAttribute="width" constant="191" id="ldr-GS-fY6"/>
+                                </constraints>
+                                <state key="normal" title="Create an Account"/>
+                                <connections>
+                                    <action selector="createAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3XQ-n8-V7N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="71G-xo-Q5a" firstAttribute="top" secondItem="bwS-v5-wQG" secondAttribute="bottom" constant="42" id="7iP-SR-iGH"/>
                             <constraint firstItem="bwS-v5-wQG" firstAttribute="top" secondItem="uoH-kb-VEA" secondAttribute="bottom" constant="29" id="8At-55-t13"/>
                             <constraint firstItem="uoH-kb-VEA" firstAttribute="top" secondItem="R29-uY-m22" secondAttribute="bottom" constant="19" id="DHV-1W-8Xy"/>
                             <constraint firstItem="bwS-v5-wQG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ea2-8s-X92"/>
                             <constraint firstItem="R29-uY-m22" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MPJ-xm-sPh"/>
                             <constraint firstItem="uoH-kb-VEA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="geD-5N-hl7"/>
                             <constraint firstItem="R29-uY-m22" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="134" id="n3j-HZ-YCh"/>
+                            <constraint firstItem="71G-xo-Q5a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zNs-lZ-L0k"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="passwordTextField" destination="uoH-kb-VEA" id="dE5-od-B8v"/>
                         <outlet property="usernameTextField" destination="R29-uY-m22" id="OXr-Hq-5cf"/>
                         <segue destination="K05-Ep-Ymb" kind="show" identifier="loginToHomeSegue" id="GeI-3e-Lbs"/>
+                        <segue destination="AcH-5S-ety" kind="show" identifier="createAccountSegue" id="7pB-AZ-7mK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-815" y="5"/>
+            <point key="canvasLocation" x="-815.0390625" y="4.6875"/>
+        </scene>
+        <!--Create Account View Controller-->
+        <scene sceneID="Rjg-ih-Tmy">
+            <objects>
+                <viewController id="AcH-5S-ety" customClass="CreateAccountViewController" customModule="FanimeWarMapV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oFx-3e-DqO"/>
+                        <viewControllerLayoutGuide type="bottom" id="UTT-Qj-97Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bqa-1q-7G2">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFN-TW-IkH">
+                                <rect key="frame" x="377" y="107" width="270" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="9ya-kr-Bgd"/>
+                                    <constraint firstAttribute="height" constant="30" id="jxr-Tp-w3b"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gMm-cg-kfn">
+                                <rect key="frame" x="377" y="160" width="270" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="JOM-DT-K4E"/>
+                                    <constraint firstAttribute="height" constant="30" id="eU7-QB-Wkn"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6J-kf-V1Y">
+                                <rect key="frame" x="447" y="217" width="131" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="131" id="FLe-Pp-TGO"/>
+                                    <constraint firstAttribute="height" constant="30" id="tSN-GA-4Vv"/>
+                                </constraints>
+                                <state key="normal" title="Create Account"/>
+                                <connections>
+                                    <action selector="createAccountButton:" destination="AcH-5S-ety" eventType="touchUpInside" id="A7w-Jq-05W"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gMm-cg-kfn" firstAttribute="top" secondItem="yFN-TW-IkH" secondAttribute="bottom" constant="23" id="5SD-E5-RzA"/>
+                            <constraint firstItem="yFN-TW-IkH" firstAttribute="top" secondItem="oFx-3e-DqO" secondAttribute="bottom" constant="87" id="Mxy-Gn-Pqb"/>
+                            <constraint firstItem="gMm-cg-kfn" firstAttribute="centerX" secondItem="Bqa-1q-7G2" secondAttribute="centerX" id="cge-0E-ZNx"/>
+                            <constraint firstItem="s6J-kf-V1Y" firstAttribute="centerX" secondItem="Bqa-1q-7G2" secondAttribute="centerX" id="iDb-JE-vqJ"/>
+                            <constraint firstItem="yFN-TW-IkH" firstAttribute="centerX" secondItem="Bqa-1q-7G2" secondAttribute="centerX" id="y0k-Gz-gCN"/>
+                            <constraint firstItem="s6J-kf-V1Y" firstAttribute="top" secondItem="gMm-cg-kfn" secondAttribute="bottom" constant="27" id="yy9-Py-YSi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="yFN-TW-IkH" id="5OX-EG-Qgo"/>
+                        <outlet property="passwordTextField" destination="gMm-cg-kfn" id="eME-ZN-PZb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ILC-Po-aZz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-240.23437499999997" y="885.9375"/>
         </scene>
         <!--The Map-->
         <scene sceneID="MRS-8p-N5H">

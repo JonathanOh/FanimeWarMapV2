@@ -32,6 +32,7 @@ struct SegueId {
     static let viewTeamId = "viewTeamSegue"
     static let addRoverId = "addRoverSegue"
     static let deployTeamId = "deployTeamSegue"
+    static let createAccountId = "createAccountSegue"
 }
 
 let STARTING_POINT = CGPoint(x: 40, y: 20)

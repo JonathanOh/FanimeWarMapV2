@@ -1,0 +1,6 @@
+framework module Pods_FanimeWarMapV2 {
+  umbrella header "Pods-FanimeWarMapV2-umbrella.h"
+
+  export *
+  module * { export * }
+}
