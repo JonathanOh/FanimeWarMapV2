@@ -22,8 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameTextField.text = "cool"
-        passwordTextField.text = "guy"
+        usernameTextField.text = "qwertytest@gmail.com"
+        passwordTextField.text = "123456"
         
     }
 

@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 
-typealias Completion = (_ error: String?, _ user: AnyObject?) -> Void
+typealias userData = (_ error: String?, _ user: AnyObject?) -> Void
 
 class AuthService {
 
@@ -19,7 +19,7 @@ class AuthService {
         return _sharedInstance
     }
     
-    func loginWith(email: String, password: String, onComplete: Completion?) {
+    func loginWith(email: String, password: String, onComplete: userData?) {
     
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
             guard let user = user else {
@@ -32,7 +32,7 @@ class AuthService {
         })
     }
 
-    func createAccountWith(email: String, password: String, onComplete: Completion?) {
+    func createAccountWith(email: String, password: String, onComplete: userData?) {
     
         // Call firebase create user API.  Will return us a user or error.
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in

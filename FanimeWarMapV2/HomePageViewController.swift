@@ -53,26 +53,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
         
-        loadCurrentRoversWithResponse(response: DummyResponse, currentTeams: possibleTeams)
+        DataService.sharedIntances.getPossibleTeams { (teams: [Team]) in
+            self.loadRoversWith(response: teams)
+        }
+        
+        //loadCurrentRoversWithResponse(response: DummyResponse, currentTeams: possibleTeams)
     }
-    
-//    "teamName" : "eevee",
-//    "teamLocationX" : 200,
-//    "teamLocationY" : 200,
-//    "assignedOnMap" : "Upper Level Map"
-    
-//    func constructTeamAndMapStateFromResponse(currentTeams: [Team]) {
-//        let tempResponses = DummyResponse
-//        for response in teampResponses {
-//            guard let teamName = response["teamName"] as String else { return }
-//            guard let teamLocationX = response["teamLocationX"] as Int else { return }
-//            guard let teamLocationY = response["teamLocationY"] as Int else { return }
-//            guard let assignedOnMap = response["assignedOnMap"] as String else { return }
-//            let teamLocation : CGPoint = CGPoint(x: teamLocationX, y: teamLocationY)
-//            
-//            
-//        }
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         for rover in currentRovers {
@@ -108,29 +94,39 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         self.title = map.rawValue
     }
     
-    func loadCurrentRoversWithResponse(response: [Dictionary<String, Any?>], currentTeams: [Team]) {
-        //dummy data
-        var teamHolder = [Team]()
-        for team in response {
-            guard let teamName = team["teamName"] as? String else { continue }
-            
-            let savedTeam = Team(name: teamName, icon: teamName)
-            teamHolder.append(savedTeam)
-            
-            guard let teamXLocation = team["teamLocationX"] as? Int else { continue }
-            guard let teamYLocation = team["teamLocationY"] as? Int else { continue }
-            guard let teamMap = team["assignedOnMap"] as? String else { continue }
-            let mapEnum = Utils.getMapEnumFromString(name: teamMap)
-            guard let map = mapEnum else { return }
+    func loadRoversWith(response: [Team]) {
+        possibleTeams = response
+        for team in possibleTeams {
+            guard let map = team.assignedOnMap else { continue }
             if map == currentActiveMap {
-                mapImageView.addSubview(savedTeam.teamIconView!)
+                mapImageView.addSubview(team.teamIconView!)
             }
-            
-            savedTeam.setupLocationAndMap(map: map, xLocation: teamXLocation, yLocation: teamYLocation)
         }
-        possibleTeams = teamHolder
-        print("hi")
     }
+    
+//    func loadCurrentRoversWithResponse(response: [Dictionary<String, Any?>], currentTeams: [Team]) {
+//        //dummy data
+//        var teamHolder = [Team]()
+//        for team in response {
+//            guard let teamName = team["teamName"] as? String else { continue }
+//            
+//            let savedTeam = Team(name: teamName, icon: teamName)
+//            teamHolder.append(savedTeam)
+//            
+//            guard let teamXLocation = team["teamLocationX"] as? Int else { continue }
+//            guard let teamYLocation = team["teamLocationY"] as? Int else { continue }
+//            guard let teamMap = team["assignedOnMap"] as? String else { continue }
+//            let mapEnum = Utils.getMapEnumFromString(name: teamMap)
+//            guard let map = mapEnum else { return }
+//            if map == currentActiveMap {
+//                mapImageView.addSubview(savedTeam.teamIconView!)
+//            }
+//            
+//            savedTeam.setupLocationAndMap(map: map, xLocation: teamXLocation, yLocation: teamYLocation)
+//        }
+//        possibleTeams = teamHolder
+//        print("hi")
+//    }
     
     // This allowed pinch zooming for the view returned
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
