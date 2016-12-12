@@ -11,6 +11,7 @@
 		45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5D1DFD1F730062DF22 /* AuthService.swift */; };
 		45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */; };
 		45BCEB621DFE2DFA0062DF22 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB611DFE2DFA0062DF22 /* DataService.swift */; };
+		45BCEB641DFE7FED0062DF22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB631DFE7FED0062DF22 /* User.swift */; };
 		595E27936630BD2EFE205787 /* Pods_FanimeWarMapV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946A86E06C22D5B21579C9CA /* Pods_FanimeWarMapV2.framework */; };
 		8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */; };
 		8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */; };
@@ -48,6 +49,7 @@
 		45BCEB5D1DFD1F730062DF22 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		45BCEB611DFE2DFA0062DF22 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		45BCEB631DFE7FED0062DF22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsViewController.swift; sourceTree = "<group>"; };
 		8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsPrototypeCell.swift; sourceTree = "<group>"; };
 		8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoverViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,14 @@
 				45BCEB611DFE2DFA0062DF22 /* DataService.swift */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		45BCEB651DFE84FE0062DF22 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				45BCEB631DFE7FED0062DF22 /* User.swift */,
+			);
+			name = Global;
 			sourceTree = "<group>";
 		};
 		8B5992631DEACC4B003CD21F /* Models */ = {
@@ -183,6 +193,7 @@
 				45BCEB5C1DFD1F560062DF22 /* Network */,
 				8B5992651DEACC91003CD21F /* View */,
 				8B5992641DEACC65003CD21F /* Controller */,
+				45BCEB651DFE84FE0062DF22 /* Global */,
 				8B5992631DEACC4B003CD21F /* Models */,
 				8B59928B1DF054BF003CD21F /* Utils.swift */,
 				8BFCDA741DEA950B002129C8 /* Constants.swift */,
@@ -355,6 +366,7 @@
 				8BFCDA6F1DEA642B002129C8 /* Rover.swift in Sources */,
 				8B5992671DEC0A44003CD21F /* AddRoverViewController.swift in Sources */,
 				8BFCDA731DEA76B5002129C8 /* MapPickerViewController.swift in Sources */,
+				45BCEB641DFE7FED0062DF22 /* User.swift in Sources */,
 				8BFCDA5D1DE96FB1002129C8 /* ViewController.swift in Sources */,
 				8BFCDA5B1DE96FB1002129C8 /* AppDelegate.swift in Sources */,
 				8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */,

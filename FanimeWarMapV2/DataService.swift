@@ -13,7 +13,7 @@ class DataService {
 
     private static let _sharedInstance = DataService()
     
-    static var sharedIntancs: DataService {
+    static var sharedIntances: DataService {
         return _sharedInstance
     }
     
@@ -34,7 +34,6 @@ class DataService {
             let newLoggedInCount = loggedInCount + 1
             loggedInReference.updateChildValues(["loggedInCount" : newLoggedInCount])
         }
-        //let newValue = loggedInReference + 1
     }
-
+    
 }

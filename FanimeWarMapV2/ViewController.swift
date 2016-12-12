@@ -42,7 +42,7 @@ class ViewController: UIViewController {
                 return
             }
             // we have a user logged in successfully
-            DataService.sharedIntancs.userLoggedIn(uid: user.uid)
+            DataService.sharedIntances.userLoggedIn(uid: user.uid)
             self.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
         })
         

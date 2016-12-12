@@ -33,7 +33,7 @@ class CreateAccountViewController: UIViewController {
             print("we have a user: \(user)")
             
             guard let userId = user?.uid else { return }
-            DataService.sharedIntancs.saveUser(uid: userId, email: email)
+            DataService.sharedIntances.saveUser(uid: userId, email: email)
             self.dismiss(animated: true, completion: nil)
             // Show error alerts if we get issue with account creation
             // We need to pass error and data in here from AuthService
