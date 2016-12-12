@@ -22,7 +22,10 @@ class AuthService {
     func loginWith(email: String, password: String, onComplete: Completion?) {
     
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
-            guard let user = user else { return }//Error Handling here
+            guard let user = user else {
+                onComplete?("Login Error", nil)
+                return
+            }//Error Handling here
             print("signed in successfully \(user)")
             User.sharedIntances.setupUserInfo(uid: user.uid, firstName: "", lastName: "", email: email)
             onComplete?(nil, user)
