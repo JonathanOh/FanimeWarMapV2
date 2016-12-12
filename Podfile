@@ -8,5 +8,6 @@ target 'FanimeWarMapV2' do
   # Pods for FanimeWarMapV2
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod ‘Firebase/Database’
 
 end

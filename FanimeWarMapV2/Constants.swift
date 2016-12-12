@@ -35,6 +35,11 @@ struct SegueId {
     static let createAccountId = "createAccountSegue"
 }
 
+enum Admin : Int {
+    case Regular = 10
+    case Admin = 1
+}
+
 let STARTING_POINT = CGPoint(x: 40, y: 20)
 
 let FANIME_DARK_BLUE : UIColor = UIColor(red: 17.0/255.0, green: 45.0/255.0, blue: 85.0/255.0, alpha: 1)

@@ -19,10 +19,12 @@ class AuthService {
         return _sharedInstance
     }
     
-    func loginWith(email: String, password: String) {
+    func loginWith(email: String, password: String, onComplete: Completion?) {
     
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
             guard let user = user else { return }//Error Handling here
+            print("signed in successfully \(user)")
+            onComplete?(nil, user)
         })
     }
 

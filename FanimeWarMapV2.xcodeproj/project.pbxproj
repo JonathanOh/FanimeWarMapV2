@@ -10,6 +10,7 @@
 		45BCEB5B1DFD1D190062DF22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */; };
 		45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5D1DFD1F730062DF22 /* AuthService.swift */; };
 		45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */; };
+		45BCEB621DFE2DFA0062DF22 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB611DFE2DFA0062DF22 /* DataService.swift */; };
 		595E27936630BD2EFE205787 /* Pods_FanimeWarMapV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946A86E06C22D5B21579C9CA /* Pods_FanimeWarMapV2.framework */; };
 		8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */; };
 		8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */; };
@@ -46,6 +47,7 @@
 		45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45BCEB5D1DFD1F730062DF22 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		45BCEB611DFE2DFA0062DF22 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8B59925F1DEA9DEB003CD21F /* ViewTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsViewController.swift; sourceTree = "<group>"; };
 		8B5992611DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTeamsPrototypeCell.swift; sourceTree = "<group>"; };
 		8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoverViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				45BCEB5D1DFD1F730062DF22 /* AuthService.swift */,
+				45BCEB611DFE2DFA0062DF22 /* DataService.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				8B5992621DEAC35E003CD21F /* ViewTeamsPrototypeCell.swift in Sources */,
 				45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */,
 				8B5992601DEA9DEB003CD21F /* ViewTeamsViewController.swift in Sources */,
+				45BCEB621DFE2DFA0062DF22 /* DataService.swift in Sources */,
 				8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */,
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
 				8BFCDA711DEA650B002129C8 /* Team.swift in Sources */,

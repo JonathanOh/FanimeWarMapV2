@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -28,14 +29,25 @@ class ViewController: UIViewController {
 
     @IBAction func loginButton(_ sender: Any) {
         
-        guard adminUsername == usernameTextField.text! && adminPassword == passwordTextField.text! else {
-            return
-        }
+        //guard adminUsername == usernameTextField.text! && adminPassword == passwordTextField.text! else { return }
+        guard let username = usernameTextField.text, let password = passwordTextField.text else { return }
+        
         
         //usernameTextField.text = ""
         //passwordTextField.text = ""
+        AuthService.sharedInstance.loginWith(email: username, password: password, onComplete: { (error: String?, user: AnyObject?) in
+            guard let user = user as? FIRUser else {
+                let alert = Utils.customWhoopsAlert(message: "Login Failed")
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            // we have a user logged in successfully
+            DataService.sharedIntancs.userLoggedIn(uid: user.uid)
+            self.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
+        })
         
-        performSegue(withIdentifier: "loginToHomeSegue", sender: self)
+        
+        
         
         
     }

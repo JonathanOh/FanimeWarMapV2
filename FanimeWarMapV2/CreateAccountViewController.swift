@@ -31,6 +31,10 @@ class CreateAccountViewController: UIViewController {
         
         AuthService.sharedInstance.createAccountWith(email: email, password: password, onComplete: { (error: String?, user: AnyObject?) -> Void in
             print("we have a user: \(user)")
+            
+            guard let userId = user?.uid else { return }
+            DataService.sharedIntancs.saveUser(uid: userId, email: email)
+            self.dismiss(animated: true, completion: nil)
             // Show error alerts if we get issue with account creation
             // We need to pass error and data in here from AuthService
             // once we get a user, we must store their UID in to firebase to make that connection between this authenticated user and an existing user
