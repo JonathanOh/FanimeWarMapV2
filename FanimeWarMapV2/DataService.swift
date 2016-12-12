@@ -29,7 +29,7 @@ class DataService {
             
             var possibleTeams = [Team]()
             guard let teams = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            for (key, value) in teams {
+            for (_, value) in teams {
                 guard let name = value["name"] as? String else { continue }
                 let team = Team(name: name, icon: name)
                 possibleTeams.append(team)
