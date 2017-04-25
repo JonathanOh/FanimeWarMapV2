@@ -26,7 +26,6 @@ class DataService {
     func getPossibleTeams(onComplete: teamData?) {
         let teamDictionaryReference = mainReference.child("Teams").child("Rovers")
         teamDictionaryReference.observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) -> Void in
-            
             var possibleTeams = [Team]()
             guard let teams = snapshot.value as? Dictionary<String, AnyObject> else { return }
             for (_, value) in teams {
@@ -40,6 +39,33 @@ class DataService {
                 team.setupLocationAndMap(map: mapImage, xLocation: xLocation, yLocation: yLocation)
             }
             onComplete?(possibleTeams)
+        }
+    }
+    
+    func setupFirebaseWithDummyData() {
+        let teamDictionaryReference = mainReference.child("Teams").child("Rovers")
+        for team in DummyResponse {
+            guard let teamName = team["name"] as? String else { continue }
+            teamDictionaryReference.updateChildValues([teamName : team])
+        }
+    }
+    func saveTeamLocations(teams: [Team]) {
+        let teamDictionaryReferece = mainReference.child("Teams").child("Rovers")
+        //teamDictionaryReferece.by
+        for team in teams {
+            var teamDictionary = [String: Any]()
+            teamDictionary["name"] = team.teamName
+            
+            if let xLocation = team.teamLocation?.x {
+                teamDictionary["xLoc"] = Double(xLocation)
+            }
+            if let yLocation = team.teamLocation?.y {
+                teamDictionary["yLoc"] = Double(yLocation)
+            }
+            if let mapName = team.assignedOnMap {
+                teamDictionary["map"] = mapName.rawValue
+            }
+            teamDictionaryReferece.updateChildValues([team.teamName : teamDictionary])
         }
     }
     

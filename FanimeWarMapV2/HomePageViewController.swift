@@ -113,8 +113,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 //            let savedTeam = Team(name: teamName, icon: teamName)
 //            teamHolder.append(savedTeam)
 //            
-//            guard let teamXLocation = team["teamLocationX"] as? Int else { continue }
-//            guard let teamYLocation = team["teamLocationY"] as? Int else { continue }
+//            guard let teamXLocation = team["xLoc"] as? Int else { continue }
+//            guard let teamYLocation = team["yLoc"] as? Int else { continue }
 //            guard let teamMap = team["assignedOnMap"] as? String else { continue }
 //            let mapEnum = Utils.getMapEnumFromString(name: teamMap)
 //            guard let map = mapEnum else { return }
@@ -183,12 +183,17 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
         case .SaveMap:
             //Learn Firebase
-            present(Utils.placeHolderAlert(), animated: true, completion: nil)
+            DataService.sharedIntances.saveTeamLocations(teams: possibleTeams)
+            //DataService.saveTeamLocations()
+            //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case .MoveTeamsMode:
             if !moveTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
+                for team in possibleTeams {
+                    print("team name: \(team.teamName), team location: \(team.teamLocation) $$$")
+                }
             }
             moveTeamsMode = !moveTeamsMode
             toggleZoomMode()
@@ -220,8 +225,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             for touch in touches {
                 let touchLocation = touch.location(in: self.mapImageView)
                 guard let teamToMove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: teamsOnMap) else { return }
-                guard let teamIconView = teamToMove.teamIconView else { return }
-                teamIconView.center = touchLocation
+                teamToMove.updateTeamLocationTo(point: touchLocation)
             }
         }
     }

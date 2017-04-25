@@ -44,22 +44,26 @@ class Team {
     func teamWasDeployed(map: Map) {
         isTeamDeployed = true
         assignedOnMap = map
+        teamLocation = STARTING_POINT
         teamIconView?.center = STARTING_POINT
     }
     
     func teamWasUndeployed() {
         isTeamDeployed = false
+        assignedOnMap = nil
+        teamLocation = nil
         teamIconView?.removeFromSuperview()
     }
     
-    func saveTeamLocation() {
-        teamLocation = teamIconView?.center
+    func updateTeamLocationTo(point: CGPoint) {
+        teamLocation = point
+        teamIconView?.center = point
     }
     
     func setupLocationAndMap(map: Map, xLocation: Int, yLocation: Int) {
         isTeamDeployed = true
         let location = CGPoint(x: xLocation, y: yLocation)
-        teamIconView?.center = location
+        updateTeamLocationTo(point: location)
         assignedOnMap = map
     }
     
