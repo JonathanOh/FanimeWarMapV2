@@ -15,6 +15,7 @@ protocol MapSelectedDelegate {
 class MapPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var delegate : MapSelectedDelegate? = nil
+    var numberOfTeamsOnMapDict: [String : Int]? = nil
     
     let currentMaps : [Map] = [.WholeMap, .UpperLevelMap, .LowerLevelMap]
     @IBOutlet weak var mapPickerTableView: UITableView!
@@ -30,7 +31,8 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "mapPickerCellID")
         cell = UITableViewCell(style: .default, reuseIdentifier: "mapPickerCellID")
-        cell?.textLabel?.text = currentMaps[indexPath.row].rawValue
+        let teamName = currentMaps[indexPath.row].rawValue
+        cell?.textLabel?.text = "\(teamName) (\(numberOfTeamsOnMapDict?[teamName] != nil ? numberOfTeamsOnMapDict![teamName]! : 0))"
         return cell!
     }
 

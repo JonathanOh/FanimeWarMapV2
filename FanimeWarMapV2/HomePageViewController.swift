@@ -183,7 +183,13 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
         case .SaveMap:
             //Learn Firebase
-            DataService.sharedIntances.saveTeamLocations(teams: possibleTeams)
+            //DataService.sharedIntances.saveTeamLocations(teams: possibleTeams)
+            DataService.sharedIntances.saveTeamLocations(teams: possibleTeams, success: { (success) in
+                if success {
+                    let alert = Utils.mapWasSavedAlert()
+                    self.present(alert, animated: false, completion: nil)
+                }
+            })
             //DataService.saveTeamLocations()
             //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case .MoveTeamsMode:
@@ -272,6 +278,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         case SegueId.mapPickerId:
             let MapPickerVC : MapPickerViewController = segue.destination as! MapPickerViewController
             MapPickerVC.delegate = self
+            MapPickerVC.numberOfTeamsOnMapDict = Utils.numberOfTeamsOnMap(teams: possibleTeams)
         case SegueId.addRoverId:
             let AddRoverVC : AddRoverViewController = segue.destination as! AddRoverViewController
             AddRoverVC.delegate = self

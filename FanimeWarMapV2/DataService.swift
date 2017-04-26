@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 typealias teamData = (_ teams: [Team]) -> Void
+typealias teamSaved = (_ success: Bool) -> Void
 
 class DataService {
 
@@ -49,24 +50,20 @@ class DataService {
             teamDictionaryReference.updateChildValues([teamName : team])
         }
     }
-    func saveTeamLocations(teams: [Team]) {
+    func saveTeamLocations(teams: [Team], success: teamSaved?) {
         let teamDictionaryReferece = mainReference.child("Teams").child("Rovers")
-        //teamDictionaryReferece.by
+        var dictionaryOfUpdatedTeams = [String : Any]()
         for team in teams {
-            var teamDictionary = [String: Any]()
-            teamDictionary["name"] = team.teamName
-            
-            if let xLocation = team.teamLocation?.x {
-                teamDictionary["xLoc"] = Double(xLocation)
-            }
-            if let yLocation = team.teamLocation?.y {
-                teamDictionary["yLoc"] = Double(yLocation)
-            }
-            if let mapName = team.assignedOnMap {
-                teamDictionary["map"] = mapName.rawValue
-            }
-            teamDictionaryReferece.updateChildValues([team.teamName : teamDictionary])
+            let teamDictionary = Utils.convertTeamToDictionary(team: team)
+            dictionaryOfUpdatedTeams[team.teamName] = teamDictionary
         }
+        teamDictionaryReferece.updateChildValues(dictionaryOfUpdatedTeams, withCompletionBlock: { (error, databaseRef: FIRDatabaseReference) in
+            if (error != nil) {
+                success?(false)
+            } else {
+                success?(true)
+            }
+        })
     }
     
     func saveUser(uid: String, email: String) {

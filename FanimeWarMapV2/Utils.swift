@@ -70,6 +70,35 @@ class Utils {
         }
     }
     
+    static func convertTeamToDictionary(team: Team) -> [String : Any] {
+        var teamDictionary = [String: Any]()
+        teamDictionary["name"] = team.teamName
+        
+        if let xLocation = team.teamLocation?.x {
+            teamDictionary["xLoc"] = Double(xLocation)
+        }
+        if let yLocation = team.teamLocation?.y {
+            teamDictionary["yLoc"] = Double(yLocation)
+        }
+        if let mapName = team.assignedOnMap {
+            teamDictionary["map"] = mapName.rawValue
+        }
+        return teamDictionary
+    }
+    
+    static func numberOfTeamsOnMap(teams: [Team]) -> [String : Int] {
+        var tempDictionary = [String : Int]()
+        for team in teams {
+            guard let map = team.assignedOnMap else { continue }
+            if let _ = tempDictionary[map.rawValue] {
+                tempDictionary[map.rawValue]! += 1
+            } else {
+                tempDictionary[map.rawValue] = 1
+            }
+        }
+        return tempDictionary
+    }
+    
     static func getMapEnumFromString(name: String) -> Map? {
         if name == "Whole Map" { return Map.WholeMap }
         else if name == "Upper Level Map" { return Map.UpperLevelMap }
@@ -102,7 +131,12 @@ class Utils {
         }
         return closestTeamToTouch
     }
-    
+    static func mapWasSavedAlert() -> UIAlertController {
+        let tempAlert = UIAlertController(title: "Yay!", message: "Team positions were saved!", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        tempAlert.addAction(okAction)
+        return tempAlert
+    }
     static func placeHolderAlert() -> UIAlertController {
         let tempAlert = UIAlertController(title: "Whoops!", message: "This is currently in development", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
