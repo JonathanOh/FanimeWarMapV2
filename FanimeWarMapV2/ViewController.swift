@@ -45,11 +45,6 @@ class ViewController: UIViewController {
             DataService.sharedIntances.userLoggedIn(uid: user.uid)
             self.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
         })
-        
-        
-        
-        
-        
     }
     
     @IBAction func createAccountButton(_ sender: Any) {

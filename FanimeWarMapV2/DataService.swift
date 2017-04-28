@@ -8,6 +8,8 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseStorage
+import UIKit
 
 typealias teamData = (_ teams: [Team]) -> Void
 typealias teamSaved = (_ success: Bool) -> Void
@@ -51,6 +53,21 @@ class DataService {
         }
     }
     func saveTeamLocations(teams: [Team], success: teamSaved?) {
+        
+        let imageTest: UIImage = UIImage(named: Map.WholeMap.rawValue)!
+        let imageData: Data = UIImagePNGRepresentation(imageTest)!
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("Map1.jpg")
+        
+        //imageRef.put(imageData, metadata: nil)
+        imageRef.put(imageData, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
+        
+        
+        
         let teamDictionaryReferece = mainReference.child("Teams").child("Rovers")
         var dictionaryOfUpdatedTeams = [String : Any]()
         for team in teams {
