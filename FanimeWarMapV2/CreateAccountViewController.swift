@@ -30,8 +30,6 @@ class CreateAccountViewController: UIViewController {
         if password.characters.count < 1 { return }
         
         AuthService.sharedInstance.createAccountWith(email: email, password: password, onComplete: { (error: String?, user: AnyObject?) -> Void in
-            print("we have a user: \(user)")
-            
             guard let userId = user?.uid else { return }
             DataService.sharedIntances.saveUser(uid: userId, email: email)
             self.dismiss(animated: true, completion: nil)

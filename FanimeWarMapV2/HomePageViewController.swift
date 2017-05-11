@@ -215,9 +215,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
-                for team in possibleTeams {
-                    print("team name: \(team.teamName), team location: \(team.teamLocation) $$$")
-                }
             }
             moveTeamsMode = !moveTeamsMode
             toggleZoomMode()
