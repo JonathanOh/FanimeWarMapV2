@@ -13,9 +13,9 @@ import UIKit
 enum Menu : String {
     case MapPicker = "Map Picker"
     case AddARover = "Add a Rover"
-    case DeployTeam = "Deploy Team"
     case ViewTeams = "View Teams"
     case SaveMap = "Save/Upload Map"
+    case DeployTeam = "Deploy Team"
     case MoveTeamsMode = "Move Teams Mode"
     case RemoveTeamsMode = "Remove Teams Mode"
     case LogOut = "Log Out"

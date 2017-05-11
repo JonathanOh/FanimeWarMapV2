@@ -11,6 +11,31 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
+extension UIImage {
+    func image(byDrawingImage image: UIImage, inRect rect: CGRect) -> UIImage! {
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        image.draw(in: rect)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+    /// Returns a image that fills in newSize
+    func resizedImage(newSize: CGSize) -> UIImage {
+        // Guard newSize is different
+        guard self.size != newSize else { return self }
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        //self.draw(in: CGRect(0, 0, newSize.width, newSize.height))
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        //let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+}
+
+
 typealias teamData = (_ teams: [Team]) -> Void
 typealias teamSaved = (_ success: Bool) -> Void
 
@@ -54,19 +79,49 @@ class DataService {
     }
     func saveTeamLocations(teams: [Team], success: teamSaved?) {
         
-        let imageTest: UIImage = UIImage(named: Map.WholeMap.rawValue)!
-        let imageData: Data = UIImagePNGRepresentation(imageTest)!
+        var imageOne: UIImage = UIImage(named: Map.WholeMap.rawValue)!
+        var imageTwo: UIImage = UIImage(named: Map.UpperLevelMap.rawValue)!
+        var imageThree: UIImage = UIImage(named: Map.LowerLevelMap.rawValue)!
+        //var imageOne: UIImage = mapOneImage.resizedImage(newSize: CGSize(width: mapOneImage.size.width, height: mapOneImage.size.height))
+        //var placeHolderImage = UIImage()
+        for team in teams {
+            guard let teamImage = team.teamIcon else { continue }
+            guard let teamLocation = team.teamLocation else { continue }
+            guard let teamMap = team.assignedOnMap else { continue }
+            let modifiedPoint: CGPoint = CGPoint(x: (teamLocation.x-15) * 2.05, y: (teamLocation.y-135) * 2.05)
+            if teamMap == .WholeMap {
+                imageOne = imageOne.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+            if teamMap == .UpperLevelMap {
+                imageTwo = imageTwo.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+            if teamMap == .LowerLevelMap {
+                imageThree = imageThree.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+        }
+        //let iconTest: UIImage = UIImage(named: "pikachu")!
+        //let combinedImage = imageTest.image(byDrawingImage: iconTest, inRect: CGRect(x: 0, y: 0, width: 100, height: 100))
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
-        let imageRef = storageRef.child("Map1.jpg")
-        
-        //imageRef.put(imageData, metadata: nil)
-        imageRef.put(imageData, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            
+        let imageDataOne: Data = UIImagePNGRepresentation(imageOne)!
+        let imageOneRef = storageRef.child("Map1.jpg")
+        imageOneRef.put(imageDataOne, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
-        
-        
+        let imageDataTwo: Data = UIImagePNGRepresentation(imageTwo)!
+        let imageTwoRef = storageRef.child("Map2.jpg")
+        imageTwoRef.put(imageDataTwo, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
+        let imageDataThree: Data = UIImagePNGRepresentation(imageThree)!
+        let imageThreeRef = storageRef.child("Map3.jpg")
+        imageThreeRef.put(imageDataThree, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
         
         let teamDictionaryReferece = mainReference.child("Teams").child("Rovers")
         var dictionaryOfUpdatedTeams = [String : Any]()

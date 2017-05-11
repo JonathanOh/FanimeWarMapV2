@@ -100,6 +100,20 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             guard let map = team.assignedOnMap else { continue }
             if map == currentActiveMap {
                 mapImageView.addSubview(team.teamIconView!)
+                
+                let newLabel = UILabel()
+                newLabel.translatesAutoresizingMaskIntoConstraints = false
+                newLabel.backgroundColor = UIColor.black
+                newLabel.textAlignment = .center
+                newLabel.textColor = UIColor.white
+                newLabel.text = team.teamName
+                mapImageView.addSubview(newLabel)
+                
+                newLabel.widthAnchor.constraint(equalToConstant: 120.0).isActive = true
+                newLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+                newLabel.topAnchor.constraint(equalTo: team.teamIconView!.topAnchor, constant: 37).isActive = true
+                newLabel.centerXAnchor.constraint(equalTo: team.teamIconView!.centerXAnchor, constant: 0.0).isActive = true
+                
             }
         }
     }
@@ -140,6 +154,10 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         cell?.textLabel?.text = mainMenuArray[indexPath.row].rawValue
         cell?.textLabel?.textColor = FANIME_ORANGE
         cell?.textLabel?.font = UIFont(name: "SFUIText-Bold", size: 14)
+        
+        if mainMenuArray[indexPath.row] == .DeployTeam || mainMenuArray[indexPath.row] == .MoveTeamsMode || mainMenuArray[indexPath.row] == .RemoveTeamsMode {
+            cell?.contentView.backgroundColor = UIColor.black
+        }
         
         return cell!
     }

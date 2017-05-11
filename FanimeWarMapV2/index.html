@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>Your Title Here</TITLE>
+</HEAD>
+
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+.fit {
+  max-width: 100%;
+  max-height: 100%;
+}
+.center {
+  display: block;
+  margin: auto;
+}
+</style>
+<H1>Whole Map</H1>
+<img id="mapOne" class="center fit" src="" /><br />
+<H1>Upper Level</H1>
+<img id="mapTwo" class="center fit" src="" /><br />
+<H1>Lower Level</H1>
+<img id="mapThree" class="center fit" src="" />
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+	var config = {
+    	apiKey: "AIzaSyDb4kKPRouIqghCQZOpeC-bxnukwAe8inQ",
+    	authDomain: "fanimewarmapv2.firebaseapp.com",
+    	databaseURL: "https://fanimewarmapv2.firebaseio.com",
+    	projectId: "fanimewarmapv2",
+    	storageBucket: "fanimewarmapv2.appspot.com",
+    	messagingSenderId: "258809306294"
+  		};
+ 	firebase.initializeApp(config);
+
+ 	var storage = firebase.storage();
+// Create a storage reference from our storage service
+	var storageRef = storage.ref();
+
+	storageRef.child('Map1.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+  		var img = document.getElementById('mapOne');
+  		img.src = url;
+	}).catch(function(error) {
+ 	 // Handle any errors
+	});
+	storageRef.child('Map2.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+  		var img = document.getElementById('mapTwo');
+  		img.src = url;
+	}).catch(function(error) {
+ 	 // Handle any errors
+	});
+	storageRef.child('Map3.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+  		var img = document.getElementById('mapThree');
+  		img.src = url;
+	}).catch(function(error) {
+ 	 // Handle any errors
+	});
+
+</script>
+
+</BODY>
+</HTML>

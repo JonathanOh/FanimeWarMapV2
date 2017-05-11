@@ -12,7 +12,7 @@ import UIKit
 class Utils {
 
     static func getArrayOfMenuOptions() -> [Menu] {
-        return [.MapPicker, .AddARover, .DeployTeam, .ViewTeams, .SaveMap, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
+        return [.MapPicker, .AddARover, .ViewTeams, .SaveMap, .DeployTeam, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
     }
     
     static func getDeployableTeams(teams: [Team]) -> [Team] {
