@@ -50,6 +50,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         possibleTeams = Utils.getCurrentArrayOfTeams()
         
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(sender:)))
+        self.mapImageView.addGestureRecognizer(longPressRecognizer)
+        
         // This property allows icons to be interacted with by the user
         mapScrollerSuperView.isUserInteractionEnabled = true
         
@@ -213,6 +216,15 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 guard let teamToRemove = Utils.closestTeamToTouchEvent(touchPoint: touchLocation, arrayOfTeams: teamsOnMap) else { return }
                 present(Utils.removeTeamAlert(team: teamToRemove), animated: true, completion: nil)
             }
+        }
+    }
+    
+    func longPressed(sender: UILongPressGestureRecognizer) {
+        let longTouchPoint = sender.location(in: self.mapImageView)
+        let closestTeam: Team? = Utils.closestTeamToTouchEvent(touchPoint: longTouchPoint, arrayOfTeams: possibleTeams)
+        guard let team = closestTeam else { return }
+        if self.presentedViewController == nil {
+            present(Utils.teamInfoAlert(team: team), animated: true, completion: nil)
         }
     }
   
