@@ -11,31 +11,6 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
-extension UIImage {
-    func image(byDrawingImage image: UIImage, inRect rect: CGRect) -> UIImage! {
-        UIGraphicsBeginImageContext(size)
-        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        image.draw(in: rect)
-        let result = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return result
-    }
-    /// Returns a image that fills in newSize
-    func resizedImage(newSize: CGSize) -> UIImage {
-        // Guard newSize is different
-        guard self.size != newSize else { return self }
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        //self.draw(in: CGRect(0, 0, newSize.width, newSize.height))
-        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        //let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-}
-
-
 typealias teamData = (_ teams: [Team]) -> Void
 typealias teamSaved = (_ success: Bool) -> Void
 
@@ -82,8 +57,7 @@ class DataService {
         var imageOne: UIImage = UIImage(named: Map.WholeMap.rawValue)!
         var imageTwo: UIImage = UIImage(named: Map.UpperLevelMap.rawValue)!
         var imageThree: UIImage = UIImage(named: Map.LowerLevelMap.rawValue)!
-        //var imageOne: UIImage = mapOneImage.resizedImage(newSize: CGSize(width: mapOneImage.size.width, height: mapOneImage.size.height))
-        //var placeHolderImage = UIImage()
+
         for team in teams {
             guard let teamImage = team.teamIcon else { continue }
             guard let teamLocation = team.teamLocation else { continue }
@@ -99,8 +73,7 @@ class DataService {
                 imageThree = imageThree.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
             }
         }
-        //let iconTest: UIImage = UIImage(named: "pikachu")!
-        //let combinedImage = imageTest.image(byDrawingImage: iconTest, inRect: CGRect(x: 0, y: 0, width: 100, height: 100))
+
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
             

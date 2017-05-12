@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		459D4AD31EC56B0A005215F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D4AD21EC56B0A005215F6 /* Extensions.swift */; };
 		45BCEB5B1DFD1D190062DF22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */; };
 		45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5D1DFD1F730062DF22 /* AuthService.swift */; };
 		45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		459D4AD21EC56B0A005215F6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45BCEB5D1DFD1F730062DF22 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				45BCEB651DFE84FE0062DF22 /* Global */,
 				8B5992631DEACC4B003CD21F /* Models */,
 				8B59928B1DF054BF003CD21F /* Utils.swift */,
+				459D4AD21EC56B0A005215F6 /* Extensions.swift */,
 				8BFCDA741DEA950B002129C8 /* Constants.swift */,
 				8BFCDA5E1DE96FB1002129C8 /* Main.storyboard */,
 				8BFCDA611DE96FB1002129C8 /* Assets.xcassets */,
@@ -253,7 +256,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Jonathan Oh";
 				TargetAttributes = {
 					8BFCDA561DE96FB1002129C8 = {
@@ -376,6 +379,7 @@
 				8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */,
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
 				8BFCDA711DEA650B002129C8 /* Team.swift in Sources */,
+				459D4AD31EC56B0A005215F6 /* Extensions.swift in Sources */,
 				8BFCDA6D1DE97664002129C8 /* HomePageViewController.swift in Sources */,
 				8B59928C1DF054BF003CD21F /* Utils.swift in Sources */,
 			);
@@ -421,6 +425,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -471,6 +476,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

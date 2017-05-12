@@ -22,12 +22,27 @@ class Team {
     init(name: String, icon: String) {
         self.teamName = name
         
-        guard let teamIcon = UIImage(named: icon) else {
-            return
-        }
+        guard let teamIcon = UIImage(named: icon) else { return }
+        
         self.teamIcon = teamIcon
         teamIconView = UIImageView(image: teamIcon)
-        teamIconView?.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        
+        guard let teamIconView = teamIconView else { return }
+        teamIconView.frame = CGRect(x: 40, y: 0, width: 40, height: 40)
+        
+        let newLabel = UILabel()
+        newLabel.translatesAutoresizingMaskIntoConstraints = false
+        newLabel.backgroundColor = UIColor.black
+        newLabel.textAlignment = .center
+        newLabel.textColor = UIColor.white
+        newLabel.text = name
+        teamIconView.addSubview(newLabel)
+        
+        newLabel.widthAnchor.constraint(equalToConstant: 120.0).isActive = true
+        newLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        newLabel.topAnchor.constraint(equalTo: teamIconView.topAnchor, constant: 37).isActive = true
+        newLabel.centerXAnchor.constraint(equalTo: teamIconView.centerXAnchor, constant: 0.0).isActive = true
+        
     }
     
     func replaceCurrentTeamWith(team: [String]) {

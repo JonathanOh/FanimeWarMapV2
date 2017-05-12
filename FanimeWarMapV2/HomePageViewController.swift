@@ -100,47 +100,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             guard let map = team.assignedOnMap else { continue }
             if map == currentActiveMap {
                 mapImageView.addSubview(team.teamIconView!)
-                
-                let newLabel = UILabel()
-                newLabel.translatesAutoresizingMaskIntoConstraints = false
-                newLabel.backgroundColor = UIColor.black
-                newLabel.textAlignment = .center
-                newLabel.textColor = UIColor.white
-                newLabel.text = team.teamName
-                mapImageView.addSubview(newLabel)
-                
-                newLabel.widthAnchor.constraint(equalToConstant: 120.0).isActive = true
-                newLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
-                newLabel.topAnchor.constraint(equalTo: team.teamIconView!.topAnchor, constant: 37).isActive = true
-                newLabel.centerXAnchor.constraint(equalTo: team.teamIconView!.centerXAnchor, constant: 0.0).isActive = true
-                
             }
         }
     }
-    
-//    func loadCurrentRoversWithResponse(response: [Dictionary<String, Any?>], currentTeams: [Team]) {
-//        //dummy data
-//        var teamHolder = [Team]()
-//        for team in response {
-//            guard let teamName = team["teamName"] as? String else { continue }
-//            
-//            let savedTeam = Team(name: teamName, icon: teamName)
-//            teamHolder.append(savedTeam)
-//            
-//            guard let teamXLocation = team["xLoc"] as? Int else { continue }
-//            guard let teamYLocation = team["yLoc"] as? Int else { continue }
-//            guard let teamMap = team["assignedOnMap"] as? String else { continue }
-//            let mapEnum = Utils.getMapEnumFromString(name: teamMap)
-//            guard let map = mapEnum else { return }
-//            if map == currentActiveMap {
-//                mapImageView.addSubview(savedTeam.teamIconView!)
-//            }
-//            
-//            savedTeam.setupLocationAndMap(map: map, xLocation: teamXLocation, yLocation: teamYLocation)
-//        }
-//        possibleTeams = teamHolder
-//        print("hi")
-//    }
     
     // This allowed pinch zooming for the view returned
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -200,16 +162,12 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         case .ViewTeams:
             performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
         case .SaveMap:
-            //Learn Firebase
-            //DataService.sharedIntances.saveTeamLocations(teams: possibleTeams)
             DataService.sharedIntances.saveTeamLocations(teams: possibleTeams, success: { (success) in
                 if success {
                     let alert = Utils.mapWasSavedAlert()
                     self.present(alert, animated: false, completion: nil)
                 }
             })
-            //DataService.saveTeamLocations()
-            //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case .MoveTeamsMode:
             if !moveTeamsMode {
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
@@ -226,10 +184,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             }
             removeTeamsMode = !removeTeamsMode
             toggleZoomMode()
-            //get deployable teams via utils function then pass touch point
-            
-            // This needs to be passed active rovers
-            //present(Utils.placeHolderAlert(), animated: true, completion: nil)
         case .LogOut:
             self.dismiss(animated: true, completion: nil)
         }
