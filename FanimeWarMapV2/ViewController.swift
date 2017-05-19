@@ -43,15 +43,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //usernameTextField.text = ""
         //passwordTextField.text = ""
-        AuthService.sharedInstance.loginWith(email: username, password: password, onComplete: { (error: String?, user: AnyObject?) in
+        AuthService.sharedInstance.loginWith(email: username, password: password, onComplete: { [weak self] (error: String?, user: AnyObject?) in
+            guard let unwrappedSelf = self else { return }
             guard let user = user as? FIRUser else {
                 let alert = Utils.customWhoopsAlert(message: "Login Failed")
-                self.present(alert, animated: true, completion: nil)
+                unwrappedSelf.present(alert, animated: true, completion: nil)
                 return
             }
             // we have a user logged in successfully
             DataService.sharedIntances.userLoggedIn(uid: user.uid)
-            self.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
+            unwrappedSelf.passwordTextField.text = ""
+            unwrappedSelf.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
         })
     }
     

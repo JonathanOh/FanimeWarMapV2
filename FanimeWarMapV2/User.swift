@@ -28,6 +28,14 @@ class User {
     var email: String? { return _email }
     var admin: Admin { return _admin }
     
+    private init() {
+        print("jsd")
+        _uid = ""
+        _firstName = ""
+        _lastName = ""
+        _email = ""
+    }
+    
     func setupUserInfo(uid: String, firstName: String, lastName: String, email: String) {
         _uid = uid
         _firstName = firstName
