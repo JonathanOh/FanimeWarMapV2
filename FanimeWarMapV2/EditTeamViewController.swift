@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol MapValueWasEditedDelegate {
+    func mapWasSelected(map: Map)
+}
+
 class EditTeamViewController: UIViewController, UITextFieldDelegate {
 
     private var mapPicker: UISegmentedControl?
     var teamBeingEdited: Team?
+    var delegate: MapValueWasEditedDelegate?
     private var textFields = [UITextField]()
     
     override func viewDidLoad() {
@@ -84,17 +89,26 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
         var newMembers = [String]()
         for (index, textField) in textFields.enumerated() {
             guard let textValue = textField.text else { continue }
+            if textValue == "" { continue }
             if index == 0 {
                 team.updateTeamLabel(name: textValue)
             } else {
                 newMembers.append(textValue)
             }
         }
-        team.updateTeamMembers(members: newMembers)
+        if newMembers.count > 0 {
+            team.updateTeamMembers(members: newMembers)
+        }
         if let map = mapPicker {
             guard let selectedMapString: String = map.titleForSegment(at: map.selectedSegmentIndex) else { return }
             guard let selectedMap: Map = Utils.getMapEnumFromString(name: selectedMapString) else { return }
+            if selectedMap == team.assignedOnMap! {
+                self.dismissView()
+                return
+            }
+            team.teamIconView?.removeFromSuperview()
             team.teamWasDeployed(map: selectedMap)
+            delegate?.mapWasSelected(map: selectedMap)
         }
         
         self.dismissView()

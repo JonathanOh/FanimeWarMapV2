@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,9 +21,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fanime2017.jpg")!)
+        //let bgImage = UIImage(named: "fanime2017.jpg")
+        //let bgImageView = UIImageView(image: bgImage)
+        //self.view.addSubview(bgImageView)
+        //bgImageView.sendSubview(toBack: self.view)
+        //bgImageView.contentMode = .scaleAspectFit
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         
-        usernameTextField.text = "qwertytest@gmail.com"
-        passwordTextField.text = "123456"
+        usernameTextField.text = ""
+        passwordTextField.text = ""
         
     }
 
@@ -51,6 +59,11 @@ class ViewController: UIViewController {
         
         performSegue(withIdentifier: SegueId.createAccountId, sender: self)
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 

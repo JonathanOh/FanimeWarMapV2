@@ -12,7 +12,7 @@ import UIKit
 class Utils {
 
     static func getArrayOfMenuOptions() -> [Menu] {
-        return [.MapPicker, .AddARover, .ViewTeams, .SaveMap, .DeployTeam, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
+        return [.MapPicker, .RemoveTeams, .SaveMap, .DeployTeam, .MoveTeamsMode, .RemoveTeamsMode, .LogOut]
     }
     
     static func getDeployableTeams(teams: [Team]) -> [Team] {
@@ -144,8 +144,8 @@ class Utils {
         return tempAlert
     }
     static func customWhoopsAlert(message: String) -> UIAlertController {
-        let tempAlert = UIAlertController(title: "Oops!", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let tempAlert = UIAlertController(title: "Whoa!", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         tempAlert.addAction(okAction)
         return tempAlert
     }

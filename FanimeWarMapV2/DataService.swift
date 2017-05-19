@@ -126,6 +126,8 @@ class DataService {
             guard let loggedInCount = profile["loggedInCount"] as? Int else { return }
             let newLoggedInCount = loggedInCount + 1
             loggedInReference.updateChildValues(["loggedInCount" : newLoggedInCount])
+            guard let userAccessLevel = profile["admin"] as? Int else { return }
+            User.sharedIntances.setUsersAccess(level: userAccessLevel)
         }
     }
     

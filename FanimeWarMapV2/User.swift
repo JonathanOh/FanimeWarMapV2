@@ -20,17 +20,32 @@ class User {
     private var _firstName : String?
     private var _lastName : String?
     private var _email : String?
+    private var _admin : Admin!
     
     var uid: String? { return _uid }
     var firstName: String? { return _firstName }
     var lastName: String? { return _lastName }
     var email: String? { return _email }
+    var admin: Admin { return _admin }
     
     func setupUserInfo(uid: String, firstName: String, lastName: String, email: String) {
         _uid = uid
         _firstName = firstName
         _lastName = lastName
         _email = email
+        _admin = .Regular
+    }
+    
+    // 1 is super admin, 10 is regular access
+    func setUsersAccess(level: Int) {
+        switch level {
+            case 1:
+                _admin = Admin.Admin
+            case 10:
+                _admin = Admin.Regular
+            default:
+                _admin = Admin.Regular
+        }
     }
     
 }

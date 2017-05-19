@@ -10,7 +10,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate, SelectedTeamToDeployDelegate {
+class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MapSelectedDelegate, RoverAddedDelegate, SelectedTeamToDeployDelegate, MapValueWasEditedDelegate {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     @IBOutlet weak var mapScrollerSuperView: UIScrollView!
@@ -42,8 +42,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         
         mainMenuTableView.backgroundColor = UIColor.white
         
-        let button = UIBarButtonItem(title: "Menu Toggle", style: .plain, target: self, action: #selector(toggleMenu))
-        navigationItem.leftBarButtonItem = button
+        //let button = UIBarButtonItem(title: "Menu Toggle", style: .plain, target: self, action: #selector(toggleMenu))
+        //navigationItem.leftBarButtonItem = button
         
         view.backgroundColor = FANIME_DARK_BLUE
         setUpBackgroundMap(map: .WholeMap)
@@ -157,14 +157,28 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         switch mainMenuArray[indexPath.row] {
         case .MapPicker:
             performSegue(withIdentifier: SegueId.mapPickerId, sender: self)
-        case .AddARover:
-            // This needs to be passed active teams
-            performSegue(withIdentifier: SegueId.addRoverId, sender: self)
+//        case .AddARover:
+//            // This needs to be passed active teams
+//            performSegue(withIdentifier: SegueId.addRoverId, sender: self)
         case .DeployTeam:
             performSegue(withIdentifier: SegueId.deployTeamId, sender: self)
-        case .ViewTeams:
-            performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
+        case .RemoveTeams:
+            let removeAlert = Utils.customWhoopsAlert(message: "You really want to remove and reset all teams?")
+            let doRemoveAllTeams = UIAlertAction(title: "Yes, Reset ALL!", style: .destructive, handler: { [weak self] (alert: UIAlertAction) in
+                guard let unwrappedSelf = self else { return }
+                for team in unwrappedSelf.possibleTeams {
+                    team.teamWasUndeployed()
+                }
+            })
+            removeAlert.addAction(doRemoveAllTeams)
+            present(removeAlert, animated: true, completion: nil)
+        //performSegue(withIdentifier: SegueId.viewTeamId, sender: self)
         case .SaveMap:
+            if User.sharedIntances.admin != Admin.Admin {
+                let alert = Utils.customWhoopsAlert(message: "You don't have admin access to save!")
+                present(alert, animated: true, completion: nil)
+                return
+            }
             DataService.sharedIntances.saveTeamLocations(teams: possibleTeams, success: { (success) in
                 if success {
                     let alert = Utils.mapWasSavedAlert()
@@ -228,6 +242,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             let editTeam = UIAlertAction(title: "Edit Team", style: .default) { (action: UIAlertAction) in
                 let editTeamViewController: EditTeamViewController = EditTeamViewController()
                 editTeamViewController.teamBeingEdited = team
+                editTeamViewController.delegate = self
                 self.present(editTeamViewController, animated: true, completion: nil)
             }
             let removeTeam = UIAlertAction(title: "Remove Team", style: .default) { (action: UIAlertAction) in
