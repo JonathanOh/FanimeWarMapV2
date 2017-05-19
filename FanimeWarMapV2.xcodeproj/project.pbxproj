@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		459D4AD31EC56B0A005215F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D4AD21EC56B0A005215F6 /* Extensions.swift */; };
+		459D4AD51ECEA933005215F6 /* EditTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D4AD41ECEA933005215F6 /* EditTeamViewController.swift */; };
 		45BCEB5B1DFD1D190062DF22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */; };
 		45BCEB5E1DFD1F730062DF22 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5D1DFD1F730062DF22 /* AuthService.swift */; };
 		45BCEB601DFD22240062DF22 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		459D4AD21EC56B0A005215F6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		459D4AD41ECEA933005215F6 /* EditTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamViewController.swift; sourceTree = "<group>"; };
 		45BCEB5A1DFD1D190062DF22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45BCEB5D1DFD1F730062DF22 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		45BCEB5F1DFD22240062DF22 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				8BFCDA5C1DE96FB1002129C8 /* ViewController.swift */,
 				8BFCDA6C1DE97664002129C8 /* HomePageViewController.swift */,
+				459D4AD41ECEA933005215F6 /* EditTeamViewController.swift */,
 				8B5992891DEECB35003CD21F /* DeployTeamViewController.swift */,
 				8BFCDA721DEA76B5002129C8 /* MapPickerViewController.swift */,
 				8B5992661DEC0A44003CD21F /* AddRoverViewController.swift */,
@@ -378,6 +381,7 @@
 				45BCEB621DFE2DFA0062DF22 /* DataService.swift in Sources */,
 				8B59928A1DEECB35003CD21F /* DeployTeamViewController.swift in Sources */,
 				8BFCDA751DEA950B002129C8 /* Constants.swift in Sources */,
+				459D4AD51ECEA933005215F6 /* EditTeamViewController.swift in Sources */,
 				8BFCDA711DEA650B002129C8 /* Team.swift in Sources */,
 				459D4AD31EC56B0A005215F6 /* Extensions.swift in Sources */,
 				8BFCDA6D1DE97664002129C8 /* HomePageViewController.swift in Sources */,

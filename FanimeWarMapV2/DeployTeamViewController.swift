@@ -40,7 +40,7 @@ class DeployTeamViewController: UIViewController, UITableViewDelegate, UITableVi
             return ViewTeamsPrototypeCell()
         }
         
-        cell.configureCell(icon: teamIcon, name: availableTeams[indexPath.row].teamName, members: [""])
+        cell.configureCell(icon: teamIcon, name: availableTeams[indexPath.row].teamLabelName, members: [""])
         
         return cell
     }

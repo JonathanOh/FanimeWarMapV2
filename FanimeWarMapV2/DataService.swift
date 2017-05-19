@@ -35,6 +35,9 @@ class DataService {
                 guard let name = value["name"] as? String else { continue }
                 let team = Team(name: name, icon: name)
                 possibleTeams.append(team)
+                if let teamLabel = value["label"] as? String {
+                    team.updateTeamLabel(name: teamLabel)
+                }
                 guard let xLocation = value["xLoc"] as? Int else { continue }
                 guard let yLocation = value["yLoc"] as? Int else { continue }
                 guard let map = value["map"] as? String else { continue }

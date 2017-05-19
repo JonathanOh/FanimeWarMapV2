@@ -73,7 +73,7 @@ class Utils {
     static func convertTeamToDictionary(team: Team) -> [String : Any] {
         var teamDictionary = [String: Any]()
         teamDictionary["name"] = team.teamName
-        
+        teamDictionary["label"] = team.teamLabelName
         if let xLocation = team.teamLocation?.x {
             teamDictionary["xLoc"] = Double(xLocation)
         }
@@ -154,13 +154,13 @@ class Utils {
         for member in team.teamMembers {
             teamString += member + " "
         }
-        let tempAlert = UIAlertController(title: team.teamName, message: "Team Members: \(teamString)", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let tempAlert = UIAlertController(title: team.teamLabelName, message: "Team Members:\n \(teamString)", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)        
         tempAlert.addAction(okAction)
         return tempAlert
     }
     static func removeTeamAlert(team: Team) -> UIAlertController {
-        let tempAlert = UIAlertController(title: "Alert", message: "Remove \(team.teamName) from map?", preferredStyle: UIAlertControllerStyle.alert)
+        let tempAlert = UIAlertController(title: "Alert", message: "Remove \(team.teamLabelName) from map?", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
             team.teamWasUndeployed()
         })

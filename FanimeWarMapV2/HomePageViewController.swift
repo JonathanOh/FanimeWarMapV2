@@ -224,7 +224,18 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         let closestTeam: Team? = Utils.closestTeamToTouchEvent(touchPoint: longTouchPoint, arrayOfTeams: possibleTeams)
         guard let team = closestTeam else { return }
         if self.presentedViewController == nil {
-            present(Utils.teamInfoAlert(team: team), animated: true, completion: nil)
+            let teamInfoAlert: UIAlertController = Utils.teamInfoAlert(team: team)
+            let editTeam = UIAlertAction(title: "Edit Team", style: .default) { (action: UIAlertAction) in
+                let editTeamViewController: EditTeamViewController = EditTeamViewController()
+                editTeamViewController.teamBeingEdited = team
+                self.present(editTeamViewController, animated: true, completion: nil)
+            }
+            let removeTeam = UIAlertAction(title: "Remove Team", style: .default) { (action: UIAlertAction) in
+                team.teamWasUndeployed()
+            }
+            teamInfoAlert.addAction(editTeam)
+            teamInfoAlert.addAction(removeTeam)
+            present(teamInfoAlert, animated: true, completion: nil)
         }
     }
   
