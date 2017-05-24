@@ -60,6 +60,9 @@ class DataService {
         var imageOne: UIImage = UIImage(named: Map.WholeMap.rawValue)!
         var imageTwo: UIImage = UIImage(named: Map.UpperLevelMap.rawValue)!
         var imageThree: UIImage = UIImage(named: Map.LowerLevelMap.rawValue)!
+        var imageFour: UIImage = UIImage(named: Map.FairmontMap.rawValue)!
+        var imageFive: UIImage = UIImage(named: Map.MarriottMap.rawValue)!
+        var imageSix: UIImage = UIImage(named: Map.HiltonMap.rawValue)!
 
         for team in teams {
             guard let teamImage = team.teamIcon else { continue }
@@ -74,6 +77,15 @@ class DataService {
             }
             if teamMap == .LowerLevelMap {
                 imageThree = imageThree.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+            if teamMap == .FairmontMap {
+                imageFour = imageFour.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+            if teamMap == .MarriottMap {
+                imageFive = imageFive.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
+            }
+            if teamMap == .HiltonMap {
+                imageSix = imageSix.image(byDrawingImage: teamImage, inRect: CGRect(origin: modifiedPoint, size: CGSize(width: 75, height: 75)))
             }
         }
 
@@ -95,6 +107,24 @@ class DataService {
         let imageDataThree: Data = UIImagePNGRepresentation(imageThree)!
         let imageThreeRef = storageRef.child("Map3.jpg")
         imageThreeRef.put(imageDataThree, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
+        let imageDataFour: Data = UIImagePNGRepresentation(imageFour)!
+        let imageFourRef = storageRef.child("Map4.jpg")
+        imageFourRef.put(imageDataFour, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
+        let imageDataFive: Data = UIImagePNGRepresentation(imageFive)!
+        let imageFiveRef = storageRef.child("Map5.jpg")
+        imageFiveRef.put(imageDataFive, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+            print(metaData ?? 0)
+            print(error ?? 0)
+        }
+        let imageDataSix: Data = UIImagePNGRepresentation(imageSix)!
+        let imageSixRef = storageRef.child("Map6.jpg")
+        imageSixRef.put(imageDataSix, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }

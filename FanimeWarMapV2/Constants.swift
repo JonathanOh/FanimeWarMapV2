@@ -25,6 +25,9 @@ enum Map : String {
     case WholeMap = "Whole Map"
     case UpperLevelMap = "Upper Level Map"
     case LowerLevelMap = "Lower Level Map"
+    case FairmontMap = "Fairmont Map"
+    case MarriottMap = "Marriott Map"
+    case HiltonMap = "Hilton Map"
 }
 
 struct SegueId {

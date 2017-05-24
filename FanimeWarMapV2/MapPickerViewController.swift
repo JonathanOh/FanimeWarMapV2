@@ -16,8 +16,10 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var delegate : MapSelectedDelegate? = nil
     var numberOfTeamsOnMapDict: [String : Int]? = nil
-    
-    let currentMaps : [Map] = [.WholeMap, .UpperLevelMap, .LowerLevelMap]
+    //case FairmontMap = "Fairmont Map"
+    //case MarriottMap = "Marriott Map"
+    //case HiltonMap = "Hilton Map"
+    let currentMaps : [Map] = [.WholeMap, .UpperLevelMap, .LowerLevelMap, .FairmontMap, .MarriottMap, .HiltonMap]
     @IBOutlet weak var mapPickerTableView: UITableView!
     
     override func viewDidLoad() {
@@ -45,7 +47,7 @@ class MapPickerViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200.0
+        return 100.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

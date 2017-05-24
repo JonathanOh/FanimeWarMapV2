@@ -150,7 +150,7 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
     func createSegmentedControlForMaps(team: Team?) -> UISegmentedControl? {
         guard let currentTeam = team else { return nil }
         
-        let maps: [String] = [Map.WholeMap.rawValue, Map.UpperLevelMap.rawValue, Map.LowerLevelMap.rawValue]
+        let maps: [String] = [Map.WholeMap.rawValue, Map.UpperLevelMap.rawValue, Map.LowerLevelMap.rawValue, Map.FairmontMap.rawValue, Map.MarriottMap.rawValue, Map.HiltonMap.rawValue]
         let control = UISegmentedControl(items: maps)
         
         guard let currentTeamMap = currentTeam.assignedOnMap else { return nil }
@@ -161,6 +161,12 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
                 control.selectedSegmentIndex = 1
             case Map.LowerLevelMap:
                 control.selectedSegmentIndex = 2
+            case Map.FairmontMap:
+                control.selectedSegmentIndex = 3
+            case Map.MarriottMap:
+                control.selectedSegmentIndex = 4
+            case Map.HiltonMap:
+                control.selectedSegmentIndex = 5
         }
         control.addTarget(self, action: #selector(mapSegmentSelected), for: .valueChanged)
         self.view.addSubview(control)
@@ -168,7 +174,7 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
         
         control.topAnchor.constraint(equalTo: textFields[textFields.endIndex - 1].bottomAnchor, constant: 10).isActive = true
         control.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        control.widthAnchor.constraint(equalToConstant: 300.0).isActive = true
+        control.widthAnchor.constraint(equalToConstant: 600.0).isActive = true
         control.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         
         return control

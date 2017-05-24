@@ -100,9 +100,12 @@ class Utils {
     }
     
     static func getMapEnumFromString(name: String) -> Map? {
-        if name == "Whole Map" { return Map.WholeMap }
-        else if name == "Upper Level Map" { return Map.UpperLevelMap }
-        else if name == "Lower Level Map" { return Map.LowerLevelMap }
+        if name == Map.WholeMap.rawValue { return Map.WholeMap }
+        else if name == Map.UpperLevelMap.rawValue { return Map.UpperLevelMap }
+        else if name == Map.LowerLevelMap.rawValue { return Map.LowerLevelMap }
+        else if name == Map.FairmontMap.rawValue { return Map.FairmontMap }
+        else if name == Map.MarriottMap.rawValue { return Map.MarriottMap }
+        else if name == Map.HiltonMap.rawValue { return Map.HiltonMap }
         else { return nil }
     }
     
@@ -155,7 +158,7 @@ class Utils {
             teamString += member + " "
         }
         let tempAlert = UIAlertController(title: team.teamLabelName, message: "Team Members:\n \(teamString)", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)        
+        let okAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)        
         tempAlert.addAction(okAction)
         return tempAlert
     }
