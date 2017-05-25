@@ -22,7 +22,13 @@
 <H1>Upper Level</H1>
 <img id="mapTwo" class="center fit" src="" /><br />
 <H1>Lower Level</H1>
-<img id="mapThree" class="center fit" src="" />
+<img id="mapThree" class="center fit" src="" /><br />
+<H1>Fairmont</H1>
+<img id="mapFour" class="center fit" src="" /><br />
+<H1>Marriott</H1>
+<img id="mapFive" class="center fit" src="" /><br />
+<H1>Hilton</H1>
+<img id="mapSix" class="center fit" src="" />
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -61,6 +67,27 @@
 	}).catch(function(error) {
  	 // Handle any errors
 	});
+    storageRef.child('Map4.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+      var img = document.getElementById('mapFour');
+      img.src = url;
+  }).catch(function(error) {
+   // Handle any errors
+  });
+    storageRef.child('Map5.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+      var img = document.getElementById('mapFive');
+      img.src = url;
+  }).catch(function(error) {
+   // Handle any errors
+  });
+    storageRef.child('Map6.jpg').getDownloadURL().then(function(url) {
+  // Or inserted into an <img> element:
+      var img = document.getElementById('mapSix');
+      img.src = url;
+  }).catch(function(error) {
+   // Handle any errors
+  });
 
 </script>
 
