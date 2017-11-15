@@ -158,7 +158,7 @@ class Utils {
             teamString += member + " "
         }
         let tempAlert = UIAlertController(title: team.teamLabelName, message: "Team Members:\n \(teamString)", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)        
+        let okAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         tempAlert.addAction(okAction)
         return tempAlert
     }
