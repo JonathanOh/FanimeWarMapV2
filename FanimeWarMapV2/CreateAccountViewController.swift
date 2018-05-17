@@ -26,8 +26,8 @@ class CreateAccountViewController: UIViewController {
         guard let email = emailTextField.text else { return } //Returns if nil email
         guard let password = passwordTextField.text else { return } //Returns if nil password
         
-        if email.characters.count < 1 { return }
-        if password.characters.count < 1 { return }
+        if email.count < 1 { return }
+        if password.count < 1 { return }
         
         AuthService.sharedInstance.createAccountWith(email: email, password: password, onComplete: { (error: String?, user: AnyObject?) -> Void in
             guard let userId = user?.uid else { return }

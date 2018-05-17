@@ -36,11 +36,11 @@ class AddRoverViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        if roverName.characters.count < 1 {
+        if roverName.count < 1 {
             return
         }
         
-        if roverPhone.characters.count != 10 && roverPhone.characters.count != 0 {
+        if roverPhone.count != 10 && roverPhone.count != 0 {
             return
         }
         

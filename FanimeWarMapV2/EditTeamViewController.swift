@@ -49,7 +49,7 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    func dismissView() {
+    @objc func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -81,7 +81,7 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
         saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    func didTapSave(){
+    @objc func didTapSave(){
         guard let team = teamBeingEdited else {
             self.dismissView()
             return
@@ -180,7 +180,7 @@ class EditTeamViewController: UIViewController, UITextFieldDelegate {
         return control
     }
     
-    func mapSegmentSelected() {
+    @objc func mapSegmentSelected() {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

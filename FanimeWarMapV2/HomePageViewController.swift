@@ -233,7 +233,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func longPressed(sender: UILongPressGestureRecognizer) {
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
         let longTouchPoint = sender.location(in: self.mapImageView)
         let closestTeam: Team? = Utils.closestTeamToTouchEvent(touchPoint: longTouchPoint, arrayOfTeams: possibleTeams)
         guard let team = closestTeam else { return }
