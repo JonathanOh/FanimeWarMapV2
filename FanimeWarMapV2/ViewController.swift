@@ -8,31 +8,48 @@
 
 import UIKit
 import Firebase
+import TinyConstraints
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
+    
     let adminUsername : String = "cool"
     let adminPassword : String = "guy"
     
-    
+    override func loadView() {
+        super.loadView()
+        let bgImage = UIImage(imageLiteralResourceName: "fanime2018image")
+        let bgImageView = UIImageView(image: bgImage)
+        bgImageView.contentMode = .scaleAspectFit
+        view.addSubview(bgImageView)
+        bgImageView.edgesToSuperview()
+        view.sendSubview(toBack: bgImageView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fanime2017.jpg")!)
-        //let bgImage = UIImage(named: "fanime2017.jpg")
-        //let bgImageView = UIImageView(image: bgImage)
-        //self.view.addSubview(bgImageView)
-        //bgImageView.sendSubview(toBack: self.view)
-        //bgImageView.contentMode = .scaleAspectFit
+
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
         usernameTextField.text = ""
         passwordTextField.text = ""
         
+        setupButtonStyle()
+    }
+    
+    func setupButtonStyle() {
+        [loginButton, createAccountButton].forEach { button in
+            button?.backgroundColor = .white
+            button?.layer.cornerRadius = 10
+            button?.layer.borderColor = UIColor(red: 0.196, green: 0.3098, blue: 0.52, alpha: 1).cgColor//Red:.196 green:0.3098 blue:0.52 //UIColor.black.cgColor
+            button?.layer.borderWidth = 2
+        }
     }
 
     @IBAction func loginButton(_ sender: Any) {
@@ -43,15 +60,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //usernameTextField.text = ""
         //passwordTextField.text = ""
-        AuthService.sharedInstance.loginWith(email: username, password: password, onComplete: { [weak self] (error: String?, user: AnyObject?) in
+        AuthService.sharedInstance.loginWith(email: username, password: password, onComplete: { [weak self] (error: String?, authDataResult: AuthDataResult?) in
             guard let unwrappedSelf = self else { return }
-            guard let user = user as? FIRUser else {
+            guard let authDataResult = authDataResult else {
                 let alert = Utils.customWhoopsAlert(message: "Login Failed")
                 unwrappedSelf.present(alert, animated: true, completion: nil)
                 return
             }
             // we have a user logged in successfully
-            DataService.sharedIntances.userLoggedIn(uid: user.uid)
+            DataService.sharedIntances.userLoggedIn(uid: authDataResult.user.uid)
             unwrappedSelf.passwordTextField.text = ""
             unwrappedSelf.performSegue(withIdentifier: "loginToHomeSegue", sender: self)
         })

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,6 +79,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createAccountButton" destination="71G-xo-Q5a" id="fMs-8J-RWb"/>
+                        <outlet property="loginButton" destination="bwS-v5-wQG" id="fP3-Xx-4jh"/>
                         <outlet property="passwordTextField" destination="uoH-kb-VEA" id="dE5-od-B8v"/>
                         <outlet property="usernameTextField" destination="R29-uY-m22" id="OXr-Hq-5cf"/>
                         <segue destination="K05-Ep-Ymb" kind="show" identifier="loginToHomeSegue" id="GeI-3e-Lbs"/>
@@ -335,19 +337,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kn-PN-DKs">
-                                                    <rect key="frame" x="629" y="8" width="387" height="165"/>
+                                                    <rect key="frame" x="626.5" y="11" width="382.5" height="160"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QeR-vo-MkI">
-                                                    <rect key="frame" x="426" y="8" width="173" height="165"/>
+                                                    <rect key="frame" x="428.5" y="11" width="168" height="160"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QeR-vo-MkI" secondAttribute="height" multiplier="173:165" id="wat-3c-roi"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Member Names" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-lY-RPe">
-                                                    <rect key="frame" x="8" y="8" width="271" height="165"/>
+                                                    <rect key="frame" x="15" y="11" width="271" height="160"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="271" id="Xh2-c4-OLz"/>
                                                     </constraints>
@@ -488,7 +490,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YU2-Sv-tkN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

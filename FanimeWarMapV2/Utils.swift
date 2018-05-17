@@ -135,7 +135,7 @@ class Utils {
         return closestTeamToTouch
     }
     static func mapWasSavedAlert() -> UIAlertController {
-        let tempAlert = UIAlertController(title: "Yay!", message: "Team positions were saved!", preferredStyle: UIAlertControllerStyle.alert)
+        let tempAlert = UIAlertController(title: "Saved!", message: "Team positions can be viewed at:\n https://fanimewarmapv2.firebaseapp.com/", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         tempAlert.addAction(okAction)
         return tempAlert

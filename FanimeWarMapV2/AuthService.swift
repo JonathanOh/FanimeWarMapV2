@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 
-typealias userData = (_ error: String?, _ user: AnyObject?) -> Void
+typealias userData = (_ error: String?, _ authDataResult: AuthDataResult?) -> Void
 
 class AuthService {
 
@@ -21,26 +21,26 @@ class AuthService {
     
     func loginWith(email: String, password: String, onComplete: userData?) {
     
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
-            guard let user = user else {
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (authDataResult: AuthDataResult?, error: Error?) in
+            guard let authDataResult = authDataResult else {
                 onComplete?("Login Error", nil)
                 return
             }//Error Handling here
-            print("signed in successfully \(user)")
-            User.sharedIntances.setupUserInfo(uid: user.uid, firstName: "", lastName: "", email: email)
-            onComplete?(nil, user)
+            print("signed in successfully \(authDataResult)")
+            User.sharedIntances.setupUserInfo(uid: authDataResult.user.uid, firstName: "", lastName: "", email: email)
+            onComplete?(nil, authDataResult)
         })
     }
 
     func createAccountWith(email: String, password: String, onComplete: userData?) {
     
         // Call firebase create user API.  Will return us a user or error.
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult: AuthDataResult?, error: Error?) in
             // Nil check if there is a unique ID for user
-            guard let _ = user?.uid else { return }
+            guard let _ = authDataResult else { return }
             // We have a user here so lets sign them in via sign in API
-            self.loginWith(email: email, password: password, onComplete: { (error: String?, user: AnyObject?) in
-                onComplete?(nil, user)
+            self.loginWith(email: email, password: password, onComplete: { (error: String?, authDataResult: AuthDataResult?) in
+                onComplete?(nil, authDataResult)
             })
 
         })

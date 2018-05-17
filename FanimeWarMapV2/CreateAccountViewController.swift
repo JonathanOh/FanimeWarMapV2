@@ -29,9 +29,9 @@ class CreateAccountViewController: UIViewController {
         if email.count < 1 { return }
         if password.count < 1 { return }
         
-        AuthService.sharedInstance.createAccountWith(email: email, password: password, onComplete: { (error: String?, user: AnyObject?) -> Void in
-            guard let userId = user?.uid else { return }
-            DataService.sharedIntances.saveUser(uid: userId, email: email)
+        AuthService.sharedInstance.createAccountWith(email: email, password: password, onComplete: { (error: String?, authDataResult: AuthDataResult?) -> Void in
+            guard let authDataResult = authDataResult else { return }
+            DataService.sharedIntances.saveUser(uid: authDataResult.user.uid, email: email)
             self.dismiss(animated: true, completion: nil)
             // Show error alerts if we get issue with account creation
             // We need to pass error and data in here from AuthService

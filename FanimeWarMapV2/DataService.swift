@@ -22,13 +22,13 @@ class DataService {
         return _sharedInstance
     }
     
-    var mainReference: FIRDatabaseReference {
-        return FIRDatabase.database().reference()
+    var mainReference: DatabaseReference {
+        return Database.database().reference()
     }
     
     func getPossibleTeams(onComplete: teamData?) {
         let teamDictionaryReference = mainReference.child("Teams").child("Rovers")
-        teamDictionaryReference.observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) -> Void in
+        teamDictionaryReference.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) -> Void in
             var possibleTeams = [Team]()
             guard let teams = snapshot.value as? Dictionary<String, AnyObject> else { return }
             for (_, value) in teams {
@@ -89,42 +89,42 @@ class DataService {
             }
         }
 
-        let storage = FIRStorage.storage()
+        let storage = Storage.storage()
         let storageRef = storage.reference()
             
         let imageDataOne: Data = UIImagePNGRepresentation(imageOne)!
         let imageOneRef = storageRef.child("Map1.jpg")
-        imageOneRef.put(imageDataOne, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageOneRef.putData(imageDataOne, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
         let imageDataTwo: Data = UIImagePNGRepresentation(imageTwo)!
         let imageTwoRef = storageRef.child("Map2.jpg")
-        imageTwoRef.put(imageDataTwo, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageTwoRef.putData(imageDataTwo, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
         let imageDataThree: Data = UIImagePNGRepresentation(imageThree)!
         let imageThreeRef = storageRef.child("Map3.jpg")
-        imageThreeRef.put(imageDataThree, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageThreeRef.putData(imageDataThree, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
         let imageDataFour: Data = UIImagePNGRepresentation(imageFour)!
         let imageFourRef = storageRef.child("Map4.jpg")
-        imageFourRef.put(imageDataFour, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageFourRef.putData(imageDataFour, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
         let imageDataFive: Data = UIImagePNGRepresentation(imageFive)!
         let imageFiveRef = storageRef.child("Map5.jpg")
-        imageFiveRef.put(imageDataFive, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageFiveRef.putData(imageDataFive, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
         let imageDataSix: Data = UIImagePNGRepresentation(imageSix)!
         let imageSixRef = storageRef.child("Map6.jpg")
-        imageSixRef.put(imageDataSix, metadata: nil) { (metaData: FIRStorageMetadata?, error: Error?) in
+        imageSixRef.putData(imageDataSix, metadata: nil) { (metaData: StorageMetadata?, error: Error?) in
             print(metaData ?? 0)
             print(error ?? 0)
         }
@@ -135,7 +135,7 @@ class DataService {
             let teamDictionary = Utils.convertTeamToDictionary(team: team)
             dictionaryOfUpdatedTeams[team.teamName] = teamDictionary
         }
-        teamDictionaryReferece.updateChildValues(dictionaryOfUpdatedTeams, withCompletionBlock: { (error, databaseRef: FIRDatabaseReference) in
+        teamDictionaryReferece.updateChildValues(dictionaryOfUpdatedTeams, withCompletionBlock: { (error, databaseRef: DatabaseReference) in
             if (error != nil) {
                 success?(false)
             } else {
@@ -151,7 +151,7 @@ class DataService {
     
     func userLoggedIn(uid: String) {
         let loggedInReference = mainReference.child("users").child(uid).child("profile")
-        loggedInReference.observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) -> Void in
+        loggedInReference.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) -> Void in
             guard let profile = snapshot.value as? Dictionary<String, AnyObject> else { return }
             guard let loggedInCount = profile["loggedInCount"] as? Int else { return }
             let newLoggedInCount = loggedInCount + 1
